@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?rfc toc="yes"?>
+<!-- You want a table of contents -->
+<?rfc symrefs="yes"?>
+<!-- Use symbolic labels for references -->
+<?rfc sortrefs="yes"?>
+<!-- This sorts the references -->
+<?rfc iprnotified="no" ?>
+<!-- Change to "yes" if someone has disclosed IPR for the draft -->
+<?rfc compact="yes"?>
+
+<rfc ipr="trust200902" docName="draft-behringer-anima-reference-model-03" category="info">
+	<front>
+		<title abbrev="AN Reference Model">A Reference Model for Autonomic Networking</title>
+		<author role="editor" fullname="Michael H. Behringer" initials="M.H." surname="Behringer">
+			<organization>Cisco</organization>
+			<address>
+				<email>mbehring@cisco.com</email>
+			</address>
+		</author>
+
+		<author surname="Carpenter" initials="B. E." fullname="Brian Carpenter">
+			<organization abbrev="Univ. of Auckland"/>
+			<address>
+				<postal>
+					<street>Department of Computer Science</street>
+					<street>University of Auckland</street>
+					<street>PB 92019</street>
+					<city>Auckland</city>
+					<region/>
+					<code>1142</code>
+					<country>New Zealand</country>
+				</postal>
+				<email>brian.e.carpenter@gmail.com</email>
+			</address>
+		</author>
+
+		<author fullname="Toerless Eckert" initials="T." surname="Eckert">
+			<organization>Cisco</organization>
+			<address>
+				<email>eckert@cisco.com</email>
+			</address>
+		</author>
+
+	    <author fullname="Laurent Ciavaglia" initials="L." surname="Ciavaglia">
+			<organization>Alcatel Lucent</organization>
+			  <address>
+				<postal>
+				  <street>Route de Villejust</street>
+				  <city>Nozay</city>
+				  <region/>
+				  <code>91620</code>
+				  <country>France</country>
+				</postal>
+				<email>laurent.ciavaglia@alcatel-lucent.com</email>
+			  </address>
+		</author>
+
+		<author fullname="Bing Liu" initials="B." surname="Liu">
+		  <organization>Huawei Technologies </organization>
+
+		  <address>
+			<postal>
+			  <street>Q14, Huawei Campus</street>
+			  <street>No.156 Beiqing Road</street>
+			  <city>Hai-Dian District, Beijing</city>
+			  <code>100095</code>
+			  <country>P.R. China</country>
+			</postal>
+			<email>leo.liubing@huawei.com</email>
+		  </address>
+		</author>
+
+		<date day="11" month="June" year="2015"/>
+		<area>Operations and Management</area>
+		<workgroup>ANIMA</workgroup>
+		<abstract>
+			<t>
+				This document describes a reference model for Autonomic Networking. The goal is to define how the various elements in an autonomic context work together, to describe their interfaces and relations. While the document is written as generally as possible, the initial solutions are limited to the chartered scope of the WG.
+			</t>
+		</abstract>
+	</front>
+	
+	<middle>
+<section anchor="intro" title="Introduction">
+	<t>The document "Autonomic Networking - Definitions and Design Goals" <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/> explains the fundamental concepts behind Autonomic Networking, and defines the relevant terms in this space. In section 5 it describes a high level reference model. This document defines this reference model with more detail, to allow for functional and protocol specifications to be developed in an architecturally consistent, non-overlapping manner. While the document is written as generally as possible, the initial solutions are limited to the chartered scope of the WG.</t>
+	<t>As discussed in <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/>, the goal of this work is not to focus exclusively on fully autonomic nodes or networks. In reality, most networks will run with some autonomic functions, while the rest of the network is traditionally managed. This reference model allows for this hybrid approach. </t>
+	<t>This is a living document and will evolve with the technical solutions developed in the ANIMA WG. Sections marked with (*) do not represent current charter items. While this document must give a long term architectural view, not all functions will be standardized at the same time.</t> 
+</section>
+<!-- intro -->
+
+<section anchor="network" title="The Network View">
+	<t>This section describes the various elements in a network with autonomic functions, and how these entities work together, on a high level. Subsequent sections explain the detailed inside view for each of the autonomic network elements, as well as the network functions (or interfaces) between those elements. </t>
+				
+	<t><xref target="network-view"/> shows the high level view of an Autonomic Network. It consists of a number of autonomic nodes, which interact directly with each other. Those autonomic nodes provide a common set of capabilities across the network, called the "Autonomic Networking Infrastructure" (ANI). The ANI provides functions like naming, addressing, negotiation, synchronization, discovery and messaging. </t>
+	
+	<t>Autonomic functions typically span several, possibly all nodes in the network. The atomic entities of an autonomic function are called the "Autonomic Service Agents" (ASA), which are instantiated on nodes. </t>
+
+   <figure anchor='network-view' title="High level view of an Autonomic Network">
+   	<artwork>
++- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+:            :       Autonomic Function 1        :                 :
+: ASA 1      :      ASA 1      :      ASA 1      :          ASA 1  :
++- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+             :                 :                 :                  
+             :   +- - - - - - - - - - - - - - +  :
+             :   :   Autonomic Function 2     :  :
+             :   :  ASA 2      :      ASA 2   :  :
+             :   +- - - - - - - - - - - - - - +  :
+             :                 :                 :                  
++- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+:                Autonomic Networking Infrastructure               :
++- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
++--------+   :    +--------+   :    +--------+   :        +--------+
+| Node 1 |--------| Node 2 |--------| Node 3 |----...-----| Node n | 
++--------+   :    +--------+   :    +--------+   :        +--------+
+	</artwork>
+   </figure>
+	<t>In a horizontal view, autonomic functions span across the network, as well as the Autonomic Networking Infrastructure. In a vertical view, a node always implements the ANI, plus it may have one or several Autonomic Service Agents. </t>
+	<t>The Autonomic Networking Infrastructure (ANI) therefore is the foundation for autonomic functions. The current charter of the ANIMA WG is to specify the ANI, using a few autonomic functions as use cases. </t>
+	
+</section>
+<!-- network -->
+
+<section anchor="element" title="The Autonomic Network Element">
+   <section anchor="element-arch" title="Architecture">
+		   
+			<t>This section describes an autonomic network element and its internal architecture. The reference model explained in <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/> shows the sources of information that an autonomic service agent can leverage: Self-knowledge, network knowledge (through discovery), Intent, and feedback loops. Fundamentally, there are two levels inside an autonomic node: the level of Autonomic Service Agents, and the level of the Autonomic Networking Infrastructure, with the former using the services of the latter. <xref target="ref_model"/> illustrates this concept.
+			</t>
+			  <t>
+   <figure anchor='ref_model' title="Model of an autonomic node">
+   	<artwork>
++------------------------------------------------------------+
+|                                                            |
+| +-----------+        +------------+        +------------+  |
+| | Autonomic |        | Autonomic  |        | Autonomic  |  |
+| | Service   |        | Service    |        | Service    |  |
+| | Agent 1   |        | Agent 2    |        | Agent 3    |  |
+| +-----------+        +------------+        +------------+  |
+|       ^                    ^                     ^         |
+| -  -  | -  - API level -  -| -  -  -  -  -  -  - |-  -  -  |
+|       V                    V                     V         |
+|------------------------------------------------------------|
+| Autonomic Networking Infrastructure                        |
+|    - Data structures (ex: certificates, peer information)  |
+|    - Autonomic Control Plane                               |
+|    - discovery, negotiation and synchronisation functions  |
+|    - Intent distribution                                   |
+|    - aggregated reporting and feedback loops               |
+|    - routing                                               |
+|------------------------------------------------------------|
+|             Basic Operating System Functions               |
++------------------------------------------------------------+
+	</artwork>
+   </figure>
+  </t>
+
+			<t>The Autonomic Networking Infrastructure (lower part of <xref target="ref_model"/>) contains node specific data structures, for example trust information about itself and its peers, as well as a generic set of functions, independent of a particular usage. This infrastructure should be generic, and support a variety of Autonomic Service Agents (upper part of <xref target="ref_model"/>). The Autonomic Control Plane is the summary of all interactions of the Autonomic Networking Infrastructure with other nodes and services.</t>
+			
+			<t>The use cases of "Autonomics" such as self-management, self-optimisation, etc, are implemented as Autonomic Service Agents. They use the services and data structures of the underlying autonomic networking infrastructure. The underlying Autonomic Networking Infrastructure should itself be self-managing. </t>
+			
+			<t>The "Basic Operating System Functions" include the "normal OS", including the network stack, security functions, etc. </t>
+	</section>
+	<!-- element-architecture --> 
+
+	<section anchor="un-constrained" title="Unconstrained AN Nodes">
+		   <t>Unconstrained nodes have the full ANI, with the full functionality (details to be worked out). They support all the capabilities outlined in the rest of the document. [tbc] </t>
+	</section>
+	<!-- unconstrained -->
+		
+	<section anchor="constrained" title="Constrained AN Nodes (*)">
+		   <t>Constrained nodes have a reduced ANI, with a well-defined minimal functionality (details to be worked out): They do need to be able to join the network, and communicate with at least a helper node which has full ANI functionality. Capabilities of constrained nodes need to be defined here. [tbc] </t>
+	</section>
+	<!-- constrained -->
+		
+</section>
+<!-- element -->
+
+<section anchor="ani" title="The Autonomic Networking Infrastructure">		
+
+	<t>The Autonomic Networking Infrastructure provides a layer of common functionality across an Autonomic Network. It comprises "must implement" functions and services, as well as extensions. </t>
+	<t>An Autonomic Function, comprising of Autonomic Service Agents on nodes, can rely on the fact that all nodes in the network implement at least the "must implement" functions. </t> 
+
+	<section anchor="naming" title="Naming">
+		<t>Inside a domain, each autonomic device needs a domain specific identifier. [tbc]</t>
+	</section>
+	<!-- naming -->
+
+	<section anchor="addressing" title="Addressing">
+		<t>Autonomic Service Agents (ASAs) need addressing to communicate with each other. This section describes the addressing approach of the Autonomic Networking Infrastructure, used by ASAs. It does NOT describe addressing approaches for the data plane of the network, which may be configured and managed in the traditional way. ASAs may provide a service to negotiate address space, or addressing mechanisms for the date plane. One use case for such an autonomic function is described in <xref target="I-D.jiang-auto-addr-management"/>.  The addressing the ASAs use is in scope for this section, the address space they negotiate for the data plane is not. </t>
+		<t>It is generally desirable to make the addressing scheme of the Autonomic Networking Infrastructure as self-managing (autonomic) as possible. </t>
+		<t>This section is currently under discussion. We currently believe that we should address the following questions: 
+		<list style="symbols">
+		  <t>How addressing inside the Autonomic Control Plane (ACP) <xref target="I-D.behringer-anima-autonomic-control-plane"/> is assigned and managed autonomically.</t>
+		  <t>Whether, if there is no separated ACP, Autonomic Service Agents (ASAs) shall have their own address space, or whether they should use the address space configured by the administrator.</t>
+		  <t>How addressing is handled in the presence of non-autonomic nodes.</t>
+		  <t>Prefix assignment to interfaces.</t>
+		  <t>Whether links and link interfaces should get routable address space, or whether link local addressing is sufficient.</t>
+		  <t>How the address space used in the Autonomic Networking Infrastructure is assigned and managed.</t>
+		</list></t>
+		<t>It is not clear at this point whether a specific address scheme should be included in this document, or whether this document should only define the requirements. This is for further discussion.</t>
+		<t>The document <xref target="I-D.behringer-anima-autonomic-addressing"/> describes one way to autonomically assign loopback addresses to autonomic nodes, in an autonomic, self-managed way. Other ideas and suggestions are strongly encouraged. </t>
+	</section>
+	<!-- addressing -->
+
+	<section anchor="discovery" title="Discovery"> 
+			<t>Traditionally, most of the information a node requires is provided through configuration or northbound interfaces. An autonomic function should only minimally rely on such northbound interfaces, therefore it needs to discover resources in the network. This section describes various discovery functions in an autonomic network.</t>
+
+			<t>Discovering nodes and their properties: A core function to establish an autonomic domain is the discovery of autonomic nodes, primarily adjacent nodes. This may either leverage existing neighbour discovery mechanisms, or new mechanisms.</t>
+			
+			<t>Discovering services: Network services such as AAA should also be discovered and not configured. Service discovery is required for such tasks. An autonomic network can either leverage existing service discovery functions, or build a new approach.</t>
+
+			<t>Thus the discovery mechanism could either be fully integrated with negotiation and synchronization (next section) or could use an independent discovery mechanism such as DNS Service Discovery or Service Location Protocol. This choice is made independently for each Autonomic Service Agent.</t> 
+	</section>
+	<!-- discovery -->
+
+	<section anchor="negotiation" title="Signaling Between Autonomic Nodes"> 
+			<t>Autonomic nodes must communicate with each other, for example to negotiate and/or synchronize network parameters of any kind and complexity. This requires some form of signaling between autonomic nodes. The document "A Generic Discovery and Negotiation Protocol for Autonomic Networking" <xref target="I-D.carpenter-anima-gdn-protocol"/> describes requirements for negotiation and synchronization in an autonomic network. It also defines a protocol, GDNP, for this purpose, including an integrated but optional discovery protocol.</t> 
+	</section>
+	<!-- negotiation -->
+		
+	<section anchor="intent-distri" title="Intent Distribution">
+		<t>Intent is the policy language of an Autonomic Network, see <xref target="intent"/> for general information on Intent. The distribution of Intent is also a function of the Autonomic Control Plane. Various methods can be used to distribute Intent across an autonomic domain. </t>
+	</section>
+	<!-- intent-distri -->
+
+	<section anchor="routing" title="Routing">
+		<t>All autonomic nodes in a domain must be able to communicate with each other, and with autonomic nodes outside their own domain. Therefore, an Autonomic Control Plane relies on a routing function. For Autonomic Networks to be interoperable, they must all support one common routing protocol. </t>
+	</section>
+	<!-- routing -->
+
+	<section anchor="acp" title="The Autonomic Control Plane">
+		<t>The totality of autonomic interactions forms the "Autonomic Control Plane". This control plane can be either implemented in the global routing table of a node, such as IGPs in today's networks; or it can be provided as an overlay network, as described in <xref target="I-D.behringer-anima-autonomic-control-plane"/>. </t> 
+		<t>The ACP can be operated in two ways: 1) as a separate virtual overlay network, as described in <xref target="I-D.behringer-anima-autonomic-control-plane"/>. or 2), in the global routing table. This sections discusses implications of both choices. </t>
+		<t>Also: Need to address how a separated ACP and an inline ACP cooperate. </t>
+	</section>
+	<!-- acp -->
+
+</section>
+<!-- ani --> 
+
+<section anchor="trust" title="Security and Trust Infrastructure">
+	<t>An Autonomic Network is self-protecting. All protocols are secure by default, without the requirement for the administrator to explicitly configure security. </t>
+	<t>Autonomic nodes have direct interactions between themselves, which must be secured. Since an autonomic network does not rely on configuration, it is not an option to configure for example pre-shared keys. A trust infrastructure such as a PKI infrastructure must be in place. This section describes the principles of this trust infrastructure. </t>
+	<t>A completely autonomic way to automatically and securely deploy such a trust infrastructure is to set up a trust anchor for the domain, and then use an approach as in the document "Bootstrapping Key Infrastructures" <xref target="I-D.pritikin-bootstrapping-keyinfrastructures"/>.</t>
+
+	<section anchor="pki" title="Public Key Infrastructure">
+		<t>An autonomic domain uses a PKI model. The root of trust is a certification authority (CA). A registrar acts as a registration authority (RA). </t>
+		<t>A minimum implementation of an autonomic domain contains one CA, one Registrar, and network elements.</t> 
+	</section> 
+	<!-- pki -->
+
+	<section anchor="cert" title="Domain Certificate">
+		<t>We need to define how the fields in a domain certificate are to be used. [tbc]</t>
+    </section>
+	<!-- cert -->  
+	
+	<section anchor="masa" title="The MASA">
+		<t>Explain briefly the function, point to <xref target="I-D.pritikin-bootstrapping-keyinfrastructures"/>. [tbc]</t>
+    </section>
+	<!-- masa -->  
+
+	<section anchor="sub-domains" title="Sub-Domains (*)">
+		<t>Explain how sub-domains are handled. (tbc)</t>
+	</section>
+	<!-- sub-domains -->
+		
+	<section anchor="cross-domain" title="Cross-Domain Functionality (*)">
+		<t>Explain how trust is handled between different domains. (tbc)</t>
+	</section>
+	<!-- sub-domains -->
+					
+</section>
+<!-- trust -->
+
+<section anchor="asa" title="Autonomic Service Agents (ASA)">
+         <t>This section describes how autonomic services run on top of the Autonomic Networking Infrastructure.  </t>
+
+	<section anchor="asa-general" title="General Description of an ASA">
+		<t>general concepts, such as sitting on top of the ANI, etc. Also needs to explain that on a constrained node (see <xref target="constrained"/>) not all ASAs may run, so we have two classes of ASAs: Ones that run on an unconstrained node, and limited function ASAs that run also on constrained nodes. We expect unconstrained nodes to support all ASAs.</t> 
+	</section>
+		
+	<section anchor="specific-asas" title="Specific ASAs for the Enrolment Process">
+		<t>The following ASAs provide essential, required functionality in an autonomic network, and are therefor mandatory to implement on unconstrained autonomic nodes. </t> 
+
+		<section anchor="enrolment" title="The Enrolment ASA">
+			<t>This section describes the function of an autonomic node to bootstrap into the domain with the help of an enrolment proxy (see previous section). [tbc]</t>
+		</section>
+		<!-- enrolment -->
+
+		<section anchor="enrolment-proxy" title="The Enrolment Proxy ASA">
+			<t>This section describes the function of an autonomic node that helps a non-enrolled, adjacent devices to enrol into the domain. [tbc]</t>
+		</section>
+		<!-- enrolment-proxy -->
+
+		<section anchor="registrar" title="The Registrar ASA">
+			<t>This section describes the registrar function in an autonomic network. It explains the tasks of a registrar element, and how registrars are placed in a network, redundancy between several, etc. [tbc]</t>
+		</section>
+		<!-- registrar -->
+
+	</section>
+	<!-- specific-asas -->
+
+</section>
+<!-- asa -->
+
+<section anchor="management" title="Management and Programmability">
+	<t>This section describes how an Autonomic Network is managed, and programmed.</t>
+		
+	<section anchor="management-general" title="How an AN Network Is Managed">
+		<t>Explain co-existence of traditional methods (SNMP, syslog, NETCONF, etc) with new, autonomic methods. Those are: Intent, Aggregated Reporting and feedback loops to the NOC. [tbc]</t>
+	</section>
+	<!-- management-general -->		
+
+	<section anchor="intent" title="Intent (*)">
+		<t>This section describes Intent, and how it is managed. Explaining ingest of intent, distribution, the nature (on top of what’s in <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/>). That intent is signed, time stamps, etc. Probably pointing back to <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/>. (Note intent distribution is handled in <xref target="intent-distri"/>) [tbc]</t>
+	</section>
+	<!-- intent -->
+		
+	<section anchor="reporting" title="Aggregated Reporting (*)">
+		<t>An autonomic network offers through the autonomic control plane the possibility to aggregate information inside the network, before sending it to the admin of the network. While this can be seen or implemented as a specific form of negotiation, the use case is different and therefore mentioned here explicitly. </t>
+	</section>
+	<!-- reporting -->
+
+	<section anchor="feedback" title="Feedback Loops to NOC(*)">
+		<t>Feedback loops are required in an autonomic network to allow the intervention of a human administrator or central control systems, while maintaining a default behaviour. Through a feedback loop an administrator can be prompted with a default action, and has the possibility to acknowledge or override the proposed default action.</t>
+	</section>
+	<!-- reporting -->
+
+	<section anchor="api" title="APIs (*)">
+	<t>Need considerations for APIs: How can ASAs use the ANI? Where do we need APIs? [tbc]</t>
+	</section>
+	<!-- API -->		
+
+	<section anchor="data-model" title="Data Model (*)">
+	<t>Need considerations for a data model. What it should cover, scope. [tbc]</t>
+	</section>
+	<!-- data model -->		
+
+</section>
+<!-- management -->		
+		
+		<section anchor="coordination" title="Coordination Between Autonomic Functions (*)">
+		  <section title="The Coordination Problem (*)">	
+			<t>Different autonomic functions may conflict in setting certain parameters. For example, an energy efficiency function may want to shut down a redundant link, while a load balancing function would not want that to happen. The administrator must be able to understand and resolve such interactions, to steer autonomic network performance to a given (intended) operational point.</t>
+
+			<t>Several interaction types may exist among autonomic functions, for example: 
+			<list style="symbols">
+			  <t>Cooperation: An autonomic function can improve the behavior or performance of another autonomic function, such as a traffic forecasting function used by a traffic allocation function. </t>
+			  <t>Dependency: An autonomic function cannot work without another one being present or accessible in the autonomic network.</t>
+			  <t>Conflict: A metric value conflict is a conflict where one metric is influenced by parameters of different autonomic functions. A parameter value conflict is a conflict where one parameter is modified by different autonomic functions. </t> 
+			</list>  </t>
+
+			<t>Solving the coordination problem beyond one-by-one cases can rapidly become intractable for large networks. Specifying a common functional block on coordination is a first step to address the problem in a systemic way. The coordination life-cycle consists in three states: 
+			<list style="symbols">
+			<t>At build-time, a "static interaction map" can be constructed on the relationship of functions and attributes. This map can be used to (pre-)define policies and priorities on identified conflicts.</t>
+			<t>At deploy-time, autonomic functions are not yet active/acting on the network. A "dynamic interaction map" is created for each instance of each autonomic functions and on a per resource basis, including the actions performed and their relationships. This map provides the basis to identify conflicts that will happen at run-time, categorize them and plan for the appropriate coordination strategies/mechanisms.</t>
+			<t>At run-time, when conflicts happen, arbitration is driven by the coordination strategies. Also new dependencies can be observed and inferred, resulting in an update of the dynamic interaction map and adaptation of the coordination strategies and mechanisms.</t>
+			</list></t>
+
+			<t>Multiple coordination strategies and mechanisms exists and can be devised. The set ranges from basic approaches such as random process or token-based process, to approaches based on time separation and hierarchical optimization, to more complex approaches such as multi-objective optimization, and other control theory approaches and algorithms family.</t>
+		  </section>
+		  
+		  <section title="A Coordination Functional Block (*)">
+			<t>A common coordination functional block is a desirable component of the ANIMA reference model. It provides a means to ensure network properties and predictable performance or behavior such as stability, and convergence, in the presence of several interacting autonomic functions.</t>
+			<t>A common coordination function requires:
+			  <list style="symbols">
+				<t>A common description of autonomic functions, their attributes and life-cycle.</t>
+				<t>A common representation of information and knowledge (e.g., interaction maps).</t>
+				<t>A common “control/command” interface between the coordination "agent" and the autonomic functions. </t>
+			  </list></t>
+			<t>Guidelines, recommendations or BCPs can also be provided for aspects pertaining to the coordination strategies and mechanisms.</t>
+		  </section>
+		</section>
+		<!-- coordination -->
+
+		<section anchor="hybrid" title="Hybrid Approach with Non-Autonomic Functions (*)">
+			<t>This section explains how autonomic functions can co-exist with non-autonomic functions, and how a potential overlap is managed. This is all about conflict resolution. Maybe we should re-name that section? <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/> already mentions this. Maybe we don’t need much more here. (tbc)</t>
+		</section>
+		<!-- hybrid -->
+
+		<section anchor="security" title="Security Considerations">
+
+		<section title="Threat Analysis">
+
+<t>This is a preliminary outline of a threat analysis, to be expanded and made more specific as the various Autonomic Networking specifications evolve.</t>
+
+<t>Since AN will hand over responsibility for network configuration from humans or centrally established management systems to fully distributed devices, the threat environment is also fully distributed. On the one hand, that means there is no single point of failure to act as an attractive target for bad actors. On the other hand, it means that potentially a single misbehaving autonomic device could launch a widespread attack, by misusing the distributed AN mechanisms. For example, a resource exhaustion attack could be launched by a single device requesting large amounts of that resource from all its peers, on behalf of a non-existent traffic load.
+Alternatively it could simply send false information to its peers, for example by announcing resource exhaustion when this was not the case.
+If security properties are managed autonomically, a misbehaving device could attempt a distributed attack by requesting all its peers to reduce security protections in some way. In general, since autonomic devices run without supervision, almost any kind of undesirable management action could in theory be attempted by a misbehaving device. </t>
+
+<t>If it is possible for an unauthorised device to act as an autonomic device, or for a malicious third party to inject messages appearing to come from an autonomic device, all these same risks would apply. </t>
+
+<t>If AN messages can be observed by a third party, they might reveal valuable information about network configuration, security precautions in use, individual users, and their traffic patterns. If encrypted, AN messages might still reveal some information via traffic analysis, but this would be quite limited (for example, this would be highly unlikely to reveal any specific information about user traffic). AN messages are liable to be exposed to third parties on any unprotected Layer 2 link, and to insider attacks even on protected Layer 2 links. </t>
+
+</section>
+		</section>
+		<!-- security -->
+		
+		<section anchor="iana" title="IANA Considerations">
+			<t>This document requests no action by IANA. </t>
+		</section>
+		<!-- iana -->
+		
+		<section anchor="ack" title="Acknowledgements">
+			<t>Many people have provided feedback and input to this document: Sheng Jiang, Roberta Maglione, Jonathan Hansford.</t>
+		</section>
+		<!-- ack -->
+		
+		<section anchor="changes" title="Change log [RFC Editor: Please remove]">
+			<t>
+				<list>
+					<t>00: Initial version.</t>
+				</list>
+			</t>
+		</section>
+		<!-- changes -->
+		
+	</middle>
+	<back>
+		<references title="References">
+			<?rfc include="reference.I-D.pritikin-bootstrapping-keyinfrastructures.xml"?>
+			<?rfc include="reference.I-D.irtf-nmrg-autonomic-network-definitions.xml"?>
+			<?rfc include="reference.I-D.behringer-anima-autonomic-control-plane.xml"?>
+			<?rfc include="reference.I-D.behringer-anima-autonomic-addressing.xml"?>
+			<?rfc include="reference.I-D.carpenter-anima-gdn-protocol.xml"?>
+			<?rfc include="reference.I-D.jiang-auto-addr-management.xml"?>
+		</references>
+	</back>
+</rfc>
+Enter file contents here
