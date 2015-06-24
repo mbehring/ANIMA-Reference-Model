@@ -313,8 +313,11 @@
 	</section>
 	<!-- management-general -->		
 
-	<section anchor="intent" title="Intent (*)">
-		<t>This section describes Intent, and how it is managed. Explaining ingest of intent, distribution, the nature (on top of what’s in <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/>). That intent is signed, time stamps, etc. Probably pointing back to <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/>. (Note intent distribution is handled in <xref target="intent-distri"/>) [tbc]</t>
+	<section anchor="intent" title="Intent">
+	<!-- Explaining ingest of intent, distribution, the nature (on top of what’s in <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/>). That intent is signed, time stamps, etc. Probably pointing back to <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/>. (Note intent distribution is handled in <xref target="intent-distri"/>) [tbc] -->
+		<t>This section describes Intent, and how it is managed. </t>
+		<t>Intent can be describe as an abstract, declarative, high-level policy used to operate an autonomic domain, such as an enterprise network [RFC7575]. Intent should be limited to high level guidance only, thus it does not directly define a policy for every network element separately. In an ideal autonomic domain, only one intent provided by human administrators is necessary to operate such domain [RFC7576]. However, it is als expected intent definition from autonomic function(s) and even from traditional network management elements (e.g., OSS). </t> 
+		<t>Intent can be refined to lower level policies using different approaches, such as Policy Continuum model [ref]. This is expected in order to adapt the intent to the capabilities of managed devices. In this context, intent may contain role or function information, which can be translated to specific nodes [RFC7575]. One of the possible refinements of the intent is the refinement to Event Condition Action (ECA) rules. Such rules, which are more suitable to individual entities, can be defined using different syntax and semantics. </t>
 	</section>
 	<!-- intent -->
 		
