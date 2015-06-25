@@ -315,9 +315,21 @@
 
 	<section anchor="intent" title="Intent">
 	<!-- Explaining ingest of intent, distribution, the nature (on top of what’s in <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/>). That intent is signed, time stamps, etc. Probably pointing back to <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/>. (Note intent distribution is handled in <xref target="intent-distri"/>) [tbc] -->
-		<t>This section describes Intent, and how it is managed. </t>
+		<t>This section describes Intent, and how it is managed. Intent and Policy-Based Network Management (PBNM) is already described inside the IETF (e.g., PCIM and SUPA) and in other SDOs (e.g., DMTF and TMF ZOOM). </t>
 		<t>Intent can be describe as an abstract, declarative, high-level policy used to operate an autonomic domain, such as an enterprise network [RFC7575]. Intent should be limited to high level guidance only, thus it does not directly define a policy for every network element separately. In an ideal autonomic domain, only one intent provided by human administrators is necessary to operate such domain [RFC7576]. However, it is als expected intent definition from autonomic function(s) and even from traditional network management elements (e.g., OSS). </t> 
 		<t>Intent can be refined to lower level policies using different approaches, such as Policy Continuum model [ref]. This is expected in order to adapt the intent to the capabilities of managed devices. In this context, intent may contain role or function information, which can be translated to specific nodes [RFC7575]. One of the possible refinements of the intent is the refinement to Event Condition Action (ECA) rules. Such rules, which are more suitable to individual entities, can be defined using different syntax and semantics. </t>
+		<t>Different parameters may be configured for intents. These parameters are usually provided by the human operator. Some of these parameters can influence the behavior of specific autonomic functions as well as the way the intent is used to manage the autonomic domain (towards intended operational point). </t>
+		<t>Some examples of parameters for intents are: 
+		<list style="symbols">
+			<t>Model version: The version of the model used to define the intent. </t>
+			<t>Domain: The network scope in which the intent has effect. </t>
+			<t>Name: The name of the intent which describes the intent for human operators. </t>
+			<t>Version: The version of the intent, which is primarly used to control intent updates. </t>
+			<t>Signature: The signature is used as a security mechanism to provide authentication, integrity, and non-repudiation. </t>
+			<t>Timestamp: The timestamp of the creation of the intent using the format supported by the IETF [TBC]. </t>
+			<t>Lifetime: The lifetime in which the intent may be observed. A special case of the lifetime is the definition of permanent intents. </t>
+		</list> </t>
+		<t>Intent distribution is considered as one of the common control and management functions of an autonomic network [RFC7575]. Since distribution is fundamental for autonomic networking, it is necessary a mechanism to provision intent by all devices in a domain [draft-carpenter-anima-gdn-protocol]. The distribution of Intent is function of the Autonomic Control Plane and several methods can be used to distribute Intent across an autonomic domain [draft-behringer-anima-reference-model]. Intent distribution might not use the ANIMA signaling protocol itself [draft-carpenter-anima-gdn-protocol], but there is a proposal to extend such protocol for intent delivery [draft-liu-anima-intent-distribution]. </t>
 	</section>
 	<!-- intent -->
 		
