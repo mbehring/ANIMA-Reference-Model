@@ -509,7 +509,9 @@
 	<t>This section describes how an Autonomic Network is managed, and programmed.</t>
 		
 	<section anchor="management-general" title="How an AN Network Is Managed">
-		<t>Explain co-existence of traditional methods (SNMP, syslog, NETCONF, etc) with new, autonomic methods. Those are: Intent, Aggregated Reporting and feedback loops to the NOC. [tbc]</t>
+		<t>Autonomic management usually co-exists with traditional management methods in most networks. Thus, autonomic behavior will be defined for individual functions in most environments. In fact, the co-existence is twolfold: autonomic functions can use traditional methods and protocols (e.g., SNMP and NETCONF) to perform management tasks; and autonomic functions can conflict with behavior enforced by the same traditional methods and protocols. </t>
+		<t>The autonomic intent is defined at a high level of abstraction. However, since it is necessary to address individual managed elements, autonomic management needs to communicate in lower-level interactions (e.g., commands and requests). For example, it is expected that the configuration of such elements be performed using NETCONF and YANG modules as well as the monitoring be executed through SNMP and MIBs.</t>
+		<t>Conflict can occur between autonomic default behavior, autonomic intent, traditional management methods. Conflict resolution is achieved in autonomic management through prioritization [RFC7575]. The rationale is that manual and node-based management have a higher priority over autonomic management. Thus, the autonomic default behavior has the lowest priority, then comes the autonomic Intent (medium priority), and, finally, the highest priority is taken by  node-specific network management methods, such as the use of command line interfaces [RFC7575]. </t>
 	</section>
 	<!-- management-general -->		
 
