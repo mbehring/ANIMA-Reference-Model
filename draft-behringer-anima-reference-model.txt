@@ -3,16 +3,16 @@
 
 
 ANIMA                                                  M. Behringer, Ed.
-Internet-Draft                                                     Cisco
+Internet-Draft                                             Cisco Systems
 Intended status: Informational                              B. Carpenter
-Expires: December 19, 2015                             Univ. of Auckland
+Expires: December 27, 2015                             Univ. of Auckland
                                                                T. Eckert
                                                                    Cisco
                                                             L. Ciavaglia
                                                           Alcatel Lucent
                                                                   B. Liu
                                                      Huawei Technologies
-                                                           June 17, 2015
+                                                           June 25, 2015
 
 
                A Reference Model for Autonomic Networking
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 19, 2015.
+   This Internet-Draft will expire on December 27, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Behringer, et al.       Expires December 19, 2015               [Page 1]
+Behringer, et al.       Expires December 27, 2015               [Page 1]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -72,72 +72,77 @@ Table of Contents
    2.  The Network View  . . . . . . . . . . . . . . . . . . . . . .   3
    3.  The Autonomic Network Element . . . . . . . . . . . . . . . .   4
      3.1.  Architecture  . . . . . . . . . . . . . . . . . . . . . .   4
-     3.2.  Unconstrained AN Nodes  . . . . . . . . . . . . . . . . .   5
+     3.2.  Full AN Nodes . . . . . . . . . . . . . . . . . . . . . .   6
      3.3.  Constrained AN Nodes (*)  . . . . . . . . . . . . . . . .   6
    4.  The Autonomic Networking Infrastructure . . . . . . . . . . .   6
      4.1.  Naming  . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     4.2.  Addressing  . . . . . . . . . . . . . . . . . . . . . . .   6
-     4.3.  Discovery . . . . . . . . . . . . . . . . . . . . . . . .   7
-     4.4.  Signaling Between Autonomic Nodes . . . . . . . . . . . .   8
-     4.5.  Intent Distribution . . . . . . . . . . . . . . . . . . .   8
-     4.6.  Routing . . . . . . . . . . . . . . . . . . . . . . . . .   8
-     4.7.  The Autonomic Control Plane . . . . . . . . . . . . . . .   8
-   5.  Security and Trust Infrastructure . . . . . . . . . . . . . .   8
-     5.1.  Public Key Infrastructure . . . . . . . . . . . . . . . .   9
-     5.2.  Domain Certificate  . . . . . . . . . . . . . . . . . . .   9
-     5.3.  The MASA  . . . . . . . . . . . . . . . . . . . . . . . .   9
-     5.4.  Sub-Domains (*) . . . . . . . . . . . . . . . . . . . . .   9
-     5.5.  Cross-Domain Functionality (*)  . . . . . . . . . . . . .   9
-   6.  Autonomic Service Agents (ASA)  . . . . . . . . . . . . . . .   9
-     6.1.  General Description of an ASA . . . . . . . . . . . . . .  10
-     6.2.  Specific ASAs for the Enrolment Process . . . . . . . . .  10
-       6.2.1.  The Enrolment ASA . . . . . . . . . . . . . . . . . .  10
-       6.2.2.  The Enrolment Proxy ASA . . . . . . . . . . . . . . .  10
-       6.2.3.  The Registrar ASA . . . . . . . . . . . . . . . . . .  10
-   7.  Management and Programmability  . . . . . . . . . . . . . . .  10
-     7.1.  How an AN Network Is Managed  . . . . . . . . . . . . . .  10
-     7.2.  Intent (*)  . . . . . . . . . . . . . . . . . . . . . . .  11
-     7.3.  Aggregated Reporting (*)  . . . . . . . . . . . . . . . .  11
-     7.4.  Feedback Loops to NOC(*)  . . . . . . . . . . . . . . . .  11
-     7.5.  APIs (*)  . . . . . . . . . . . . . . . . . . . . . . . .  11
-     7.6.  Data Model (*)  . . . . . . . . . . . . . . . . . . . . .  11
-   8.  Coordination Between Autonomic Functions (*)  . . . . . . . .  11
-     8.1.  The Coordination Problem (*)  . . . . . . . . . . . . . .  11
-     8.2.  A Coordination Functional Block (*) . . . . . . . . . . .  12
-   9.  Hybrid Approach with Non-Autonomic Functions (*)  . . . . . .  13
-   10. Security Considerations . . . . . . . . . . . . . . . . . . .  13
+       4.1.1.  Naming requirements . . . . . . . . . . . . . . . . .   6
+       4.1.2.  Proposed Mechanisms . . . . . . . . . . . . . . . . .   7
+     4.2.  Addressing  . . . . . . . . . . . . . . . . . . . . . . .   8
+       4.2.1.  Requirements and Fundamental Concepts . . . . . . . .   8
+       4.2.2.  The Base Addressing Scheme  . . . . . . . . . . . . .  10
+       4.2.3.  Possible Sub-Schemes  . . . . . . . . . . . . . . . .  10
+       4.2.4.  Address Hierarchy . . . . . . . . . . . . . . . . . .  12
+     4.3.  Discovery . . . . . . . . . . . . . . . . . . . . . . . .  13
+     4.4.  Signaling Between Autonomic Nodes . . . . . . . . . . . .  13
+     4.5.  Intent Distribution . . . . . . . . . . . . . . . . . . .  14
+     4.6.  Routing . . . . . . . . . . . . . . . . . . . . . . . . .  14
+     4.7.  The Autonomic Control Plane . . . . . . . . . . . . . . .  14
+   5.  Security and Trust Infrastructure . . . . . . . . . . . . . .  14
+     5.1.  Public Key Infrastructure . . . . . . . . . . . . . . . .  15
+     5.2.  Domain Certificate  . . . . . . . . . . . . . . . . . . .  15
+     5.3.  The MASA  . . . . . . . . . . . . . . . . . . . . . . . .  15
+     5.4.  Sub-Domains (*) . . . . . . . . . . . . . . . . . . . . .  15
+     5.5.  Cross-Domain Functionality (*)  . . . . . . . . . . . . .  15
+   6.  Autonomic Service Agents (ASA)  . . . . . . . . . . . . . . .  15
+     6.1.  General Description of an ASA . . . . . . . . . . . . . .  15
+     6.2.  Specific ASAs for the Enrolment Process . . . . . . . . .  16
+       6.2.1.  The Enrolment ASA . . . . . . . . . . . . . . . . . .  16
+       6.2.2.  The Enrolment Proxy ASA . . . . . . . . . . . . . . .  16
+       6.2.3.  The Registrar ASA . . . . . . . . . . . . . . . . . .  16
+   7.  Management and Programmability  . . . . . . . . . . . . . . .  16
+     7.1.  How an AN Network Is Managed  . . . . . . . . . . . . . .  16
+     7.2.  Intent  . . . . . . . . . . . . . . . . . . . . . . . . .  16
+     7.3.  Aggregated Reporting (*)  . . . . . . . . . . . . . . . .  18
+     7.4.  Feedback Loops to NOC(*)  . . . . . . . . . . . . . . . .  18
+     7.5.  APIs (*)  . . . . . . . . . . . . . . . . . . . . . . . .  18
 
 
 
-Behringer, et al.       Expires December 19, 2015               [Page 2]
+Behringer, et al.       Expires December 27, 2015               [Page 2]
 
 Internet-Draft             AN Reference Model                  June 2015
 
 
-     10.1.  Threat Analysis  . . . . . . . . . . . . . . . . . . . .  13
-   11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  14
-   12. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  14
-   13. Change log [RFC Editor: Please remove]  . . . . . . . . . . .  14
-   14. References  . . . . . . . . . . . . . . . . . . . . . . . . .  14
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  15
+     7.6.  Data Model (*)  . . . . . . . . . . . . . . . . . . . . .  18
+   8.  Coordination Between Autonomic Functions (*)  . . . . . . . .  18
+     8.1.  The Coordination Problem (*)  . . . . . . . . . . . . . .  18
+     8.2.  A Coordination Functional Block (*) . . . . . . . . . . .  19
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  20
+     9.1.  Threat Analysis . . . . . . . . . . . . . . . . . . . . .  20
+   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  21
+   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  21
+   12. Change log [RFC Editor: Please remove]  . . . . . . . . . . .  21
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  21
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  22
 
 1.  Introduction
 
    The document "Autonomic Networking - Definitions and Design Goals"
-   [I-D.irtf-nmrg-autonomic-network-definitions] explains the
-   fundamental concepts behind Autonomic Networking, and defines the
-   relevant terms in this space.  In section 5 it describes a high level
-   reference model.  This document defines this reference model with
-   more detail, to allow for functional and protocol specifications to
-   be developed in an architecturally consistent, non-overlapping
-   manner.  While the document is written as generally as possible, the
-   initial solutions are limited to the chartered scope of the WG.
+   [RFC7575] explains the fundamental concepts behind Autonomic
+   Networking, and defines the relevant terms in this space.  In section
+   5 it describes a high level reference model.  This document defines
+   this reference model with more detail, to allow for functional and
+   protocol specifications to be developed in an architecturally
+   consistent, non-overlapping manner.  While the document is written as
+   generally as possible, the initial solutions are limited to the
+   chartered scope of the WG.
 
-   As discussed in [I-D.irtf-nmrg-autonomic-network-definitions], the
-   goal of this work is not to focus exclusively on fully autonomic
-   nodes or networks.  In reality, most networks will run with some
-   autonomic functions, while the rest of the network is traditionally
-   managed.  This reference model allows for this hybrid approach.
+   As discussed in [RFC7575], the goal of this work is not to focus
+   exclusively on fully autonomic nodes or networks.  In reality, most
+   networks will run with some autonomic functions, while the rest of
+   the network is traditionally managed.  This reference model allows
+   for this hybrid approach.
 
    This is a living document and will evolve with the technical
    solutions developed in the ANIMA WG.  Sections marked with (*) do not
@@ -157,18 +162,16 @@ Internet-Draft             AN Reference Model                  June 2015
    consists of a number of autonomic nodes, which interact directly with
    each other.  Those autonomic nodes provide a common set of
    capabilities across the network, called the "Autonomic Networking
-   Infrastructure" (ANI).  The ANI provides functions like naming,
-   addressing, negotiation, synchronization, discovery and messaging.
 
 
 
-
-
-
-Behringer, et al.       Expires December 19, 2015               [Page 3]
+Behringer, et al.       Expires December 27, 2015               [Page 3]
 
 Internet-Draft             AN Reference Model                  June 2015
 
+
+   Infrastructure" (ANI).  The ANI provides functions like naming,
+   addressing, negotiation, synchronization, discovery and messaging.
 
    Autonomic functions typically span several, possibly all nodes in the
    network.  The atomic entities of an autonomic function are called the
@@ -214,17 +217,17 @@ Internet-Draft             AN Reference Model                  June 2015
    knowledge, network knowledge (through discovery), Intent, and
    feedback loops.  Fundamentally, there are two levels inside an
    autonomic node: the level of Autonomic Service Agents, and the level
-   of the Autonomic Networking Infrastructure, with the former using the
-   services of the latter.  Figure 2 illustrates this concept.
 
 
 
 
-
-Behringer, et al.       Expires December 19, 2015               [Page 4]
+Behringer, et al.       Expires December 27, 2015               [Page 4]
 
 Internet-Draft             AN Reference Model                  June 2015
 
+
+   of the Autonomic Networking Infrastructure, with the former using the
+   services of the latter.  Figure 2 illustrates this concept.
 
    +------------------------------------------------------------+
    |                                                            |
@@ -268,19 +271,22 @@ Internet-Draft             AN Reference Model                  June 2015
    The "Basic Operating System Functions" include the "normal OS",
    including the network stack, security functions, etc.
 
-3.2.  Unconstrained AN Nodes
-
-   Unconstrained nodes have the full ANI, with the full functionality
-   (details to be worked out).  They support all the capabilities
-   outlined in the rest of the document. [tbc]
 
 
 
 
-Behringer, et al.       Expires December 19, 2015               [Page 5]
+
+
+Behringer, et al.       Expires December 27, 2015               [Page 5]
 
 Internet-Draft             AN Reference Model                  June 2015
 
+
+3.2.  Full AN Nodes
+
+   Full AN nodes have the full Autonomic Networking Infrastructure, with
+   the full functionality (details to be worked out).  They support all
+   the capabilities outlined in the rest of the document. [tbc]
 
 3.3.  Constrained AN Nodes (*)
 
@@ -302,115 +308,447 @@ Internet-Draft             AN Reference Model                  June 2015
 
 4.1.  Naming
 
-   Inside a domain, each autonomic device needs a domain specific
-   identifier. [tbc]
+4.1.1.  Naming requirements
 
-4.2.  Addressing
+   o  Representing each device
 
-   Autonomic Service Agents (ASAs) need addressing to communicate with
-   each other.  This section describes the addressing approach of the
-   Autonomic Networking Infrastructure, used by ASAs.  It does NOT
-   describe addressing approaches for the data plane of the network,
-   which may be configured and managed in the traditional way.  ASAs may
-   provide a service to negotiate address space, or addressing
-   mechanisms for the date plane.  One use case for such an autonomic
-   function is described in [I-D.jiang-auto-addr-management].  The
-   addressing the ASAs use is in scope for this section, the address
-   space they negotiate for the data plane is not.
+         Inside a domain, each autonomic device needs a domain specific
+         identifier.
 
-   It is generally desirable to make the addressing scheme of the
-   Autonomic Networking Infrastructure as self-managing (autonomic) as
-   possible.
+         [Open Questions] Are there devices that don't need names?  Do
+         ASAs need names?
 
-   This section is currently under discussion.  We currently believe
-   that we should address the following questions:
+   o  Uniqueness
 
-   o  How addressing inside the Autonomic Control Plane (ACP)
-      [I-D.behringer-anima-autonomic-control-plane] is assigned and
-      managed autonomically.
+         The names MUST NOT collide within one autonomic domain.
+
+         It is acceptable that the names in different domains collide,
+         since they could be distinguished by domains.
+
+   o  Semantic Encoding
+
+         It is RECOMMENDED that the names encode some semantics rather
+         than meaningless strings.  The semantics might be:
 
 
 
 
-
-Behringer, et al.       Expires December 19, 2015               [Page 6]
+Behringer, et al.       Expires December 27, 2015               [Page 6]
 
 Internet-Draft             AN Reference Model                  June 2015
 
 
-   o  Whether, if there is no separated ACP, Autonomic Service Agents
-      (ASAs) shall have their own address space, or whether they should
-      use the address space configured by the administrator.
+         +  Location
 
-   o  How addressing is handled in the presence of non-autonomic nodes.
+         +  Device type
 
-   o  Prefix assignment to interfaces.
+         +  Functional role
 
-   o  Whether links and link interfaces should get routable address
-      space, or whether link local addressing is sufficient.
+         +  Ownership
 
-   o  How the address space used in the Autonomic Networking
-      Infrastructure is assigned and managed.
+         +  etc.
 
-   It is not clear at this point whether a specific address scheme
-   should be included in this document, or whether this document should
-   only define the requirements.  This is for further discussion.
+         This is for ease of management consideration that network
+         administrators could easily recognize the device directly
+         through the names.
 
-   The document [I-D.behringer-anima-autonomic-addressing] describes one
-   way to autonomically assign loopback addresses to autonomic nodes, in
-   an autonomic, self-managed way.  Other ideas and suggestions are
-   strongly encouraged.
+   o  Consistency
+
+         The devices' naming SHOULD follow the same pattern within a
+         domain.
+
+4.1.2.  Proposed Mechanisms
+
+   __
+
+   o  Structured Naming Pattern
+
+         The whole name string could be divided into several fields,
+         each of which representing a specific semantic as described
+         above.  For example: Location-DeviceType-FunctionalRole-
+         DistinguisherNumber@NameofDomain.
+
+         The structure should be flexible that some fields are optional.
+         When these optional fields are added, the name could still be
+         recognized as the previous one.  In above example, the
+         "DistinguisherNumber" and "NameofDomain" are mandatory whereas
+         others are optional.  At initial stage, the devices might be
+         only capable of self-generating the mandatory fields and the
+         "DeviceType" because of the lack of knowledge.  Later, they
+         might have learned the "Location" and "FunctionalRole" and
+         added the fields into current name.  However, the other devices
+         could still recognize it according to the same
+         "DistinguisherNumber".
+
+   o  Advertised Common Fields
+
+         Some fields in the structured name might be common among the
+         domain (e.g.  "Location" "NameofDomain").  Thus, these part of
+         the names could be advertised through Intent
+         DistributionSection 4.5.
+
+
+
+Behringer, et al.       Expires December 27, 2015               [Page 7]
+
+Internet-Draft             AN Reference Model                  June 2015
+
+
+   o  Self-generated Fields
+
+         The mandatory fields SHOULD be self-generated so that one
+         device could name itself sufficiently without any advertised
+         knowledges.
+
+         There should various methods for a device to extract/generate a
+         proper word for each mandatory semantic fields (e.g.
+         "DeviceType", "DistinguisherNum") from its self-knowledge.
+
+   Detailed design of specific naming patterns and methods are out of
+   scope of this document.
+
+4.2.  Addressing
+
+   Autonomic Service Agents (ASAs) need to communicate with each other,
+   using the autonomic addressing of the node they reside on.  This
+   section describes the addressing approach of the Autonomic Networking
+   Infrastructure, used by ASAs.  It does NOT describe addressing
+   approaches for the data plane of the network, which may be configured
+   and managed in the traditional way, or negotiated as a service of an
+   ASA.  One use case for such an autonomic function is described in
+   [I-D.jiang-auto-addr-management].  The addressing of the Autonomic
+   Networking Infrastructure is in scope for this section, the address
+   space they negotiate for the data plane is not.
+
+   Autonomic addressing is a function of the Autonomic Networking
+   Infrastructure (lower part of Figure 2).  ASAs do not have their own
+   addresses.  They may use either API calls, or the autonomic
+   addressing scheme of the Autonomic Networking Infrastructure.
+
+4.2.1.  Requirements and Fundamental Concepts
+
+   An autonomic addressing scheme has the following requirements:
+
+   o  Zero-touch for simple networks: Simple networks should have
+      complete self-management of addressing, and not require any
+      central address management, tools, or address planning.
+
+   o  Low-touch for complex networks: If complex networks require
+      operator input for autonomic address management, it should be
+      limited to high level guidance only, expressed in Intent.
+
+   o  Flexibility: The addressing scheme must be flexible enough for
+      nodes to be able to move around, for the network to grow, split
+      and merge.
+
+
+
+
+
+Behringer, et al.       Expires December 27, 2015               [Page 8]
+
+Internet-Draft             AN Reference Model                  June 2015
+
+
+   o  Robustness: It should be as hard as possible for an administrator
+      to negatively affect addressing (and thus connectivity) in the
+      autonomic context.
+
+   o  Support for virtualization: Autonomic Nodes may support Autonomic
+      Service Agents in different virtual machines or containers.  The
+      addressing scheme should support this architecture.
+
+   o  Simplicity: To make engineering simpler, and to give the human
+      administrator an easy way to trouble-shoot autonomic functions.
+
+   o  Scale: The proposed scheme should work in any network of any size.
+
+   o  Upgradability: The scheme must be able to support different
+      addressing concepts in the future.
+
+   These are the fundamental concepts of autonomic addressing:
+
+   o  IPv6 only: Autonomic processes SHOULD (as defined in [RFC2119])
+      use exclusively IPv6, for simplicity reasons.
+
+   o  Usage: Autonomic addresses are exclusively used for self-
+      management functions inside a trusted domain.  They are not used
+      for user traffic.  Communications with entities outside the
+      trusted domain use another address space, for example normally
+      managed routable address space.
+
+   o  Separation: Autonomic address space is used separately from user
+      address space and other address realms.  This supports the
+      robustness requirement.  Link-local is considered not part of user
+      address space for this purpose.
+
+   o  Overlay network: Routeable addresses for AN nodes are used
+      exclusively in a secure overlay network which is the basis of the
+      ACP.  This means that these addresses will be assigned to the
+      loopback interface in most operating systems.  All other
+      interfaces exclusively use IPv6 link local for autonomic
+      functions.  The usage of IPv6 link local addressing is discussed
+      in [RFC7404].
+
+   o  Use-ULA: For these overlay addresses of autonomic nodes, we use
+      Unique Local Addresses (ULA), as specified in [RFC4193].  An
+      alternative scheme was discussed, using assigned ULA addressing.
+      The consensus was to use standard ULA, because it was deemed to be
+      sufficient.
+
+   o  No external connectivity: They do not provide access to the
+      Internet.  If a node requires further reaching connectivity, it
+
+
+
+Behringer, et al.       Expires December 27, 2015               [Page 9]
+
+Internet-Draft             AN Reference Model                  June 2015
+
+
+      should use another, traditionally managed address scheme in
+      parallel.
+
+4.2.2.  The Base Addressing Scheme
+
+   The Base ULA addressing scheme for autonomic nodes has the following
+   format:
+
+     8      40          3                     77
+   +--+--------------+------+------------------------------------------+
+   |FD| hash(domain) | Type |             (sub-scheme)                 |
+   +--+--------------+------+------------------------------------------+
+
+                     Figure 3: Base Addressing Scheme
+
+   The first 48 bits follow the ULA scheme, as defined in [RFC4193], to
+   which a type field is added:
+
+   o  "FD" identifies a locally defined ULA address.
+
+   o  The "global ID" is set here to be a hash of the domain name, which
+      results in a pseudo-random 40 bit value.  It is calculated as the
+      first 40 bits of the MD5 hash of the domain name, in the example
+      "example.com".
+
+   o  Type: Set to 000 (3 zero bits).  This field allows different
+      address sub-schemes in the future.  The goal is to start with a
+      minimal number of sub-scheme initially, but to allow for
+      extensions later if and when required.  This addresses the
+      "upgradability" requirement.  Assignment of types for this field
+      should be maintained by IANA.
+
+4.2.3.  Possible Sub-Schemes
+
+   The sub-schemes listed here are not intended to be all supported
+   initially, but are listed for discussion.  The final document should
+   define ideally only a single sub-scheme for now, and leave the other
+   "types" for later assignment.
+
+4.2.3.1.  Sub-Scheme 1
+
+             51                 13                    64
+   +------------------------+---------+--------------------------------+
+   |    (base scheme)       | Zone ID |         Device ID              |
+   +------------------------+---------+--------------------------------+
+
+                       Figure 4: Addressing Scheme 1
+
+
+
+
+Behringer, et al.       Expires December 27, 2015              [Page 10]
+
+Internet-Draft             AN Reference Model                  June 2015
+
+
+   The fields are defined as follows: [Editor's note: The lengths of the
+   fields is for discussion.]
+
+   o  Zone ID: If set to all zero bits: Flat addressing scheme.  Any
+      other value indicates a zone.  See section Section 4.2.4 on how
+      this field is used in detail.
+
+   o  Device ID: A unique value for each device, typically assigned by a
+      registrar.
+
+   The device ID is derived as follows: In an Autonomic Network, a
+   registrar is enrolling new devices.  As part of the enrolment process
+   the registrar assigns a number to the device, which is unique for
+   this registrar, but not necessarily unique in the domain.  The 64 bit
+   device ID is then composed as:
+
+   o  48 bit: Registrar ID, a number unique inside the domain that
+      identifies the registrar which assigned the name to the device.  A
+      MAC address of the registrar can be used for this purpose.
+
+   o  16 bit: Device ID, a number which is unique for a given registrar,
+      to identify the device.  This can be a sequentially assigned
+      number.
+
+   The "device ID" itself is unique in a domain (i.e., the Zone-ID is
+   not required for uniqueness).  Therefore, a device can be addressed
+   either as part of a flat hierarchy (zone ID = 0), or with an
+   aggregation scheme (any other zone ID).  An address with zone-ID
+   could be interpreted as an identifier, with another zone-ID as a
+   locator.
+
+4.2.3.2.  Sub-Scheme 2
+
+             51                 13                    64-V           ?
+   +------------------------+---------+----------------------------+---+
+   |    (base scheme)       | Zone ID |         Device ID          | V |
+   +------------------------+---------+----------------------------+---+
+
+                       Figure 5: Addressing Scheme 2
+
+   The fields are defined as follows: [Editor's note: The lengths of the
+   fields is for discussion.]
+
+   o  Zone ID: As in sub-scheme 1.
+
+   o  Device ID: As in sub-scheme 1.
+
+
+
+
+
+Behringer, et al.       Expires December 27, 2015              [Page 11]
+
+Internet-Draft             AN Reference Model                  June 2015
+
+
+   o  V: Virtualization bit(s): 1 or more bits that indicate a virtual
+      context on an autonomic node.
+
+   In addition the scheme 1 (Section 4.2.3.1), this scheme allows the
+   direct addressing of specific virtual containers / VMs on an
+   autonomic node.  An increasing number of hardware platforms have a
+   distributed architecture, with a base OS for the node itself, and the
+   support for hardware blades with potentially different OSs.  The VMs
+   on the blades could be considered as separate autonomic nodes, in
+   which case it would make sense to be able to address them directly.
+   Autonomic Service Agents (ASAs) could be instantiated in either the
+   base OS, or one of the VMs on a blade.  This addressing scheme allows
+   for the easy separation of the hardware context.
+
+   The location of the V bit(s) at the end of the address allows to
+   announce a single prefix for each autonomic node, while having
+   separate virtual contexts addressable directly.
+
+4.2.4.  Address Hierarchy
+
+   The "zone ID" allows for the definition of a simple address
+   hierarchy.  If set to zero, the address scheme is flat.  In this
+   case, the addresses primarily act as identifiers for the nodes.  Used
+   like this, aggregation is not possible.
+
+   If aggregation is required, the 13 bit value allows for up to 8191
+   zones.  (Theoretically, the 13 bits for the zone ID would allow also
+   for two levels of zones, introducing a sub-hierarchy.  We do not
+   think this is required at this point, but a new type could be used in
+   the future to support such a scheme.)
+
+   If aggregation is required, the 13 bit value allows for up to 8191
+   zones.  (Theoretically, the 13 bits for the zone ID would allow also
+   for two levels of zones, introducing a sub-hierarchy.  We do not
+   think this is required at this point, but a new type could be used in
+   the future to support such a scheme.)
+
+   Another way to introduce hierarchy is to use sub-domains in the
+   naming scheme.  The node names "node17.subdomainA.example.com" and
+   "node4.subdomainB.example.com" would automatically lead to different
+   ULA prefixes, which can be used to introduce a routing hierarchy in
+   the network, assuming that the subdomains are aligned with routing
+   areas.
+
+
+
+
+
+
+
+
+Behringer, et al.       Expires December 27, 2015              [Page 12]
+
+Internet-Draft             AN Reference Model                  June 2015
+
 
 4.3.  Discovery
 
    Traditionally, most of the information a node requires is provided
    through configuration or northbound interfaces.  An autonomic
-   function should only minimally rely on such northbound interfaces,
-   therefore it needs to discover resources in the network.  This
-   section describes various discovery functions in an autonomic
-   network.
+   function should rely on such northbound interfaces minimally or not
+   at all, and therefore it needs to discover peers and other resources
+   in the network.  This section describes various discovery functions
+   in an autonomic network.
 
-   Discovering nodes and their properties: A core function to establish
-   an autonomic domain is the discovery of autonomic nodes, primarily
-   adjacent nodes.  This may either leverage existing neighbour
-   discovery mechanisms, or new mechanisms.
+   Discovering nodes and their properties and capabilities: A core
+   function to establish an autonomic domain is the mutual discovery of
+   autonomic nodes, primarily adjacent nodes and secondarily off-link
+   peers.  This may in principle either leverage existing discovery
+   mechanisms, or use new mechanisms tailored to the autonomic context.
+   An important point is that discovery must work in a network with no
+   predefined topology, ideally no manual configuration of any kind, and
+   with nodes starting up from factory condition or after any form of
+   failure or sudden topology change.
 
    Discovering services: Network services such as AAA should also be
    discovered and not configured.  Service discovery is required for
    such tasks.  An autonomic network can either leverage existing
-   service discovery functions, or build a new approach.
+   service discovery functions, or use a new approach, or a mixture.
 
    Thus the discovery mechanism could either be fully integrated with
-   negotiation and synchronization (next section) or could use an
-   independent discovery mechanism such as DNS Service Discovery or
-   Service Location Protocol.  This choice is made independently for
-   each Autonomic Service Agent.
-
-
-
-
-Behringer, et al.       Expires December 19, 2015               [Page 7]
-
-Internet-Draft             AN Reference Model                  June 2015
-
+   autonomic signaling (next section) or could use an independent
+   discovery mechanism such as DNS Service Discovery or Service Location
+   Protocol.  This choice could be made independently for each Autonomic
+   Service Agent, although the infrastructure might require some minimal
+   lowest common denominator (e.g., for discovering the security
+   bootstrap mechanism, or the source of intent distribution,
+   Section 4.5).
 
 4.4.  Signaling Between Autonomic Nodes
 
    Autonomic nodes must communicate with each other, for example to
-   negotiate and/or synchronize network parameters of any kind and
-   complexity.  This requires some form of signaling between autonomic
-   nodes.  The document "A Generic Discovery and Negotiation Protocol
-   for Autonomic Networking" [I-D.carpenter-anima-gdn-protocol]
-   describes requirements for negotiation and synchronization in an
+   negotiate and/or synchronize technical objectives (i.e., network
+   parameters) of any kind and complexity.  This requires some form of
+   signaling between autonomic nodes.  Autonomic nodes implementing a
+   specific use case might choose their own signaling protocol, as long
+   as it fits the overall security model.  However, in the general case,
+   any pair of autonomic nodes might need to communicate, so there needs
+   to be a generic protocol for this.  A prerequisite for this is that
+   autonomic nodes can discover each other without any preconfiguration,
+   as mentioned above.  To be generic, discovery and signaling must be
+   able to handle any sort of technical objective, including ones that
+   require complex data structures.  The document "A Generic Discovery
+   and Negotiation Protocol for Autonomic Networking"
+
+
+
+Behringer, et al.       Expires December 27, 2015              [Page 13]
+
+Internet-Draft             AN Reference Model                  June 2015
+
+
+   [I-D.carpenter-anima-gdn-protocol] describes more detailed
+   requirements for discovery, negotiation and synchronization in an
    autonomic network.  It also defines a protocol, GDNP, for this
    purpose, including an integrated but optional discovery protocol.
 
 4.5.  Intent Distribution
 
-   Intent is the policy language of an Autonomic Network, see
+   Intent is the policy language of an Autonomic Network; see
    Section 7.2 for general information on Intent.  The distribution of
-   Intent is also a function of the Autonomic Control Plane.  Various
-   methods can be used to distribute Intent across an autonomic domain.
+   Intent is also a function of the Autonomic Control Plane.  It is
+   expected that Intent will be expressed as quite complex human-
+   readable data structures, and the distribution mechanism must be able
+   to support that.  Some Intent items will need to be flooded to most
+   or all nodes, and other items of Intent may only be needed by a few
+   nodes.  Various methods could be used to distribute Intent across an
+   autonomic domain.  One approach is to treat it like any other
+   technical objective needing to be synchronized across a set of nodes.
+   In that case the autonomic signaling protocol could be used (previous
+   section).
 
 4.6.  Routing
 
@@ -428,27 +766,11 @@ Internet-Draft             AN Reference Model                  June 2015
    be provided as an overlay network, as described in
    [I-D.behringer-anima-autonomic-control-plane].
 
-   The ACP can be operated in two ways: 1) as a separate virtual overlay
-   network, as described in
-   [I-D.behringer-anima-autonomic-control-plane]. or 2), in the global
-   routing table.  This sections discusses implications of both choices.
-
-   Also: Need to address how a separated ACP and an inline ACP
-   cooperate.
-
 5.  Security and Trust Infrastructure
 
    An Autonomic Network is self-protecting.  All protocols are secure by
    default, without the requirement for the administrator to explicitly
    configure security.
-
-
-
-
-Behringer, et al.       Expires December 19, 2015               [Page 8]
-
-Internet-Draft             AN Reference Model                  June 2015
-
 
    Autonomic nodes have direct interactions between themselves, which
    must be secured.  Since an autonomic network does not rely on
@@ -456,6 +778,13 @@ Internet-Draft             AN Reference Model                  June 2015
    shared keys.  A trust infrastructure such as a PKI infrastructure
    must be in place.  This section describes the principles of this
    trust infrastructure.
+
+
+
+Behringer, et al.       Expires December 27, 2015              [Page 14]
+
+Internet-Draft             AN Reference Model                  June 2015
+
 
    A completely autonomic way to automatically and securely deploy such
    a trust infrastructure is to set up a trust anchor for the domain,
@@ -494,18 +823,6 @@ Internet-Draft             AN Reference Model                  June 2015
    This section describes how autonomic services run on top of the
    Autonomic Networking Infrastructure.
 
-
-
-
-
-
-
-
-Behringer, et al.       Expires December 19, 2015               [Page 9]
-
-Internet-Draft             AN Reference Model                  June 2015
-
-
 6.1.  General Description of an ASA
 
    general concepts, such as sitting on top of the ANI, etc.  Also needs
@@ -514,6 +831,16 @@ Internet-Draft             AN Reference Model                  June 2015
    unconstrained node, and limited function ASAs that run also on
    constrained nodes.  We expect unconstrained nodes to support all
    ASAs.
+
+
+
+
+
+
+Behringer, et al.       Expires December 27, 2015              [Page 15]
+
+Internet-Draft             AN Reference Model                  June 2015
+
 
 6.2.  Specific ASAs for the Enrolment Process
 
@@ -550,26 +877,88 @@ Internet-Draft             AN Reference Model                  June 2015
    etc) with new, autonomic methods.  Those are: Intent, Aggregated
    Reporting and feedback loops to the NOC. [tbc]
 
+7.2.  Intent
+
+   This section describes Intent, and how it is managed.  Intent and
+   Policy-Based Network Management (PBNM) is already described inside
+   the IETF (e.g., PCIM and SUPA) and in other SDOs (e.g., DMTF and TMF
+   ZOOM).
+
+   Intent can be describe as an abstract, declarative, high-level policy
+   used to operate an autonomic domain, such as an enterprise network
+   [RFC7575].  Intent should be limited to high level guidance only,
+   thus it does not directly define a policy for every network element
+   separately.  In an ideal autonomic domain, only one intent provided
+   by human administrators is necessary to operate such domain
 
 
 
-
-
-
-
-Behringer, et al.       Expires December 19, 2015              [Page 10]
+Behringer, et al.       Expires December 27, 2015              [Page 16]
 
 Internet-Draft             AN Reference Model                  June 2015
 
 
-7.2.  Intent (*)
+   [RFC7576].  However, it is als expected intent definition from
+   autonomic function(s) and even from traditional network management
+   elements (e.g., OSS).
 
-   This section describes Intent, and how it is managed.  Explaining
-   ingest of intent, distribution, the nature (on top of what's in
-   [I-D.irtf-nmrg-autonomic-network-definitions]).  That intent is
-   signed, time stamps, etc.  Probably pointing back to
-   [I-D.irtf-nmrg-autonomic-network-definitions].  (Note intent
-   distribution is handled in Section 4.5) [tbc]
+   Intent can be refined to lower level policies using different
+   approaches, such as Policy Continuum model [ref].  This is expected
+   in order to adapt the intent to the capabilities of managed devices.
+   In this context, intent may contain role or function information,
+   which can be translated to specific nodes [RFC7575].  One of the
+   possible refinements of the intent is the refinement to Event
+   Condition Action (ECA) rules.  Such rules, which are more suitable to
+   individual entities, can be defined using different syntax and
+   semantics.
+
+   Different parameters may be configured for intents.  These parameters
+   are usually provided by the human operator.  Some of these parameters
+   can influence the behavior of specific autonomic functions as well as
+   the way the intent is used to manage the autonomic domain (towards
+   intended operational point).
+
+   Some examples of parameters for intents are:
+
+   o  Model version: The version of the model used to define the intent.
+
+   o  Domain: The network scope in which the intent has effect.
+
+   o  Name: The name of the intent which describes the intent for human
+      operators.
+
+   o  Version: The version of the intent, which is primarly used to
+      control intent updates.
+
+   o  Signature: The signature is used as a security mechanism to
+      provide authentication, integrity, and non-repudiation.
+
+   o  Timestamp: The timestamp of the creation of the intent using the
+      format supported by the IETF [TBC].
+
+   o  Lifetime: The lifetime in which the intent may be observed.  A
+      special case of the lifetime is the definition of permanent
+      intents.
+
+   Intent distribution is considered as one of the common control and
+   management functions of an autonomic network [RFC7575].  Since
+   distribution is fundamental for autonomic networking, it is necessary
+   a mechanism to provision intent by all devices in a domain [draft-
+   carpenter-anima-gdn-protocol].  The distribution of Intent is
+   function of the Autonomic Control Plane and several methods can be
+
+
+
+Behringer, et al.       Expires December 27, 2015              [Page 17]
+
+Internet-Draft             AN Reference Model                  June 2015
+
+
+   used to distribute Intent across an autonomic domain [draft-
+   behringer-anima-reference-model].  Intent distribution might not use
+   the ANIMA signaling protocol itself [draft-carpenter-anima-gdn-
+   protocol], but there is a proposal to extend such protocol for intent
+   delivery [draft-liu-anima-intent-distribution].
 
 7.3.  Aggregated Reporting (*)
 
@@ -613,7 +1002,10 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 19, 2015              [Page 11]
+
+
+
+Behringer, et al.       Expires December 27, 2015              [Page 18]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -669,7 +1061,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 19, 2015              [Page 12]
+Behringer, et al.       Expires December 27, 2015              [Page 19]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -691,17 +1083,9 @@ Internet-Draft             AN Reference Model                  June 2015
    Guidelines, recommendations or BCPs can also be provided for aspects
    pertaining to the coordination strategies and mechanisms.
 
-9.  Hybrid Approach with Non-Autonomic Functions (*)
+9.  Security Considerations
 
-   This section explains how autonomic functions can co-exist with non-
-   autonomic functions, and how a potential overlap is managed.  This is
-   all about conflict resolution.  Maybe we should re-name that section?
-   [I-D.irtf-nmrg-autonomic-network-definitions] already mentions this.
-   Maybe we don't need much more here. (tbc)
-
-10.  Security Considerations
-
-10.1.  Threat Analysis
+9.1.  Threat Analysis
 
    This is a preliminary outline of a threat analysis, to be expanded
    and made more specific as the various Autonomic Networking
@@ -722,14 +1106,6 @@ Internet-Draft             AN Reference Model                  June 2015
    case.  If security properties are managed autonomically, a
    misbehaving device could attempt a distributed attack by requesting
    all its peers to reduce security protections in some way.  In
-
-
-
-Behringer, et al.       Expires December 19, 2015              [Page 13]
-
-Internet-Draft             AN Reference Model                  June 2015
-
-
    general, since autonomic devices run without supervision, almost any
    kind of undesirable management action could in theory be attempted by
    a misbehaving device.
@@ -737,6 +1113,14 @@ Internet-Draft             AN Reference Model                  June 2015
    If it is possible for an unauthorised device to act as an autonomic
    device, or for a malicious third party to inject messages appearing
    to come from an autonomic device, all these same risks would apply.
+
+
+
+
+Behringer, et al.       Expires December 27, 2015              [Page 20]
+
+Internet-Draft             AN Reference Model                  June 2015
+
 
    If AN messages can be observed by a third party, they might reveal
    valuable information about network configuration, security
@@ -748,20 +1132,20 @@ Internet-Draft             AN Reference Model                  June 2015
    on any unprotected Layer 2 link, and to insider attacks even on
    protected Layer 2 links.
 
-11.  IANA Considerations
+10.  IANA Considerations
 
    This document requests no action by IANA.
 
-12.  Acknowledgements
+11.  Acknowledgements
 
    Many people have provided feedback and input to this document: Sheng
    Jiang, Roberta Maglione, Jonathan Hansford.
 
-13.  Change log [RFC Editor: Please remove]
+12.  Change log [RFC Editor: Please remove]
 
       00: Initial version.
 
-14.  References
+13.  References
 
    [I-D.behringer-anima-autonomic-addressing]
               Behringer, M., "An Autonomic IPv6 Addressing Scheme",
@@ -779,19 +1163,20 @@ Internet-Draft             AN Reference Model                  June 2015
               carpenter-anima-gdn-protocol-04 (work in progress), June
               2015.
 
-
-
-Behringer, et al.       Expires December 19, 2015              [Page 14]
-
-Internet-Draft             AN Reference Model                  June 2015
-
-
    [I-D.irtf-nmrg-autonomic-network-definitions]
               Behringer, M., Pritikin, M., Bjarnason, S., Clemm, A.,
               Carpenter, B., Jiang, S., and L. Ciavaglia, "Autonomic
               Networking - Definitions and Design Goals", draft-irtf-
-              nmrg-autonomic-network-definitions-00 (work in progress),
-              December 2013.
+              nmrg-autonomic-network-definitions-07 (work in progress),
+              March 2015.
+
+
+
+
+Behringer, et al.       Expires December 27, 2015              [Page 21]
+
+Internet-Draft             AN Reference Model                  June 2015
+
 
    [I-D.jiang-auto-addr-management]
               Jiang, S., Carpenter, B., and Q. Qiong, "Autonomic
@@ -802,13 +1187,31 @@ Internet-Draft             AN Reference Model                  June 2015
    [I-D.pritikin-bootstrapping-keyinfrastructures]
               Pritikin, M., Behringer, M., and S. Bjarnason,
               "Bootstrapping Key Infrastructures", draft-pritikin-
-              bootstrapping-keyinfrastructures-00 (work in progress),
-              January 2014.
+              bootstrapping-keyinfrastructures-01 (work in progress),
+              September 2014.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC4193]  Hinden, R. and B. Haberman, "Unique Local IPv6 Unicast
+              Addresses", RFC 4193, October 2005.
+
+   [RFC7404]  Behringer, M. and E. Vyncke, "Using Only Link-Local
+              Addressing inside an IPv6 Network", RFC 7404, November
+              2014.
+
+   [RFC7575]  Behringer, M., Pritikin, M., Bjarnason, S., Clemm, A.,
+              Carpenter, B., Jiang, S., and L. Ciavaglia, "Autonomic
+              Networking: Definitions and Design Goals", RFC 7575, June
+              2015.
 
 Authors' Addresses
 
    Michael H. Behringer (editor)
-   Cisco
+   Cisco Systems
+   Building D, 45 Allee des Ormes
+   Mougins  06250
+   France
 
    Email: mbehring@cisco.com
 
@@ -823,23 +1226,18 @@ Authors' Addresses
    Email: brian.e.carpenter@gmail.com
 
 
+
+
+
+Behringer, et al.       Expires December 27, 2015              [Page 22]
+
+Internet-Draft             AN Reference Model                  June 2015
+
+
    Toerless Eckert
    Cisco
 
    Email: eckert@cisco.com
-
-
-
-
-
-
-
-
-
-
-Behringer, et al.       Expires December 19, 2015              [Page 15]
-
-Internet-Draft             AN Reference Model                  June 2015
 
 
    Laurent Ciavaglia
@@ -887,10 +1285,4 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-
-
-
-
-
-
-Behringer, et al.       Expires December 19, 2015              [Page 16]
+Behringer, et al.       Expires December 27, 2015              [Page 23]
