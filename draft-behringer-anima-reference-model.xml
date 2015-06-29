@@ -80,6 +80,19 @@
 			<email>leo.liubing@huawei.com</email>
 		  </address>
 		</author>
+		
+		<author fullname="Jeferson Campos Nobre" initials="J.C." surname="Nobre">
+      			<organization>Federal University of Rio Grande do Sul</organization>
+      			<address>
+        			<postal>
+          				<street>Av. Bento Gonçalves, 9500</street>
+        				<city>Porto Alegre</city>
+			        	<code>91501-970</code>
+        				<country>Brazil</country>
+        			</postal>
+        			<email>jcnobre@inf.ufrgs.br</email>
+		      </address>
+    		</author>
 
 		<date day="30" month="June" year="2015"/>
 		<area>Operations and Management</area>
