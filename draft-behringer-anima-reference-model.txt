@@ -5,14 +5,14 @@
 ANIMA                                                  M. Behringer, Ed.
 Internet-Draft                                             Cisco Systems
 Intended status: Informational                              B. Carpenter
-Expires: December 27, 2015                             Univ. of Auckland
+Expires: January 1, 2016                               Univ. of Auckland
                                                                T. Eckert
                                                                    Cisco
                                                             L. Ciavaglia
                                                           Alcatel Lucent
                                                                   B. Liu
                                                      Huawei Technologies
-                                                           June 25, 2015
+                                                           June 30, 2015
 
 
                A Reference Model for Autonomic Networking
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 27, 2015.
+   This Internet-Draft will expire on January 1, 2016.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Behringer, et al.       Expires December 27, 2015               [Page 1]
+Behringer, et al.        Expires January 1, 2016                [Page 1]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -83,7 +83,7 @@ Table of Contents
        4.2.2.  The Base Addressing Scheme  . . . . . . . . . . . . .  10
        4.2.3.  Possible Sub-Schemes  . . . . . . . . . . . . . . . .  10
        4.2.4.  Address Hierarchy . . . . . . . . . . . . . . . . . .  12
-     4.3.  Discovery . . . . . . . . . . . . . . . . . . . . . . . .  13
+     4.3.  Discovery . . . . . . . . . . . . . . . . . . . . . . . .  12
      4.4.  Signaling Between Autonomic Nodes . . . . . . . . . . . .  13
      4.5.  Intent Distribution . . . . . . . . . . . . . . . . . . .  14
      4.6.  Routing . . . . . . . . . . . . . . . . . . . . . . . . .  14
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Behringer, et al.       Expires December 27, 2015               [Page 2]
+Behringer, et al.        Expires January 1, 2016                [Page 2]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -122,8 +122,7 @@ Internet-Draft             AN Reference Model                  June 2015
      9.1.  Threat Analysis . . . . . . . . . . . . . . . . . . . . .  20
    10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  21
    11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  21
-   12. Change log [RFC Editor: Please remove]  . . . . . . . . . . .  21
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  21
+   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  21
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  22
 
 1.  Introduction
@@ -165,7 +164,8 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015               [Page 3]
+
+Behringer, et al.        Expires January 1, 2016                [Page 3]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -221,7 +221,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015               [Page 4]
+Behringer, et al.        Expires January 1, 2016                [Page 4]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -277,7 +277,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015               [Page 5]
+Behringer, et al.        Expires January 1, 2016                [Page 5]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -333,7 +333,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015               [Page 6]
+Behringer, et al.        Expires January 1, 2016                [Page 6]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -389,7 +389,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015               [Page 7]
+Behringer, et al.        Expires January 1, 2016                [Page 7]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -445,7 +445,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015               [Page 8]
+Behringer, et al.        Expires January 1, 2016                [Page 8]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -501,7 +501,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015               [Page 9]
+Behringer, et al.        Expires January 1, 2016                [Page 9]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -557,7 +557,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015              [Page 10]
+Behringer, et al.        Expires January 1, 2016               [Page 10]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -589,9 +589,9 @@ Internet-Draft             AN Reference Model                  June 2015
    The "device ID" itself is unique in a domain (i.e., the Zone-ID is
    not required for uniqueness).  Therefore, a device can be addressed
    either as part of a flat hierarchy (zone ID = 0), or with an
-   aggregation scheme (any other zone ID).  An address with zone-ID
-   could be interpreted as an identifier, with another zone-ID as a
-   locator.
+   aggregation scheme (any other zone ID).  An address with zone-ID 0
+   (zero) could be interpreted as an identifier, with another zone-ID as
+   a locator.
 
 4.2.3.2.  Sub-Scheme 2
 
@@ -613,7 +613,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015              [Page 11]
+Behringer, et al.        Expires January 1, 2016               [Page 11]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -649,30 +649,12 @@ Internet-Draft             AN Reference Model                  June 2015
    think this is required at this point, but a new type could be used in
    the future to support such a scheme.)
 
-   If aggregation is required, the 13 bit value allows for up to 8191
-   zones.  (Theoretically, the 13 bits for the zone ID would allow also
-   for two levels of zones, introducing a sub-hierarchy.  We do not
-   think this is required at this point, but a new type could be used in
-   the future to support such a scheme.)
-
    Another way to introduce hierarchy is to use sub-domains in the
    naming scheme.  The node names "node17.subdomainA.example.com" and
    "node4.subdomainB.example.com" would automatically lead to different
    ULA prefixes, which can be used to introduce a routing hierarchy in
    the network, assuming that the subdomains are aligned with routing
    areas.
-
-
-
-
-
-
-
-
-Behringer, et al.       Expires December 27, 2015              [Page 12]
-
-Internet-Draft             AN Reference Model                  June 2015
-
 
 4.3.  Discovery
 
@@ -682,6 +664,15 @@ Internet-Draft             AN Reference Model                  June 2015
    at all, and therefore it needs to discover peers and other resources
    in the network.  This section describes various discovery functions
    in an autonomic network.
+
+
+
+
+
+Behringer, et al.        Expires January 1, 2016               [Page 12]
+
+Internet-Draft             AN Reference Model                  June 2015
+
 
    Discovering nodes and their properties and capabilities: A core
    function to establish an autonomic domain is the mutual discovery of
@@ -722,18 +713,22 @@ Internet-Draft             AN Reference Model                  June 2015
    able to handle any sort of technical objective, including ones that
    require complex data structures.  The document "A Generic Discovery
    and Negotiation Protocol for Autonomic Networking"
-
-
-
-Behringer, et al.       Expires December 27, 2015              [Page 13]
-
-Internet-Draft             AN Reference Model                  June 2015
-
-
    [I-D.carpenter-anima-gdn-protocol] describes more detailed
    requirements for discovery, negotiation and synchronization in an
    autonomic network.  It also defines a protocol, GDNP, for this
    purpose, including an integrated but optional discovery protocol.
+
+
+
+
+
+
+
+
+Behringer, et al.        Expires January 1, 2016               [Page 13]
+
+Internet-Draft             AN Reference Model                  June 2015
+
 
 4.5.  Intent Distribution
 
@@ -763,8 +758,9 @@ Internet-Draft             AN Reference Model                  June 2015
    The totality of autonomic interactions forms the "Autonomic Control
    Plane".  This control plane can be either implemented in the global
    routing table of a node, such as IGPs in today's networks; or it can
-   be provided as an overlay network, as described in
-   [I-D.behringer-anima-autonomic-control-plane].
+   be provided as an overlay network.  The document "An Autonomic
+   Control Plane" ([I-D.behringer-anima-autonomic-control-plane])
+   describes the details.
 
 5.  Security and Trust Infrastructure
 
@@ -779,15 +775,17 @@ Internet-Draft             AN Reference Model                  June 2015
    must be in place.  This section describes the principles of this
    trust infrastructure.
 
+   A completely autonomic way to automatically and securely deploy such
+   a trust infrastructure is to set up a trust anchor for the domain,
 
 
-Behringer, et al.       Expires December 27, 2015              [Page 14]
+
+
+Behringer, et al.        Expires January 1, 2016               [Page 14]
 
 Internet-Draft             AN Reference Model                  June 2015
 
 
-   A completely autonomic way to automatically and securely deploy such
-   a trust infrastructure is to set up a trust anchor for the domain,
    and then use an approach as in the document "Bootstrapping Key
    Infrastructures" [I-D.pritikin-bootstrapping-keyinfrastructures].
 
@@ -837,7 +835,9 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015              [Page 15]
+
+
+Behringer, et al.        Expires January 1, 2016               [Page 15]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -845,7 +845,7 @@ Internet-Draft             AN Reference Model                  June 2015
 6.2.  Specific ASAs for the Enrolment Process
 
    The following ASAs provide essential, required functionality in an
-   autonomic network, and are therefor mandatory to implement on
+   autonomic network, and are therefore mandatory to implement on
    unconstrained autonomic nodes.
 
 6.2.1.  The Enrolment ASA
@@ -893,7 +893,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015              [Page 16]
+Behringer, et al.        Expires January 1, 2016               [Page 16]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -949,7 +949,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015              [Page 17]
+Behringer, et al.        Expires January 1, 2016               [Page 17]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -1005,7 +1005,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015              [Page 18]
+Behringer, et al.        Expires January 1, 2016               [Page 18]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -1061,7 +1061,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015              [Page 19]
+Behringer, et al.        Expires January 1, 2016               [Page 19]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -1117,7 +1117,7 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015              [Page 20]
+Behringer, et al.        Expires January 1, 2016               [Page 20]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -1141,11 +1141,7 @@ Internet-Draft             AN Reference Model                  June 2015
    Many people have provided feedback and input to this document: Sheng
    Jiang, Roberta Maglione, Jonathan Hansford.
 
-12.  Change log [RFC Editor: Please remove]
-
-      00: Initial version.
-
-13.  References
+12.  References
 
    [I-D.behringer-anima-autonomic-addressing]
               Behringer, M., "An Autonomic IPv6 Addressing Scheme",
@@ -1173,7 +1169,11 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015              [Page 21]
+
+
+
+
+Behringer, et al.        Expires January 1, 2016               [Page 21]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -1229,7 +1229,7 @@ Authors' Addresses
 
 
 
-Behringer, et al.       Expires December 27, 2015              [Page 22]
+Behringer, et al.        Expires January 1, 2016               [Page 22]
 
 Internet-Draft             AN Reference Model                  June 2015
 
@@ -1285,4 +1285,4 @@ Internet-Draft             AN Reference Model                  June 2015
 
 
 
-Behringer, et al.       Expires December 27, 2015              [Page 23]
+Behringer, et al.        Expires January 1, 2016               [Page 23]
