@@ -81,7 +81,7 @@
 		  </address>
 		</author>
 
-		<date day="25" month="June" year="2015"/>
+		<date day="30" month="June" year="2015"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -356,7 +356,7 @@
 			<t>16 bit: Device ID, a number which is unique for a given registrar, to identify the device. This can be a sequentially assigned number. </t> 
 		</list>
 		</t>
-		<t>The "device ID" itself is unique in a domain (i.e., the Zone-ID is not required for uniqueness). Therefore, a device can be addressed either as part of a flat hierarchy (zone ID = 0), or with an aggregation scheme (any other zone ID). An address with zone-ID could be interpreted as an identifier, with another zone-ID as a locator.</t>
+		<t>The "device ID" itself is unique in a domain (i.e., the Zone-ID is not required for uniqueness). Therefore, a device can be addressed either as part of a flat hierarchy (zone ID = 0), or with an aggregation scheme (any other zone ID). An address with zone-ID 0 (zero) could be interpreted as an identifier, with another zone-ID as a locator.</t>
 	</section> 
 	<!-- scheme-1 -->
 
@@ -386,7 +386,6 @@
 
 		<section anchor="hierarchy" title="Address Hierarchy">
 			<t>The "zone ID" allows for the definition of a simple address hierarchy. If set to zero, the address scheme is flat. In this case, the addresses primarily act as identifiers for the nodes. Used like this, aggregation is not possible. </t>
-			<t>If aggregation is required, the 13 bit value allows for up to 8191 zones. (Theoretically, the 13 bits for the zone ID would allow also for two levels of zones, introducing a sub-hierarchy. We do not think this is required at this point, but a new type could be used in the future to support such a scheme.)</t>
 			<t>If aggregation is required, the 13 bit value allows for up to 8191 zones. (Theoretically, the 13 bits for the zone ID would allow also for two levels of zones, introducing a sub-hierarchy. We do not think this is required at this point, but a new type could be used in the future to support such a scheme.)</t>
 			<t>Another way to introduce hierarchy is to use sub-domains in the naming scheme. The node names "node17.subdomainA.example.com" and "node4.subdomainB.example.com" would automatically lead to different ULA prefixes, which can be used to introduce a routing hierarchy in the network, assuming that the subdomains are aligned with routing areas. </t> 
 		</section> <!-- hierarchy -->
@@ -421,7 +420,7 @@
 	<!-- routing -->
 
 	<section anchor="acp" title="The Autonomic Control Plane">
-		<t>The totality of autonomic interactions forms the "Autonomic Control Plane". This control plane can be either implemented in the global routing table of a node, such as IGPs in today's networks; or it can be provided as an overlay network, as described in <xref target="I-D.behringer-anima-autonomic-control-plane"/>. </t> 
+		<t>The totality of autonomic interactions forms the "Autonomic Control Plane". This control plane can be either implemented in the global routing table of a node, such as IGPs in today's networks; or it can be provided as an overlay network. The document "An Autonomic Control Plane" (<xref target="I-D.behringer-anima-autonomic-control-plane"/>) describes the details. </t> 
 	</section>
 	<!-- acp -->
 
@@ -470,7 +469,7 @@
 	</section>
 		
 	<section anchor="specific-asas" title="Specific ASAs for the Enrolment Process">
-		<t>The following ASAs provide essential, required functionality in an autonomic network, and are therefor mandatory to implement on unconstrained autonomic nodes. </t> 
+		<t>The following ASAs provide essential, required functionality in an autonomic network, and are therefore mandatory to implement on unconstrained autonomic nodes. </t> 
 
 		<section anchor="enrolment" title="The Enrolment ASA">
 			<t>This section describes the function of an autonomic node to bootstrap into the domain with the help of an enrolment proxy (see previous section). [tbc]</t>
@@ -605,16 +604,7 @@ If security properties are managed autonomically, a misbehaving device could att
 			<t>Many people have provided feedback and input to this document: Sheng Jiang, Roberta Maglione, Jonathan Hansford.</t>
 		</section>
 		<!-- ack -->
-		
-		<section anchor="changes" title="Change log [RFC Editor: Please remove]">
-			<t>
-				<list>
-					<t>00: Initial version.</t>
-				</list>
-			</t>
-		</section>
-		<!-- changes -->
-		
+				
 	</middle>
 	<back>
 		<references title="References">
