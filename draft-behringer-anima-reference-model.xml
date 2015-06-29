@@ -13,13 +13,22 @@
 <rfc ipr="trust200902" docName="draft-behringer-anima-reference-model-03" category="info">
 	<front>
 		<title abbrev="AN Reference Model">A Reference Model for Autonomic Networking</title>
-		<author role="editor" fullname="Michael H. Behringer" initials="M.H." surname="Behringer">
-			<organization>Cisco</organization>
+
+		<author role="editor" fullname="Michael H. Behringer" initials="M." surname="Behringer">
+			<organization>Cisco Systems</organization>
+
 			<address>
-				<email>mbehring@cisco.com</email>
+				<postal>
+					<street>Building D, 45 Allee des Ormes</street>
+					<city>Mougins</city>
+					<region/>
+					<code>06250</code>
+					<country>France</country>
+				</postal>
+			<email>mbehring@cisco.com</email>
 			</address>
 		</author>
-
+		
 		<author surname="Carpenter" initials="B. E." fullname="Brian Carpenter">
 			<organization abbrev="Univ. of Auckland"/>
 			<address>
@@ -72,7 +81,7 @@
 		  </address>
 		</author>
 
-		<date day="17" month="June" year="2015"/>
+		<date day="25" month="June" year="2015"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -84,8 +93,8 @@
 	
 	<middle>
 <section anchor="intro" title="Introduction">
-	<t>The document "Autonomic Networking - Definitions and Design Goals" <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/> explains the fundamental concepts behind Autonomic Networking, and defines the relevant terms in this space. In section 5 it describes a high level reference model. This document defines this reference model with more detail, to allow for functional and protocol specifications to be developed in an architecturally consistent, non-overlapping manner. While the document is written as generally as possible, the initial solutions are limited to the chartered scope of the WG.</t>
-	<t>As discussed in <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/>, the goal of this work is not to focus exclusively on fully autonomic nodes or networks. In reality, most networks will run with some autonomic functions, while the rest of the network is traditionally managed. This reference model allows for this hybrid approach. </t>
+	<t>The document "Autonomic Networking - Definitions and Design Goals" <xref target="RFC7575"/> explains the fundamental concepts behind Autonomic Networking, and defines the relevant terms in this space. In section 5 it describes a high level reference model. This document defines this reference model with more detail, to allow for functional and protocol specifications to be developed in an architecturally consistent, non-overlapping manner. While the document is written as generally as possible, the initial solutions are limited to the chartered scope of the WG.</t>
+	<t>As discussed in <xref target="RFC7575"/>, the goal of this work is not to focus exclusively on fully autonomic nodes or networks. In reality, most networks will run with some autonomic functions, while the rest of the network is traditionally managed. This reference model allows for this hybrid approach. </t>
 	<t>This is a living document and will evolve with the technical solutions developed in the ANIMA WG. Sections marked with (*) do not represent current charter items. While this document must give a long term architectural view, not all functions will be standardized at the same time.</t> 
 </section>
 <!-- intro -->
@@ -164,8 +173,8 @@
 	</section>
 	<!-- element-architecture --> 
 
-	<section anchor="un-constrained" title="Unconstrained AN Nodes">
-		   <t>Unconstrained nodes have the full ANI, with the full functionality (details to be worked out). They support all the capabilities outlined in the rest of the document. [tbc] </t>
+	<section anchor="un-constrained" title="Full AN Nodes">
+		   <t>Full AN nodes have the full Autonomic Networking Infrastructure, with the full functionality (details to be worked out). They support all the capabilities outlined in the rest of the document. [tbc] </t>
 	</section>
 	<!-- unconstrained -->
 		
@@ -188,19 +197,114 @@
 	<!-- naming -->
 
 	<section anchor="addressing" title="Addressing">
-		<t>Autonomic Service Agents (ASAs) need addressing to communicate with each other. This section describes the addressing approach of the Autonomic Networking Infrastructure, used by ASAs. It does NOT describe addressing approaches for the data plane of the network, which may be configured and managed in the traditional way. ASAs may provide a service to negotiate address space, or addressing mechanisms for the date plane. One use case for such an autonomic function is described in <xref target="I-D.jiang-auto-addr-management"/>.  The addressing the ASAs use is in scope for this section, the address space they negotiate for the data plane is not. </t>
-		<t>It is generally desirable to make the addressing scheme of the Autonomic Networking Infrastructure as self-managing (autonomic) as possible. </t>
-		<t>This section is currently under discussion. We currently believe that we should address the following questions: 
+		<t>Autonomic Service Agents (ASAs) need to communicate with each other, using the autonomic addressing of the node they reside on. This section describes the addressing approach of the Autonomic Networking Infrastructure, used by ASAs. It does NOT describe addressing approaches for the data plane of the network, which may be configured and managed in the traditional way, or negotiated as a service of an ASA. One use case for such an autonomic function is described in <xref target="I-D.jiang-auto-addr-management"/>.  The addressing of the Autonomic Networking Infrastructure is in scope for this section, the address space they negotiate for the data plane is not. </t>
+		<t>Autonomic addressing is a function of the Autonomic Networking Infrastructure (lower part of <xref target="ref_model"/>). ASAs do not have their own addresses. They may use either API calls, or the autonomic addressing scheme of the Autonomic Networking Infrastructure. </t>
+
+		<section anchor="addr-req" title="Requirements and Fundamental Concepts">
+
+		<t>An autonomic addressing scheme has the following requirements: 
 		<list style="symbols">
-		  <t>How addressing inside the Autonomic Control Plane (ACP) <xref target="I-D.behringer-anima-autonomic-control-plane"/> is assigned and managed autonomically.</t>
-		  <t>Whether, if there is no separated ACP, Autonomic Service Agents (ASAs) shall have their own address space, or whether they should use the address space configured by the administrator.</t>
-		  <t>How addressing is handled in the presence of non-autonomic nodes.</t>
-		  <t>Prefix assignment to interfaces.</t>
-		  <t>Whether links and link interfaces should get routable address space, or whether link local addressing is sufficient.</t>
-		  <t>How the address space used in the Autonomic Networking Infrastructure is assigned and managed.</t>
+			<t>Zero-touch for simple networks: Simple networks should have complete self-management of addressing, and not require any central address management, tools, or address planning. </t>
+			<t>Low-touch for complex networks: If complex networks require operator input for autonomic address management, it should be limited to high level guidance only, expressed in Intent.</t>
+			<t>Flexibility: The addressing scheme must be flexible enough for nodes to be able to move around, for the network to grow, split and merge. </t>
+			<t>Robustness: It should be as hard as possible for an administrator to negatively affect addressing (and thus connectivity) in the autonomic context. </t>
+			<t>Support for virtualization: Autonomic Nodes may support Autonomic Service Agents in different virtual machines or containers. The addressing scheme should support this architecture. </t>
+			<t>Simplicity: To make engineering simpler, and to give the human administrator an easy way to trouble-shoot autonomic functions. </t>
+			<t>Scale: The proposed scheme should work in any network of any size. </t> 
+			<t>Upgradability: The scheme must be able to support different addressing concepts in the future. </t>
+		</list>
+		</t>
+
+		<t>These are the fundamental concepts of autonomic addressing:
+		<list style="symbols">
+			<t>IPv6 only: Autonomic processes SHOULD (as defined in <xref target="RFC2119"/>) use exclusively IPv6, for simplicity reasons.</t>
+			<t>Usage: Autonomic addresses are exclusively used for self-management functions inside a trusted domain. They are not used for user traffic. Communications with entities outside the trusted domain use another address space, for example normally managed routable address space.</t>
+			<t>Separation: Autonomic address space is used separately from user address space and other address realms. This supports the robustness requirement. Link-local is considered not part of user address space for this purpose. </t>
+			<t>Overlay network: Routeable addresses for AN nodes are used exclusively in a secure overlay network which is the basis of the ACP. This means that these addresses will be assigned to the loopback interface in most operating systems. All other interfaces exclusively use IPv6 link local for autonomic functions. The usage of IPv6 link local addressing is discussed in <xref target="RFC7404"/>.</t> 
+			<t>Use-ULA: For these overlay addresses of autonomic nodes, we use Unique Local Addresses (ULA), as specified in <xref target="RFC4193"/>. An alternative scheme was discussed, using assigned ULA addressing. The consensus was to use standard ULA, because it was deemed to be sufficient. </t>
+			<t>No external connectivity: They do not provide access to the Internet. If a node requires further reaching connectivity, it should use another, traditionally managed address scheme in parallel. </t>
 		</list></t>
-		<t>It is not clear at this point whether a specific address scheme should be included in this document, or whether this document should only define the requirements. This is for further discussion.</t>
-		<t>The document <xref target="I-D.behringer-anima-autonomic-addressing"/> describes one way to autonomically assign loopback addresses to autonomic nodes, in an autonomic, self-managed way. Other ideas and suggestions are strongly encouraged. </t>
+		</section>
+		<!-- addr-req --> 
+		
+<section anchor="scheme" title="The Base Addressing Scheme">
+	<t>The Base ULA addressing scheme for autonomic nodes has the following format:</t>
+	<t><figure title="Base Addressing Scheme" anchor='base-addr-scheme'>
+   	<artwork>
+  8      40          3                     77        	           
++--+--------------+------+------------------------------------------+
+|FD| hash(domain) | Type |             (sub-scheme)                 |
++--+--------------+------+------------------------------------------+
+	</artwork>
+	</figure></t>
+	<t>The first 48 bits follow the ULA scheme, as defined in <xref target="RFC4193"/>, to which a type field is added: 
+	<list style="symbols">
+		<t>"FD" identifies a locally defined ULA address. </t>
+		<t>The "global ID" is set here to be a hash of the domain name, which results in a pseudo-random 40 bit value. It is calculated as the first 40 bits of the MD5 hash of the domain name, in the example "example.com".</t>
+		<t>Type: Set to 000 (3 zero bits). This field allows different address sub-schemes in the future. The goal is to start with a minimal number of sub-scheme initially, but to allow for extensions later if and when required. This addresses the "upgradability" requirement. Assignment of types for this field should be maintained by IANA.</t>
+	</list></t>
+</section>
+<!-- scheme -->
+
+<section anchor="sub-schemes" title="Possible Sub-Schemes">
+	<t>The sub-schemes listed here are not intended to be all supported initially, but are listed for discussion. The final document should define ideally only a single sub-scheme for now, and leave the other "types" for later assignment. </t>
+
+	<section anchor="scheme-1" title="Sub-Scheme 1">
+		<t><figure title="Addressing Scheme 1" anchor='addr-scheme-1'>
+		<artwork>
+          51                 13                    64	           
++------------------------+---------+--------------------------------+
+|    (base scheme)       | Zone ID |         Device ID              |
++------------------------+---------+--------------------------------+
+		</artwork>
+		</figure></t>
+		<t>The fields are defined as follows: [Editor's note: The lengths of the fields is for discussion.]
+		<list style="symbols">
+			<t>Zone ID: If set to all zero bits: Flat addressing scheme. Any other value indicates a zone. See section <xref target="hierarchy"/> on how this field is used in detail. </t>
+			<t>Device ID: A unique value for each device, typically assigned by a registrar. </t> 
+		</list>
+		</t> 
+		<t>The device ID is derived as follows: In an Autonomic Network, a registrar is enrolling new devices. As part of the enrolment process the registrar assigns a number to the device, which is unique for this registrar, but not necessarily unique in the domain. The 64 bit device ID is then composed as: 
+		<list style="symbols"> 
+			<t>48 bit: Registrar ID, a number unique inside the domain that identifies the registrar which assigned the name to the device. A MAC address of the registrar can be used for this purpose. </t>
+			<t>16 bit: Device ID, a number which is unique for a given registrar, to identify the device. This can be a sequentially assigned number. </t> 
+		</list>
+		</t>
+		<t>The "device ID" itself is unique in a domain (i.e., the Zone-ID is not required for uniqueness). Therefore, a device can be addressed either as part of a flat hierarchy (zone ID = 0), or with an aggregation scheme (any other zone ID). An address with zone-ID could be interpreted as an identifier, with another zone-ID as a locator.</t>
+	</section> 
+	<!-- scheme-1 -->
+
+	<section anchor="scheme-2" title="Sub-Scheme 2">
+		<t><figure title="Addressing Scheme 2" anchor='addr-scheme-2'>
+		<artwork>
+          51                 13                    64-V           ?
++------------------------+---------+----------------------------+---+
+|    (base scheme)       | Zone ID |         Device ID          | V |
++------------------------+---------+----------------------------+---+
+		</artwork>
+		</figure></t>
+		<t>The fields are defined as follows: [Editor's note: The lengths of the fields is for discussion.]
+		<list style="symbols">
+			<t>Zone ID: As in sub-scheme 1. </t>
+			<t>Device ID: As in sub-scheme 1.</t>
+			<t>V: Virtualization bit(s): 1 or more bits that indicate a virtual context on an autonomic node.</t>
+		</list>
+		</t> 
+		<t>In addition the scheme 1 (<xref target="scheme-1"/>), this scheme allows the direct addressing of specific virtual containers / VMs on an autonomic node. An increasing number of hardware platforms have a distributed architecture, with a base OS for the node itself, and the support for hardware blades with potentially different OSs. The VMs on the blades could be considered as separate autonomic nodes, in which case it would make sense to be able to address them directly. Autonomic Service Agents (ASAs) could be instantiated in either the base OS, or one of the VMs on a blade. This addressing scheme allows for the easy separation of the hardware context.</t>
+		<t>The location of the V bit(s) at the end of the address allows to announce a single prefix for each autonomic node, while having separate virtual contexts addressable directly.</t>
+	</section> 
+	<!-- scheme-2 -->
+
+	</section> 
+	<!-- sub-schemes -->
+
+		<section anchor="hierarchy" title="Address Hierarchy">
+			<t>The "zone ID" allows for the definition of a simple address hierarchy. If set to zero, the address scheme is flat. In this case, the addresses primarily act as identifiers for the nodes. Used like this, aggregation is not possible. </t>
+			<t>If aggregation is required, the 13 bit value allows for up to 8191 zones. (Theoretically, the 13 bits for the zone ID would allow also for two levels of zones, introducing a sub-hierarchy. We do not think this is required at this point, but a new type could be used in the future to support such a scheme.)</t>
+			<t>If aggregation is required, the 13 bit value allows for up to 8191 zones. (Theoretically, the 13 bits for the zone ID would allow also for two levels of zones, introducing a sub-hierarchy. We do not think this is required at this point, but a new type could be used in the future to support such a scheme.)</t>
+			<t>Another way to introduce hierarchy is to use sub-domains in the naming scheme. The node names "node17.subdomainA.example.com" and "node4.subdomainB.example.com" would automatically lead to different ULA prefixes, which can be used to introduce a routing hierarchy in the network, assuming that the subdomains are aligned with routing areas. </t> 
+		</section> <!-- hierarchy -->
+
 	</section>
 	<!-- addressing -->
 
@@ -232,8 +336,6 @@
 
 	<section anchor="acp" title="The Autonomic Control Plane">
 		<t>The totality of autonomic interactions forms the "Autonomic Control Plane". This control plane can be either implemented in the global routing table of a node, such as IGPs in today's networks; or it can be provided as an overlay network, as described in <xref target="I-D.behringer-anima-autonomic-control-plane"/>. </t> 
-		<t>The ACP can be operated in two ways: 1) as a separate virtual overlay network, as described in <xref target="I-D.behringer-anima-autonomic-control-plane"/>. or 2), in the global routing table. This sections discusses implications of both choices. </t>
-		<t>Also: Need to address how a separated ACP and an inline ACP cooperate. </t>
 	</section>
 	<!-- acp -->
 
@@ -435,6 +537,8 @@ If security properties are managed autonomically, a misbehaving device could att
 	</middle>
 	<back>
 		<references title="References">
+			<?rfc include='reference.RFC.2119'?>
+			<?rfc include='reference.RFC.7575'?>
 			<?rfc include="reference.I-D.pritikin-bootstrapping-keyinfrastructures.xml"?>
 			<?rfc include="reference.I-D.irtf-nmrg-autonomic-network-definitions.xml"?>
 			<?rfc include="reference.I-D.behringer-anima-autonomic-control-plane.xml"?>
@@ -444,4 +548,3 @@ If security properties are managed autonomically, a misbehaving device could att
 		</references>
 	</back>
 </rfc>
-Enter file contents here
