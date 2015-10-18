@@ -76,9 +76,9 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
-   2.  The Network View  . . . . . . . . . . . . . . . . . . . . . .   4
-   3.  The Autonomic Network Element . . . . . . . . . . . . . . . .   5
-     3.1.  Architecture  . . . . . . . . . . . . . . . . . . . . . .   5
+   2.  The Network View  . . . . . . . . . . . . . . . . . . . . . .   3
+   3.  The Autonomic Network Element . . . . . . . . . . . . . . . .   4
+     3.1.  Architecture  . . . . . . . . . . . . . . . . . . . . . .   4
      3.2.  Full AN Nodes . . . . . . . . . . . . . . . . . . . . . .   6
      3.3.  Constrained AN Nodes (*)  . . . . . . . . . . . . . . . .   6
    4.  The Autonomic Networking Infrastructure . . . . . . . . . . .   6
@@ -89,11 +89,11 @@ Table of Contents
      4.3.  Discovery . . . . . . . . . . . . . . . . . . . . . . . .   9
      4.4.  Signaling Between Autonomic Nodes . . . . . . . . . . . .  10
      4.5.  Intent Distribution . . . . . . . . . . . . . . . . . . .  10
-     4.6.  Routing . . . . . . . . . . . . . . . . . . . . . . . . .  11
+     4.6.  Routing . . . . . . . . . . . . . . . . . . . . . . . . .  10
      4.7.  The Autonomic Control Plane . . . . . . . . . . . . . . .  11
    5.  Security and Trust Infrastructure . . . . . . . . . . . . . .  11
      5.1.  Public Key Infrastructure . . . . . . . . . . . . . . . .  11
-     5.2.  Domain Certificate  . . . . . . . . . . . . . . . . . . .  12
+     5.2.  Domain Certificate  . . . . . . . . . . . . . . . . . . .  11
      5.3.  The MASA  . . . . . . . . . . . . . . . . . . . . . . . .  12
      5.4.  Sub-Domains (*) . . . . . . . . . . . . . . . . . . . . .  12
      5.5.  Cross-Domain Functionality (*)  . . . . . . . . . . . . .  12
@@ -101,11 +101,11 @@ Table of Contents
      6.1.  General Description of an ASA . . . . . . . . . . . . . .  12
      6.2.  Specific ASAs for the Enrolment Process . . . . . . . . .  12
        6.2.1.  The Enrolment ASA . . . . . . . . . . . . . . . . . .  12
-       6.2.2.  The Enrolment Proxy ASA . . . . . . . . . . . . . . .  13
+       6.2.2.  The Enrolment Proxy ASA . . . . . . . . . . . . . . .  12
        6.2.3.  The Registrar ASA . . . . . . . . . . . . . . . . . .  13
    7.  Management and Programmability  . . . . . . . . . . . . . . .  13
      7.1.  How an AN Network Is Managed  . . . . . . . . . . . . . .  13
-     7.2.  Intent (*)  . . . . . . . . . . . . . . . . . . . . . . .  14
+     7.2.  Intent (*)  . . . . . . . . . . . . . . . . . . . . . . .  13
 
 
 
@@ -117,24 +117,17 @@ Internet-Draft             AN Reference Model               October 2015
      7.3.  Aggregated Reporting (*)  . . . . . . . . . . . . . . . .  15
      7.4.  Feedback Loops to NOC(*)  . . . . . . . . . . . . . . . .  16
      7.5.  Control Loops (*) . . . . . . . . . . . . . . . . . . . .  16
-       7.5.1.  Types of Control (*)  . . . . . . . . . . . . . . . .  16
-       7.5.2.  Types of Control Loops (*)  . . . . . . . . . . . . .  16
-       7.5.3.  Management of an Autonomic Control Loop (*) . . . . .  18
-       7.5.4.  Elements of an Autonomic Control Loop (*) . . . . . .  18
-     7.6.  APIs (*)  . . . . . . . . . . . . . . . . . . . . . . . .  19
-       7.6.1.  Dynamic APIs (*)  . . . . . . . . . . . . . . . . . .  19
-       7.6.2.  APIs and Semantics(*) . . . . . . . . . . . . . . . .  19
-       7.6.3.  API Considerations (*)  . . . . . . . . . . . . . . .  20
-     7.7.  Data Model (*)  . . . . . . . . . . . . . . . . . . . . .  20
-   8.  Coordination Between Autonomic Functions (*)  . . . . . . . .  21
-     8.1.  The Coordination Problem (*)  . . . . . . . . . . . . . .  21
-     8.2.  A Coordination Functional Block (*) . . . . . . . . . . .  22
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  22
-     9.1.  Threat Analysis . . . . . . . . . . . . . . . . . . . . .  22
-   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  23
-   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  23
-   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  23
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  25
+     7.6.  APIs (*)  . . . . . . . . . . . . . . . . . . . . . . . .  16
+     7.7.  Data Model (*)  . . . . . . . . . . . . . . . . . . . . .  17
+   8.  Coordination Between Autonomic Functions (*)  . . . . . . . .  18
+     8.1.  The Coordination Problem (*)  . . . . . . . . . . . . . .  18
+     8.2.  A Coordination Functional Block (*) . . . . . . . . . . .  19
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  19
+     9.1.  Threat Analysis . . . . . . . . . . . . . . . . . . . . .  19
+   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  20
+   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  20
+   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  20
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  22
 
 1.  Introduction
 
@@ -160,6 +153,13 @@ Internet-Draft             AN Reference Model               October 2015
    long term architectural view, not all functions will be standardized
    at the same time.
 
+2.  The Network View
+
+   This section describes the various elements in a network with
+   autonomic functions, and how these entities work together, on a high
+   level.  Subsequent sections explain the detailed inside view for each
+   of the autonomic network elements, as well as the network functions
+   (or interfaces) between those elements.
 
 
 
@@ -169,14 +169,6 @@ Behringer, et al.        Expires April 18, 2016                 [Page 3]
 
 Internet-Draft             AN Reference Model               October 2015
 
-
-2.  The Network View
-
-   This section describes the various elements in a network with
-   autonomic functions, and how these entities work together, on a high
-   level.  Subsequent sections explain the detailed inside view for each
-   of the autonomic network elements, as well as the network functions
-   (or interfaces) between those elements.
 
    Figure 1 shows the high level view of an Autonomic Network.  It
    consists of a number of autonomic nodes, which interact directly with
@@ -218,14 +210,6 @@ Internet-Draft             AN Reference Model               October 2015
    WG is to specify the ANI, using a few autonomic functions as use
    cases.
 
-
-
-
-Behringer, et al.        Expires April 18, 2016                 [Page 4]
-
-Internet-Draft             AN Reference Model               October 2015
-
-
 3.  The Autonomic Network Element
 
 3.1.  Architecture
@@ -234,6 +218,14 @@ Internet-Draft             AN Reference Model               October 2015
    architecture.  The reference model explained in
    [I-D.irtf-nmrg-autonomic-network-definitions] shows the sources of
    information that an autonomic service agent can leverage: Self-
+
+
+
+Behringer, et al.        Expires April 18, 2016                 [Page 4]
+
+Internet-Draft             AN Reference Model               October 2015
+
+
    knowledge, network knowledge (through discovery), Intent, and
    feedback loops.  Fundamentally, there are two levels inside an
    autonomic node: the level of Autonomic Service Agents, and the level
@@ -274,14 +266,6 @@ Internet-Draft             AN Reference Model               October 2015
    interactions of the Autonomic Networking Infrastructure with other
    nodes and services.
 
-
-
-
-Behringer, et al.        Expires April 18, 2016                 [Page 5]
-
-Internet-Draft             AN Reference Model               October 2015
-
-
    The use cases of "Autonomics" such as self-management, self-
    optimisation, etc, are implemented as Autonomic Service Agents.  They
    use the services and data structures of the underlying autonomic
@@ -290,6 +274,13 @@ Internet-Draft             AN Reference Model               October 2015
 
    The "Basic Operating System Functions" include the "normal OS",
    including the network stack, security functions, etc.
+
+
+
+Behringer, et al.        Expires April 18, 2016                 [Page 5]
+
+Internet-Draft             AN Reference Model               October 2015
+
 
 3.2.  Full AN Nodes
 
@@ -331,13 +322,6 @@ Internet-Draft             AN Reference Model               October 2015
 
          The names MUST NOT collide within one autonomic domain.
 
-
-
-Behringer, et al.        Expires April 18, 2016                 [Page 6]
-
-Internet-Draft             AN Reference Model               October 2015
-
-
          It is acceptable that the names in different domains collide,
          since they could be distinguished by domains.
 
@@ -345,6 +329,14 @@ Internet-Draft             AN Reference Model               October 2015
 
          It is RECOMMENDED that the names encode some semantics rather
          than meaningless strings.  The semantics might be:
+
+
+
+
+Behringer, et al.        Expires April 18, 2016                 [Page 6]
+
+Internet-Draft             AN Reference Model               October 2015
+
 
          +  Location
 
@@ -385,15 +377,6 @@ Internet-Draft             AN Reference Model               October 2015
          "DeviceType" because of the lack of knowledge.  Later, they
          might have learned the "Location" and "FunctionalRole" and
          added the fields into current name.  However, the other devices
-
-
-
-
-Behringer, et al.        Expires April 18, 2016                 [Page 7]
-
-Internet-Draft             AN Reference Model               October 2015
-
-
          could still recognize it according to the same
          "DistinguisherNumber".
 
@@ -403,6 +386,13 @@ Internet-Draft             AN Reference Model               October 2015
          domain (e.g.  "Location" "NameofDomain").  Thus, these part of
          the names could be advertised through Intent
          DistributionSection 4.5.
+
+
+
+Behringer, et al.        Expires April 18, 2016                 [Page 7]
+
+Internet-Draft             AN Reference Model               October 2015
+
 
    o  Self-generated Fields
 
@@ -442,14 +432,6 @@ Internet-Draft             AN Reference Model               October 2015
       complete self-management of addressing, and not require any
       central address management, tools, or address planning.
 
-
-
-
-Behringer, et al.        Expires April 18, 2016                 [Page 8]
-
-Internet-Draft             AN Reference Model               October 2015
-
-
    o  Low-touch for complex networks: If complex networks require
       operator input for autonomic address management, it should be
       limited to high level guidance only, expressed in Intent.
@@ -457,6 +439,16 @@ Internet-Draft             AN Reference Model               October 2015
    o  Flexibility: The addressing scheme must be flexible enough for
       nodes to be able to move around, for the network to grow, split
       and merge.
+
+
+
+
+
+
+Behringer, et al.        Expires April 18, 2016                 [Page 8]
+
+Internet-Draft             AN Reference Model               October 2015
+
 
    o  Robustness: It should be as hard as possible for an administrator
       to negatively affect addressing (and thus connectivity) in the
@@ -499,13 +491,6 @@ Internet-Draft             AN Reference Model               October 2015
    with nodes starting up from factory condition or after any form of
    failure or sudden topology change.
 
-
-
-Behringer, et al.        Expires April 18, 2016                 [Page 9]
-
-Internet-Draft             AN Reference Model               October 2015
-
-
    Discovering services: Network services such as AAA should also be
    discovered and not configured.  Service discovery is required for
    such tasks.  An autonomic network can either leverage existing
@@ -513,6 +498,14 @@ Internet-Draft             AN Reference Model               October 2015
 
    Thus the discovery mechanism could either be fully integrated with
    autonomic signaling (next section) or could use an independent
+
+
+
+Behringer, et al.        Expires April 18, 2016                 [Page 9]
+
+Internet-Draft             AN Reference Model               October 2015
+
+
    discovery mechanism such as DNS Service Discovery or Service Location
    Protocol.  This choice could be made independently for each Autonomic
    Service Agent, although the infrastructure might require some minimal
@@ -555,6 +548,13 @@ Internet-Draft             AN Reference Model               October 2015
    In that case the autonomic signaling protocol could be used (previous
    section).
 
+4.6.  Routing
+
+   All autonomic nodes in a domain must be able to communicate with each
+   other, and with autonomic nodes outside their own domain.  Therefore,
+   an Autonomic Control Plane relies on a routing function.  For
+
+
 
 
 Behringer, et al.        Expires April 18, 2016                [Page 10]
@@ -562,11 +562,6 @@ Behringer, et al.        Expires April 18, 2016                [Page 10]
 Internet-Draft             AN Reference Model               October 2015
 
 
-4.6.  Routing
-
-   All autonomic nodes in a domain must be able to communicate with each
-   other, and with autonomic nodes outside their own domain.  Therefore,
-   an Autonomic Control Plane relies on a routing function.  For
    Autonomic Networks to be interoperable, they must all support one
    common routing protocol.
 
@@ -606,6 +601,11 @@ Internet-Draft             AN Reference Model               October 2015
    A minimum implementation of an autonomic domain contains one CA, one
    Registrar, and network elements.
 
+5.2.  Domain Certificate
+
+   We need to define how the fields in a domain certificate are to be
+   used. [tbc]
+
 
 
 
@@ -617,11 +617,6 @@ Behringer, et al.        Expires April 18, 2016                [Page 11]
 
 Internet-Draft             AN Reference Model               October 2015
 
-
-5.2.  Domain Certificate
-
-   We need to define how the fields in a domain certificate are to be
-   used. [tbc]
 
 5.3.  The MASA
 
@@ -662,6 +657,11 @@ Internet-Draft             AN Reference Model               October 2015
    into the domain with the help of an enrolment proxy (see previous
    section). [tbc]
 
+6.2.2.  The Enrolment Proxy ASA
+
+   This section describes the function of an autonomic node that helps a
+   non-enrolled, adjacent devices to enrol into the domain. [tbc]
+
 
 
 
@@ -673,11 +673,6 @@ Behringer, et al.        Expires April 18, 2016                [Page 12]
 
 Internet-Draft             AN Reference Model               October 2015
 
-
-6.2.2.  The Enrolment Proxy ASA
-
-   This section describes the function of an autonomic node that helps a
-   non-enrolled, adjacent devices to enrol into the domain. [tbc]
 
 6.2.3.  The Registrar ASA
 
@@ -719,7 +714,12 @@ Internet-Draft             AN Reference Model               October 2015
    node-specific network management methods, such as the use of command
    line interfaces [RFC7575].
 
+7.2.  Intent (*)
 
+   This section describes Intent, and how it is managed.  Intent and
+   Policy-Based Network Management (PBNM) is already described inside
+   the IETF (e.g., PCIM and SUPA) and in other SDOs (e.g., DMTF and TMF
+   ZOOM).
 
 
 
@@ -729,13 +729,6 @@ Behringer, et al.        Expires April 18, 2016                [Page 13]
 
 Internet-Draft             AN Reference Model               October 2015
 
-
-7.2.  Intent (*)
-
-   This section describes Intent, and how it is managed.  Intent and
-   Policy-Based Network Management (PBNM) is already described inside
-   the IETF (e.g., PCIM and SUPA) and in other SDOs (e.g., DMTF and TMF
-   ZOOM).
 
    Intent can be describe as an abstract, declarative, high-level policy
    used to operate an autonomic domain, such as an enterprise network
@@ -778,6 +771,13 @@ Internet-Draft             AN Reference Model               October 2015
    o  Signature: The signature is used as a security mechanism to
       provide authentication, integrity, and non-repudiation.
 
+   o  Timestamp: The timestamp of the creation of the intent using the
+      format supported by the IETF [TBC].
+
+   o  Lifetime: The lifetime in which the intent may be observed.  A
+      special case of the lifetime is the definition of permanent
+      intents.
+
 
 
 
@@ -785,13 +785,6 @@ Behringer, et al.        Expires April 18, 2016                [Page 14]
 
 Internet-Draft             AN Reference Model               October 2015
 
-
-   o  Timestamp: The timestamp of the creation of the intent using the
-      format supported by the IETF [TBC].
-
-   o  Lifetime: The lifetime in which the intent may be observed.  A
-      special case of the lifetime is the definition of permanent
-      intents.
 
    Intent distribution is considered as one of the common control and
    management functions of an autonomic network [RFC7575].  Since
@@ -834,6 +827,13 @@ Internet-Draft             AN Reference Model               October 2015
    level of the intent.  In this context, the visibility on current
    operational status of an autonomic network can be used to switch to
    different management modes.  Despite the fact that autonomic
+   management should minimize the need for user intervention, possibly
+   there are some events that need to be addressed by human
+   administrator actions.  An alternative to model this is the use of
+   exception-based management [RFC7575].
+
+
+
 
 
 
@@ -841,11 +841,6 @@ Behringer, et al.        Expires April 18, 2016                [Page 15]
 
 Internet-Draft             AN Reference Model               October 2015
 
-
-   management should minimize the need for user intervention, possibly
-   there are some events that need to be addressed by human
-   administrator actions.  An alternative to model this is the use of
-   exception-based management [RFC7575].
 
 7.4.  Feedback Loops to NOC(*)
 
@@ -857,39 +852,44 @@ Internet-Draft             AN Reference Model               October 2015
 
 7.5.  Control Loops (*)
 
-   Control loops provide a generic mechanism for self-adaptation.  That
-   is, as user needs, business goals, and the ANI itself change, self-
+   Control loops are used in autonomic networking to provide a generic
+   mechanism to enable the Autonomic System to adapt (on its own) to
+   various factors that can change the goals that the Autonomic System
+   is trying to achieve, or how those goals are achieved.  For example,
+   as user needs, business goals, and the ANI itself changes, self-
    adaptation enables the ANI to change the services and resources it
-   makes available to adapt to these changes.  Self-adaptive systems
-   move decision-making from static, pre-defined commands to dynamic
-   processes computed at runtime.
+   makes available to adapt to these changes.
 
-   Control loops operate to continuously capture data that enables the
-   understanding of the system, and then provide actions to move the
-   state of the system toward a common goal.
+   Control loops operate to continuously observe and collect data that
+   enables the autonomic management system to understand changes to the
+   behavior of the system being managed, and then provide actions to
+   move the state of the system being managed toward a common goal.
+   Self-adaptive systems move decision-making from static, pre-defined
+   commands to dynamic processes computed at runtime.
 
-7.5.1.  Types of Control (*)
+   Most autonomic systems use a closed control loop with feedback.  Such
+   control loops SHOULD be able to be dynamically changed at runtime to
+   adapt to changing user needs, business goals, and changes in the ANI.
 
-   There are two generic types of closed loop control.  Feedback control
-   adjusts the control loop based on measuring the output of the system
-   being managed to generate an error signal (the deviation of the
-   current state vs. its desired state).  Action is then taken to reduce
-   the deviation.
+   The document draft-strassner-anima-control-loop-00 defines the
+   requirements for an autonomic control loop, describes different types
+   of control loops, and explains how control loops are used in an
+   autonomic system.
 
-   In contrast, feedforward control anticipates future effects on a
-   controlled variable by measuring other variables whose values may be
-   more timely, and adjusts the process based on those variables.  In
-   this approach, control is not error-based, but rather, based on
-   knowledge.
+7.6.  APIs (*)
 
-   Autonomic control loops MAY require both feedforward and feedback
-   control.
+   Most APIs are static, meaning that they are pre-defined and represent
+   an invariant mechanism for operating with data.  An Autonomic Network
+   SHOULD be able to use dynamic APIs in addition to static APIs.
 
-7.5.2.  Types of Control Loops (*)
+   A dynamic API is one that retrieves data using a generic mechanism,
+   and then enables the client to navigate the retrieved data and
+   operate on it.  Such APIs typically use introspection and/or
+   reflection.  Introspection enables software to examine the type and
+   properties of an object at runtime, while reflection enables a
+   program to manipulate the attributes, methods, and/or metadata of an
+   object.
 
-   There are many different types of control loops.  In autonomics, the
-   most commonly cited loop is called Monitor-Analyze-Plan-Execute (with
-   Knowledge), called MAPE-K [Kephart03].  However, MAPE-K has a number
 
 
 
@@ -898,193 +898,22 @@ Behringer, et al.        Expires April 18, 2016                [Page 16]
 Internet-Draft             AN Reference Model               October 2015
 
 
-   of systemic problems, as described in [Strassner09].  Therefore,
-   other autonomic architectures, such as AutoI [autoi] and FOCALE
-   [Strassner07] and use control loops that evolved from the OODA
-   (Observe-Orient-Decide-Act) control loop [Boyd95].  The reason for
-   using this loop, and not the MAPE-K loop, is because the OODA loop
-   contains a critical step not contained in other loops: orientation.
-   Orientation determines how observations, decisions, and actions are
-   performed.
+   APIs MUST be able to express and preserve semantics across different
+   domains.  For example, software contracts [Meyer97] are based on the
+   principle that a software-intensive system, such as an Autonomic
+   Network, is a set of communicating components whose interaction is
+   based on precisely-defined specifications of the mutual obligations
+   that interacting components must respect.  This typically includes
+   specifying:
 
-   Figure 3 shows a simplified model of a control loop containing both
-   feedforward and feedback elements.
-
-                       Input Variables
-                ----------+-------------------------+
-                          |                         |
-                          |                         |
-                         \ /                       \ /
-                    +-----+------+             +----+----+
-      Set Point --->| Controller |------------>| Process |--+---> Output
-                    +-----+------+  Deltas of  +---------+  |
-                          ^         Control                 |
-                          |        Variable(s)              |
-                          |                                 |
-                          +---------------------------------+
-
-       Figure 3: Control Loop with Feedforward and Feedback Elements
-
-   Note that Figure 3 is a STATIC model.  Figure 4 is a dynamic version,
-   called a Model-Reference Adaptive Control Loop (MRACL).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Behringer, et al.        Expires April 18, 2016                [Page 17]
-
-Internet-Draft             AN Reference Model               October 2015
-
-
-                               Model   +--------------+
-                    +-------+  Output  |   Adaptive   |<----+
-               +--->| Model |--------->| Algorithm(s) |     |
-               |    +-------+          +---+-----+----+     |
-               |              Adjusted     |     ^          |
-        Input  |             Parameters    |     |          |
-       --------+          +----------------+     |          |
-               |          |                      |          |
-               |          |            +---------+          |
-               |         \ /           |                    |
-               |    +-----+------+     |       +---------+  |
-               +--->| Controller |-----+------>| Process |--+---> Output
-                    +-----+------+  Deltas of  +---------+  |
-                          ^         Control                 |
-                          |        Variable(s)              |
-                          |                                 |
-                          +---------------------------------+
-
-             Figure 4: A Model-Reference Adaptive Control Loop
-
-   More complex adaptive control loops have been defined; these will be
-   described in a future I-D, so that an appropriate gap analysis can be
-   defined to recommend an architectural approach for ANIMA.
-
-7.5.3.  Management of an Autonomic Control Loop (*)
-
-   Both standard and adaptive control loops (e.g., as represented in
-   Figures X and X1, respectively) enable intervention by a human
-   administrator or central control systems, if required.  Interaction
-   mechanisms include changing the behaviour of one or more elements in
-   the control loop, as well as providing mechanisms to bypass parts of
-   the control loop (e.g., skip the "decide" phase and go directly to
-   the "action" phase of an OODA loop, as is done in FOCALE).  This also
-   enables the default behaviour to be changed if necessary.
-
-7.5.4.  Elements of an Autonomic Control Loop (*)
-
-   An autonomic control loop MUST be able to perform the following
-   functions as part of its operation:
-
-   o  Observe and collect data from the system being managed
-
-   o  Orient these data, so that their meaning and significance can be
-      understood in proper context
-
-   o  Analyze the collected data through filtering, correlation, and
-      other mechanisms to define a model of past and current states
-
-
-
-
-Behringer, et al.        Expires April 18, 2016                [Page 18]
-
-Internet-Draft             AN Reference Model               October 2015
-
-
-   o  Plan different actions based on inferring trends, determining root
-      causes, and similar processes
-
-   o  Decide which plan(s) to take
-
-   o  Execute the plan, and then repeat these steps
-
-   In addition, an autonomic control loop SHOULD be able to execute one
-   or more machine learning algorithms that can learn from and make
-   predictions on monitored data.  This enables more efficient
-   adaptivity.  Note that machine learning is build from a model of
-   exemplar inputs in order to make decisions and predictions.
-   Supporting algorithms, such as those for data mining and analytics,
-   SHOULD also be supported.
-
-7.6.  APIs (*)
-
-   Most APIs are static, meaning that they are pre-defined and represent
-   an invariant mechanism for operating with data.  An Autonomic Network
-   SHOULD be able to use dynamic APIs in addition to static APIs.  APIs
-   MUST be able to express and preserve semantics across different
-   domains.
-
-7.6.1.  Dynamic APIs (*)
-
-   A dynamic API is one that retrieves data using a generic mechanism,
-   and then enables the client to navigate the retrieved data and
-   operate on it.  Such APIs typically use introspection and/or
-   reflection (the former enables software to examine the type and
-   properties of an object at runtime, while the latter enables a
-   program to manipulate the attributes, methods, and/or metadata of an
-   object.
-
-7.6.2.  APIs and Semantics(*)
-
-   An API is NOT the same as an interface.
-
-   An interface is a boundary across which different components of a
-   system exchange information.  An API is a set of software (including
-   tools, protocols, and programs) for building software applications.
-   An API defines a set of data structures, inputs, outputs, and
-   operations that can be used by a programmer to build an application.
-
-   An Autonomic API must pay particular attention to semantics.
-   Previous designs have used the notion of a software contract to build
-   high-quality APIs that are distributed and modular.  A software
-   contract [Meyer97] is based on the principle that a software-
-   intensive system, such as an Autonomic Network, is a set of
-
-
-
-Behringer, et al.        Expires April 18, 2016                [Page 19]
-
-Internet-Draft             AN Reference Model               October 2015
-
-
-   communicating components whose interaction is based on precisely-
-   defined specification of the mutual obligations that interacting
-   components must respect.  For example, when a method executes, the
-   following must hold:
-
-   o  pre-conditions must be satisfied before the method can start
+   o  pre-conditions that MUST be satisfied before the method can start
       execution
 
-   o  post-conditions must be satisfied when the method has finished
-      execution
+   o  post-conditions that MUST be satisfied when the method has
+      finished execution
 
-   o  invariant attributes must not change during the execution of the
-      method
-
-7.6.3.  API Considerations (*)
-
-   APIs should perform one function well, not perform many different and
-   unrelated functions.  In software design, this is called the Single
-   Responsibility Principle [srp]
+   o  invariant attributes that MUST NOT change during the execution of
+      the method
 
 7.7.  Data Model (*)
 
@@ -1114,17 +943,16 @@ Internet-Draft             AN Reference Model               October 2015
    A data model is essential for certain types of functions, such as a
    MRACL.  More generally, a data model can be used to define the
    objects, attributes, methods, and relationships of a software system
-
-
-
-Behringer, et al.        Expires April 18, 2016                [Page 20]
-
-Internet-Draft             AN Reference Model               October 2015
-
-
    (e.g., the ANI, an autonomic node, or an ASA).  A data model can be
    used to help design an API, as well as any language used to interface
    to the Autonomic Network.
+
+
+
+Behringer, et al.        Expires April 18, 2016                [Page 17]
+
+Internet-Draft             AN Reference Model               October 2015
+
 
 8.  Coordination Between Autonomic Functions (*)
 
@@ -1171,15 +999,17 @@ Internet-Draft             AN Reference Model               October 2015
       time, categorize them and plan for the appropriate coordination
       strategies/mechanisms.
 
+   o  At run-time, when conflicts happen, arbitration is driven by the
+      coordination strategies.  Also new dependencies can be observed
 
 
-Behringer, et al.        Expires April 18, 2016                [Page 21]
+
+
+Behringer, et al.        Expires April 18, 2016                [Page 18]
 
 Internet-Draft             AN Reference Model               October 2015
 
 
-   o  At run-time, when conflicts happen, arbitration is driven by the
-      coordination strategies.  Also new dependencies can be observed
       and inferred, resulting in an update of the dynamic interaction
       map and adaptation of the coordination strategies and mechanisms.
 
@@ -1226,16 +1056,16 @@ Internet-Draft             AN Reference Model               October 2015
    distributed.  On the one hand, that means there is no single point of
    failure to act as an attractive target for bad actors.  On the other
    hand, it means that potentially a single misbehaving autonomic device
+   could launch a widespread attack, by misusing the distributed AN
+   mechanisms.  For example, a resource exhaustion attack could be
 
 
 
-Behringer, et al.        Expires April 18, 2016                [Page 22]
+Behringer, et al.        Expires April 18, 2016                [Page 19]
 
 Internet-Draft             AN Reference Model               October 2015
 
 
-   could launch a widespread attack, by misusing the distributed AN
-   mechanisms.  For example, a resource exhaustion attack could be
    launched by a single device requesting large amounts of that resource
    from all its peers, on behalf of a non-existent traffic load.
    Alternatively it could simply send false information to its peers,
@@ -1274,8 +1104,8 @@ Internet-Draft             AN Reference Model               October 2015
 
    [I-D.behringer-anima-autonomic-addressing]
               Behringer, M., "An Autonomic IPv6 Addressing Scheme",
-              draft-behringer-anima-autonomic-addressing-01 (work in
-              progress), June 2015.
+              draft-behringer-anima-autonomic-addressing-02 (work in
+              progress), October 2015.
 
    [I-D.carpenter-anima-gdn-protocol]
               Carpenter, B. and B. Liu, "A Generic Discovery and
@@ -1285,7 +1115,9 @@ Internet-Draft             AN Reference Model               October 2015
 
 
 
-Behringer, et al.        Expires April 18, 2016                [Page 23]
+
+
+Behringer, et al.        Expires April 18, 2016                [Page 20]
 
 Internet-Draft             AN Reference Model               October 2015
 
@@ -1341,7 +1173,7 @@ Internet-Draft             AN Reference Model               October 2015
 
 
 
-Behringer, et al.        Expires April 18, 2016                [Page 24]
+Behringer, et al.        Expires April 18, 2016                [Page 21]
 
 Internet-Draft             AN Reference Model               October 2015
 
@@ -1397,7 +1229,7 @@ Authors' Addresses
 
 
 
-Behringer, et al.        Expires April 18, 2016                [Page 25]
+Behringer, et al.        Expires April 18, 2016                [Page 22]
 
 Internet-Draft             AN Reference Model               October 2015
 
@@ -1453,4 +1285,4 @@ Internet-Draft             AN Reference Model               October 2015
 
 
 
-Behringer, et al.        Expires April 18, 2016                [Page 26]
+Behringer, et al.        Expires April 18, 2016                [Page 23]

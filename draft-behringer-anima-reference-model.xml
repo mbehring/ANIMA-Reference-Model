@@ -474,144 +474,33 @@
 	<!-- feedback -->
 
 	<section anchor="control-loops" title="Control Loops (*)">
-
-	<t>Control loops provide a generic mechanism for self-adaptation. That
-   is, as user needs, business goals, and the ANI itself change, self-
+	
+    <t>   Control loops are used in autonomic networking to provide a generic
+   mechanism to enable the Autonomic System to adapt (on its own) to
+   various factors that can change the goals that the Autonomic System
+   is trying to achieve, or how those goals are achieved. For example,
+   as user needs, business goals, and the ANI itself changes, self-
    adaptation enables the ANI to change the services and resources it
-   makes available to adapt to these changes. Self-adaptive systems
-   move decision-making from static, pre-defined commands to dynamic
-   processes computed at runtime.</t>
+   makes available to adapt to these changes.</t>
 
-   <t>Control loops operate to continuously capture data that enables the
-   understanding of the system, and then provide actions to move the
-   state of the system toward a common goal.</t>
+   <t>Control loops operate to continuously observe and collect data
+   that enables the autonomic management system to understand changes
+   to the behavior of the system being managed, and then provide
+   actions to move the state of the system being managed toward a
+   common goal. Self-adaptive systems move decision-making from
+   static, pre-defined commands to dynamic processes computed at
+   runtime.</t>
 
-	<section anchor="types-of-control" title="Types of Control (*)">
+   <t>Most autonomic systems use a closed control loop with feedback.
+   Such control loops SHOULD be able to be dynamically changed at
+   runtime to adapt to changing user needs, business goals, and
+   changes in the ANI.</t>
 
-   <t>There are two generic types of closed loop control. Feedback
-   control adjusts the control loop based on measuring the output of
-   the system being managed to generate an error signal (the
-   deviation of the current state vs. its desired state). Action is
-   then taken to reduce the deviation.</t>
-
-   <t>In contrast, feedforward control anticipates future effects on a
-   controlled variable by measuring other variables whose values may
-   be more timely, and adjusts the process based on those variables.
-   In this approach, control is not error-based, but rather, based
-   on knowledge.</t>
-
-   <t>Autonomic control loops MAY require both feedforward and feedback
-   control.</t>
-
-   </section> 
-   <!-- types-of-control -->
-
-	<section anchor="types-of-control-loops" title="Types of Control Loops (*)">
-
-   <t>There are many different types of control loops. In autonomics,
-   the most commonly cited loop is called Monitor-Analyze-Plan-Execute
-   (with Knowledge), called MAPE-K [Kephart03]. However, MAPE-K has a
-   number of systemic problems, as described in [Strassner09].
-   Therefore, other autonomic architectures, such as AutoI [autoi]
-   and FOCALE [Strassner07] and use control loops that evolved from
-   the OODA (Observe-Orient-Decide-Act) control loop [Boyd95]. The
-   reason for using this loop, and not the MAPE-K loop, is because
-   the OODA loop contains a critical step not contained in other
-   loops: orientation. Orientation determines how observations,
-   decisions, and actions are performed.</t>
-
-   <t><xref target="control-loop"/> shows a simplified model of a control loop containing both
-   feedforward and feedback elements.</t>
-
-	<t><figure title="Control Loop with Feedforward and Feedback Elements" anchor='control-loop'>
-   	<artwork>
-                    Input Variables
-             ----------+-------------------------+
-                       |                         |
-                       |                         |
-                      \ /                       \ /
-                 +-----+------+             +----+----+
-   Set Point --->| Controller |------------>| Process |--+---> Output
-                 +-----+------+  Deltas of  +---------+  |
-                       ^         Control                 |
-                       |        Variable(s)              |
-                       |                                 |
-                       +---------------------------------+
-	</artwork>
-	</figure></t>
+   <t>The document <xref target="I-D.strassner-anima-control-loop"/> defines the
+   requirements for an autonomic control loop, describes different
+   types of control loops, and explains how control loops are used
+   in an autonomic system.</t>
    
-   <t>Note that <xref target="control-loop"/> is a STATIC model. <xref target="adaptive-control-loop"/> is a dynamic version, called a Model-Reference Adaptive Control Loop (MRACL).</t>
-
-	<t><figure title="A Model-Reference Adaptive Control Loop" anchor='adaptive-control-loop'>
-   	<artwork>
-                            Model   +--------------+
-                 +-------+  Output  |   Adaptive   |&lt;----+
-            +--->| Model |--------->| Algorithm(s) |     |
-            |    +-------+          +---+-----+----+     |
-            |              Adjusted     |     ^          |
-     Input  |             Parameters    |     |          |
-    --------+          +----------------+     |          |
-            |          |                      |          |
-            |          |            +---------+          |
-            |         \ /           |                    |
-            |    +-----+------+     |       +---------+  |
-            +--->| Controller |-----+------>| Process |--+---> Output
-                 +-----+------+  Deltas of  +---------+  |
-                       ^         Control                 |
-                       |        Variable(s)              |
-                       |                                 |
-                       +---------------------------------+
-	</artwork>
-	</figure></t>
-
-   <t>More complex adaptive control loops have been defined; these will
-   be described in a future I-D, so that an appropriate gap analysis
-   can be defined to recommend an architectural approach for ANIMA.</t>
-
-   </section> 
-   
-	<section anchor="management-of-control-loops" title="Management of an Autonomic Control Loop (*)">
-
-   <t>Both standard and adaptive control loops (e.g., as represented in
-   Figures X and X1, respectively) enable intervention by a human
-   administrator or central control systems, if required. Interaction
-   mechanisms include changing the behaviour of one or more elements
-   in the control loop, as well as providing mechanisms to bypass
-   parts of the control loop (e.g., skip the "decide" phase and go
-   directly to the "action" phase of an OODA loop, as is done in
-   FOCALE). This also enables the default behaviour to be changed if
-   necessary.</t>
-
-   </section>
-   
-	<section anchor="elements-of-control-loops" title="Elements of an Autonomic Control Loop (*)">
-
-	<t>An autonomic control loop MUST be able to perform the following
-   functions as part of its operation:
-
-   <list style="symbols">
-   
-      <t>Observe and collect data from the system being managed</t>
-      <t>Orient these data, so that their meaning and significance
-         can be understood in proper context</t>
-      <t>Analyze the collected data through filtering, correlation,
-         and other mechanisms to define a model of past and current
-         states</t>
-      <t>Plan different actions based on inferring trends,
-         determining root causes, and similar processes</t>
-      <t>Decide which plan(s) to take</t>
-      <t>Execute the plan, and then repeat these steps</t>
-   </list></t>
-   
-   <t>In addition, an autonomic control loop SHOULD be able to execute
-   one or more machine learning algorithms that can learn from and
-   make predictions on monitored data. This enables more efficient
-   adaptivity. Note that machine learning is build from a model of
-   exemplar inputs in order to make decisions and predictions.
-   Supporting algorithms, such as those for data mining and analytics,
-   SHOULD also be supported.</t>
-
-	</section>
 	</section>
 	<!-- control-loops -->
 	
@@ -620,63 +509,35 @@
    <t>Most APIs are static, meaning that they are pre-defined and
    represent an invariant mechanism for operating with data. An
    Autonomic Network SHOULD be able to use dynamic APIs in addition
-   to static APIs. APIs MUST be able to express and preserve
-   semantics across different domains.</t>
+   to static APIs.  </t>
 
-	<section anchor="dynamic-apis" title="Dynamic APIs (*)">
-	
    <t>A dynamic API is one that retrieves data using a generic
-   mechanism, and then enables the client to navigate the
-   retrieved data and operate on it. Such APIs typically use 
-   introspection and/or reflection (the former enables software
-   to examine the type and properties of an object at runtime,
-   while the latter enables a program to manipulate the attributes,
-   methods, and/or metadata of an object.</t>
+   mechanism, and then enables the client to navigate the retrieved
+   data and operate on it. Such APIs typically use introspection 
+   and/or reflection. Introspection enables software to examine the
+   type and properties of an object at runtime, while reflection
+   enables a program to manipulate the attributes, methods, and/or
+   metadata of an object.</t>
 
-	</section> 
-
-	<section anchor="apis-and-semantics" title="APIs and Semantics(*)">
-
-   <t>An API is NOT the same as an interface.</t>
-
-   <t>An interface is a boundary across which different components of
-   a system exchange information. An API is a set of software
-   (including tools, protocols, and programs) for building software
-   applications. An API defines a set of data structures, inputs,
-   outputs, and operations that can be used by a programmer to build
-   an application.</t>
-
-   <t>An Autonomic API must pay particular attention to semantics.
-   Previous designs have used the notion of a software contract to
-   build high-quality APIs that are distributed and modular. A
-   software contract [Meyer97] is based on the principle that a
-   software-intensive system, such as an Autonomic Network, is a
-   set of communicating components whose interaction is based on
-   precisely-defined specification of the mutual obligations that
-   interacting components must respect. For example, when a method
-   executes, the following must hold:
+   <t>APIs MUST be able to express and preserve semantics across
+   different domains. For example, software contracts [Meyer97] are
+   based on the principle that a software-intensive system, such as
+   an Autonomic Network, is a set of communicating components whose
+   interaction is based on precisely-defined specifications of the
+   mutual obligations that interacting components must respect.
+   This typically includes specifying:
 
    <list style="symbols">
-      <t>pre-conditions must be satisfied before the method can
-         start execution</t>
-      <t>post-conditions must be satisfied when the method has
-         finished execution</t>
-      <t>invariant attributes must not change during the execution
-         of the method</t>
-	</list></t>
+	 <t>pre-conditions that MUST be satisfied before the method can
+        start execution</t>
 
-	</section>
-	<!-- APIs and semantics --> 
+	 <t>post-conditions that MUST be satisfied when the method has
+        finished execution</t>
 
-	<section anchor="api-considerations" title="API Considerations (*)">
-
-   <t>APIs should perform one function well, not perform many different
-   and unrelated functions. In software design, this is called the
-   Single Responsibility Principle [srp]</t>
-
-   </section> 
-   <!-- api-considerations -->
-
+     <t>invariant attributes that MUST NOT change during the execution
+        of the method</t>
+   </list>
+   </t>
    </section> 
    <!-- apis -->
    
@@ -795,6 +656,7 @@ If security properties are managed autonomically, a misbehaving device could att
 			<?rfc include="reference.I-D.behringer-anima-autonomic-addressing.xml"?>
 			<?rfc include="reference.I-D.carpenter-anima-gdn-protocol.xml"?>
 			<?rfc include="reference.I-D.jiang-auto-addr-management.xml"?>
+			<?rfc include="reference.I-D.strassner-anima-control-loop.xml"?>
 		</references>
 	</back>
 </rfc>
