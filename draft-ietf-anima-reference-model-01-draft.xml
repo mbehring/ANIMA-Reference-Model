@@ -210,94 +210,15 @@
 	<t>The Autonomic Networking Infrastructure provides a layer of common functionality across an Autonomic Network. It comprises "must implement" functions and services, as well as extensions. </t>
 	<t>An Autonomic Function, comprising of Autonomic Service Agents on nodes, can rely on the fact that all nodes in the network implement at least the "must implement" functions. </t> 
 
-      <section anchor="naming" title="Naming">
-
-        <section title="Naming requirements">
-          <t><list style="symbols">
-              <t>Representing each device<list style="hanging">
-                  <t>Inside a domain, each autonomic device needs a domain
-                  specific identifier.</t>
-
-                  <t>[Open Questions] Are there devices that don't need names?
-                  Do ASAs need names?</t>
-                </list></t>
-
-              <t>Uniqueness<list style="hanging">
-                  <t>The names MUST NOT collide within one autonomic
-                  domain.</t>
-
-                  <t>It is acceptable that the names in different domains
-                  collide, since they could be distinguished by domains.</t>
-                </list></t>
-
-              <t>Semantic Encoding<list style="hanging">
-                  <t>It is RECOMMENDED that the names encode some semantics
-                  rather than meaningless strings. The semantics might
-                  be:<list style="symbols">
-                      <t>Location</t>
-
-                      <t>Device type</t>
-
-                      <t>Functional role</t>
-
-                      <t>Ownership</t>
-
-                      <t>etc.</t>
-                    </list></t>
-
-                  <t>This is for ease of management consideration that network
-                  administrators could easily recognize the device directly
-                  through the names.</t>
-                </list></t>
-
-              <t>Consistency<list style="hanging">
-                  <t>The devices' naming SHOULD follow the same pattern within
-                  a domain.</t>
-                </list></t>
-            </list></t>
-        </section>
-
-        <section title="Proposed Mechanisms">
-          <t><spanx/><list style="symbols">
-              <t>Structured Naming Pattern<list style="hanging">
-                  <t>The whole name string could be divided into several
-                  fields, each of which representing a specific semantic as
-                  described above. For example:
-                  Location-DeviceType-FunctionalRole-DistinguisherNumber@NameofDomain.</t>
-
-                  <t>The structure should be flexible that some fields are
-                  optional. When these optional fields are added, the name
-                  could still be recognized as the previous one. In above
-                  example, the "DistinguisherNumber" and "NameofDomain" are
-                  mandatory whereas others are optional. At initial stage, the
-                  devices might be only capable of self-generating the
-                  mandatory fields and the "DeviceType" because of the lack of
-                  knowledge. Later, they might have learned the "Location" and
-                  "FunctionalRole" and added the fields into current name.
-                  However, the other devices could still recognize it
-                  according to the same "DistinguisherNumber".</t>
-                </list></t>
-
-              <t>Advertised Common Fields<list style="hanging">
-                  <t>Some fields in the structured name might be common among
-                  the domain (e.g. "Location" "NameofDomain"). Thus, these
-                  part of the names could be advertised through Intent
-                  Distribution<xref target="intent-distri"/>.</t>
-                </list></t>
-
-              <t>Self-generated Fields<list style="hanging">
-                  <t>The mandatory fields SHOULD be self-generated so that one
-                  device could name itself sufficiently without any advertised
-                  knowledges.</t>
-
-                  <t>There should various methods for a device to
-                  extract/generate a proper word for each mandatory semantic
-                  fields (e.g. "DeviceType", "DistinguisherNum") from its
-                  self-knowledge.</t>
-                </list></t>
-            </list>Detailed design of specific naming patterns and methods are
-          out of scope of this document.</t>
-        </section>
+    <section anchor="naming" title="Naming">
+	    <t>Inside a domain, each autonomic device should be assigned a name. Basic considerations for forming the names is as the following:
+		<list style="symbols">
+		  <t>Uniqueness: The names must not collide within one autonomic domain. It is acceptable that the names in different domains collide, since they could be distinguished by domains.</t>
+		  <t>Consistency: The devices' naming should follow the same pattern within a domain.</t>
+		  <t>Autonomic: The names must be assigned automatically without any human intervention.</t>
+        </list></t>
+		<t>It is recommended that the names are generated by the autonomic nodes themselves.</t>
+		<t>Specific naming convention is out of the scope of this document."</t>
     </section>
 	<!-- naming -->
 
@@ -317,8 +238,7 @@
 			<t>Upgradability: The scheme must be able to support different addressing concepts in the future. </t>
 		</list>
 		</t>
-
-		<t>The primary use for the autonomically managed addressing described here is for the Autonomic Control Plane (<xref target="I-D.ietf-anima-autonomic-control-plane"/>). The fundamental concepts, as well as the proposed addressing scheme for the ACP is discussed in <xref target="I-D.behringer-anima-autonomic-addressing"/>. </t>
+		<t>The proposed addressing scheme is described in the document "An Autonomic Control Plane" (<xref target="I-D.ietf-anima-autonomic-control-plane"/>).</t>
 
 	</section>
 	<!-- addressing -->
@@ -331,28 +251,34 @@
 			<t>Discovering services: Network services such as AAA should also be discovered and not configured. Service discovery is required for such tasks. An autonomic network can either leverage existing service discovery functions, or use a new approach, or a mixture.</t>
 
 			<t>Thus the discovery mechanism could either be fully integrated with autonomic signaling (next section) or could use an independent discovery mechanism such as DNS Service Discovery or Service Location Protocol. This choice could be made independently for each Autonomic Service Agent, although the infrastructure might require some minimal lowest common denominator (e.g., for discovering the security bootstrap mechanism, or the source of intent distribution, <xref target="intent-distri"/>).</t>
+			
+			<t>The currently proposed protocol for node discovery is GRASP, described in <xref target="I-D.ietf-anima-grasp"/>.</t>
 	</section>
 	<!-- discovery -->
-
-	<section anchor="negotiation" title="Signaling Between Autonomic Nodes">
-			<t>Autonomic nodes must communicate with each other, for example to negotiate and/or synchronize technical objectives (i.e., network parameters) of any kind and complexity. This requires some form of signaling between autonomic nodes. Autonomic nodes implementing a specific use case might choose their own signaling protocol, as long as it fits the overall security model. However, in the general case, any pair of autonomic nodes might need to communicate, so there needs to be a generic protocol for this. A prerequisite for this is that autonomic nodes can discover each other without any preconfiguration, as mentioned above. To be generic, discovery and signaling must be able to handle any sort of technical objective, including ones that require complex data structures. The document "A Generic Discovery and Negotiation Protocol for Autonomic Networking" <xref target="I-D.ietf-anima-grasp"/> describes more detailed requirements for discovery, negotiation and synchronization in an autonomic network. It also defines a protocol, GRASP, for this purpose, including an integrated but optional discovery protocol.</t>
-	</section>
-	<!-- negotiation -->
-		
-	<section anchor="intent-distri" title="Intent Distribution">
-		<t>Intent is the policy language of an Autonomic Network; see <xref target="intent"/> for general information on Intent. The distribution of Intent is also a function of the Autonomic Control Plane. It is expected that Intent will be expressed as quite complex human-readable data structures, and the distribution mechanism must be able to support that. Some Intent items will need to be flooded to most or all nodes, and other items of Intent may only be needed by a few nodes. Various methods could be used to distribute Intent across an autonomic domain. One approach is to treat it like any other technical objective needing to be synchronized across a set of nodes. In that case the autonomic signaling protocol could be used (previous section).</t>
-	</section>
-	<!-- intent-distri -->
-
-	<section anchor="routing" title="Routing">
-		<t>All autonomic nodes in a domain must be able to communicate with each other, and with autonomic nodes outside their own domain. Therefore, an Autonomic Control Plane relies on a routing function. For Autonomic Networks to be interoperable, they must all support one common routing protocol. </t>
-	</section>
-	<!-- routing -->
 
 	<section anchor="acp" title="The Autonomic Control Plane">
 		<t>The totality of autonomic interactions forms the "Autonomic Control Plane". This control plane can be either implemented in the global routing table of a node, such as IGPs in today's networks; or it can be provided as an overlay network. The document "An Autonomic Control Plane" (<xref target="I-D.ietf-anima-autonomic-control-plane"/>) describes the details. </t> 
 	</section>
 	<!-- acp -->
+
+	<section anchor="negotiation" title="Signaling Between Autonomic Nodes">
+			<t>Autonomic nodes must communicate with each other, for example to negotiate and/or synchronize technical objectives (i.e., network parameters) of any kind and complexity. This requires some form of signaling between autonomic nodes. Autonomic nodes implementing a specific use case might choose their own signaling protocol, as long as it fits the overall security model. However, in the general case, any pair of autonomic nodes might need to communicate, so there needs to be a generic protocol for this. A prerequisite for this is that autonomic nodes can discover each other without any preconfiguration, as mentioned above. To be generic, discovery and signaling must be able to handle any sort of technical objective, including ones that require complex data structures. The document "A Generic Discovery and Negotiation Protocol for Autonomic Networking" <xref target="I-D.ietf-anima-grasp"/> describes more detailed requirements for discovery, negotiation and synchronization in an autonomic network. It also defines a protocol, GRASP, for this purpose, including an integrated but optional discovery protocol.</t>
+			<t>The currently proposed protocol for signalling is GRASP, described in <xref target="I-D.ietf-anima-grasp"/>. It is expected to run inside the Autonomic Control Plane (see <xref target="acp"/>).</t>
+	</section>
+	<!-- negotiation -->
+		
+	<section anchor="routing" title="Routing">
+		<t>All autonomic nodes in a domain must be able to communicate with each other, and with autonomic nodes outside their own domain. Therefore, an Autonomic Control Plane relies on a routing function. For Autonomic Networks to be interoperable, they must all support one common routing protocol. </t>
+		<t>The routing protocol is defined in the ACP document <xref target="I-D.ietf-anima-autonomic-control-plane"/>.</t>
+	</section>
+	<!-- routing -->
+
+	<section anchor="intent-distri" title="Intent Distribution">
+		<t>[Editor's note: Intent is not yet in scope of the ANIMA charter as of March 2016. The following information is provided to help understand the long term ANIMA reference model.]</t>
+		<t>Intent is the policy language of an Autonomic Network; see <xref target="intent"/> for general information on Intent. The distribution of Intent is also a function of the Autonomic Control Plane. It is expected that Intent will be expressed as quite complex human-readable data structures, and the distribution mechanism must be able to support that. Some Intent items will need to be flooded to most or all nodes, and other items of Intent may only be needed by a few nodes. Various methods could be used to distribute Intent across an autonomic domain. One approach is to treat it like any other technical objective needing to be synchronized across a set of nodes. In that case the autonomic signaling protocol could be used (previous section).</t>
+	</section>
+	<!-- intent-distri -->
+
 
 </section>
 <!-- ani --> 
