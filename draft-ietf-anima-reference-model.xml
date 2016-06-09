@@ -353,7 +353,61 @@
          <t>This section describes how autonomic services run on top of the Autonomic Networking Infrastructure.  </t>
 
 	<section anchor="asa-general" title="General Description of an ASA">
-		<t>general concepts, such as sitting on top of the ANI, etc. Also needs to explain that on a constrained node not all ASAs may run, so we have two classes of ASAs: Ones that run on an unconstrained node, and limited function ASAs that run also on constrained nodes. We expect unconstrained nodes to support all ASAs.</t> 
+
+<t>An Autonomic Service Agent (ASA) is defined in <xref target="RFC7575"/> as
+"An agent implemented on an autonomic node
+that implements an autonomic function, either in part (in the case of
+a distributed function) or whole." Thus it is a process that makes use
+of the features provided by the ANI to achieve its own goals, usually including
+interaction with other ASAs via the GRASP protocol <xref target="I-D.ietf-anima-grasp"/> or otherwise.
+Of course it also interacts with the specific targets of its function, using
+any suitable mechanism.
+Unless its function is very simple, the ASA will need to be multi-threaded so that
+it can handle overlapping asynchronous operations. It may therefore be a quite
+complex piece of software in its own right, forming part of the application layer
+above the ANI. </t>
+
+<t>Thus we can distinguish at least three classes of ASAs:
+<list style="symbols">
+ <t>Simple ASAs with a small footprint that could run anywhere.</t>
+ <t>Complex, multi-threaded ASAs that have a significant resource requirement and will only
+    run on selected nodes.</t>
+ <t>A few 'infrastructure ASAs' that use basic ANI features in support of the ANI itself,
+    which must run in all autonomic nodes.
+    These are outlined in the sections below this one.</t>
+</list></t>
+
+<t>Since all ASAs will interact with the ANI, they will depend on appropriate application
+programming interfaces (APIs). It is desirable that ASAs are portable between operating
+systems, so these APIs need to be universal.
+An API for GRASP is described in <xref target="I-D.liu-anima-grasp-api"/>. </t>
+
+<t>ASAs will in general be designed and coded by experts in a particular technology
+and use case, not by experts in the ANI and its components. Also, they
+may be coded in a variety of programming languages, in particular including languages
+that support object constructs as well as traditional variables and structures. The APIs
+should be designed with these factors in mind.</t>
+
+<t>It must be possible to run ASAs as non-privileged (user space) processes except for those
+(such as the infrastructure ASAs) that necessarily require kernel privilege. Also, it is
+highly desirable that ASAs can be dynamically loaded on a running node.</t>
+
+<t>Since autonomic systems must be self-repairing, it is of great importance that ASAs are
+coded using robust programming techniques. All run-time error conditions must be caught,
+leading to suitable recovery actions, with a complete restart of the ASA as a last resort.
+Conditions such as discovery failures or negotiation failures must be treated as routine,
+with the ASA retrying the failed operation, preferably with an exponential back-off
+in the case of persistent errors. When multiple threads are started within an ASA,
+these threads must be monitored for failures and hangups, and appropriate action taken.
+Attention must be given to garbage collection, so that ASAs never run out of resources.
+There is assumed to be no human operator - again, in the worst case, every ASA must
+be capable of restarting itself. </t>
+
+<t>ASAs will automatically benefit from the security provided by the ANI, and specifically
+by the ACP and by GRASP. However, beyond that, they are responsible for their own security,
+especially when communicating with the specific targets of their function. Therefore,
+the design of an ASA must include a security analysis beyond 'use ANI security.' </t>
+
 	</section>
 		
 	<section anchor="specific-asas" title="Specific ASAs for the Enrolment Process">
@@ -610,6 +664,7 @@ If security properties are managed autonomically, a misbehaving device could att
 			<?rfc include="reference.I-D.ietf-anima-autonomic-control-plane.xml"?>
 			<?rfc include="reference.I-D.behringer-anima-autonomic-addressing.xml"?>
 			<?rfc include="reference.I-D.ietf-anima-grasp.xml"?>
+			<?rfc include="reference.I-D.liu-anima-grasp-api.xml"?>
 			<?rfc include="reference.I-D.jiang-auto-addr-management.xml"?>
 		</references>
 	</back>
