@@ -232,6 +232,7 @@
 			<t>Low-touch for complex networks: If complex networks require operator input for autonomic address management, it should be limited to high level guidance only, expressed in Intent.</t>
 			<t>Flexibility: The addressing scheme must be flexible enough for nodes to be able to move around, for the network to grow, split and merge. </t>
 			<t>Robustness: It should be as hard as possible for an administrator to negatively affect addressing (and thus connectivity) in the autonomic context. </t>
+      <t>Stability: The addressing scheme should be as stable as possible. However, implementations need to be able to recover from unexpected address changes. </t>
 			<t>Support for virtualization: Autonomic Nodes may support Autonomic Service Agents in different virtual machines or containers. The addressing scheme should support this architecture. </t>
 			<t>Simplicity: To make engineering simpler, and to give the human administrator an easy way to trouble-shoot autonomic functions. </t>
 			<t>Scale: The proposed scheme should work in any network of any size. </t> 
@@ -639,6 +640,10 @@ If security properties are managed autonomically, a misbehaving device could att
 <t>If AN messages can be observed by a third party, they might reveal valuable information about network configuration, security precautions in use, individual users, and their traffic patterns. If encrypted, AN messages might still reveal some information via traffic analysis, but this would be quite limited (for example, this would be highly unlikely to reveal any specific information about user traffic). AN messages are liable to be exposed to third parties on any unprotected Layer 2 link, and to insider attacks even on protected Layer 2 links. </t>
 
 </section>
+
+    <section title="Security Mechanisms">
+    <t>The components of the ANI must each include appropriate security mechanisms. In particular, the ACP must provide security against interception, forgery, and replay of any messages sent over the ACP. The signaling protocol may rely on this protection, but must also provide for security when running without an ACP. All components of the security bootstrap process must of course themselves be secured. All ASAs must make use of the ANI's security, and must be carefully designed so that they do not create security "holes" in the boundary of the whole AN system. </t>
+    </section>
 		</section>
 		<!-- security -->
 		
