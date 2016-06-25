@@ -381,6 +381,20 @@ above the ANI. </t>
     These are outlined in the sections below this one.</t>
 </list></t>
 
+<!-- Paragraph moved from GRASP spec -->
+<t>Autonomic nodes, and therefore their ASAs, will be self-aware.
+Every autonomic node will be loaded with various functions and ASAs and will be
+aware of its own capabilities, typically decided by the hardware,
+firmware or pre-installed software. Its exact role may depend on
+Intent and on the surrounding network behaviors, which may include 
+forwarding behaviors, aggregation properties, topology location, bandwidth,
+tunnel or translation properties, etc. The surrounding topology will
+depend on the network planning. Following an initial discovery phase,
+the device properties and those of its neighbors are the
+foundation of the behavior of a specific
+device. A device and its ASAs have no pre-configuration for the
+particular network in which they are installed.</t>
+
 <t>Since all ASAs will interact with the ANI, they will depend on appropriate application
 programming interfaces (APIs). It is desirable that ASAs are portable between operating
 systems, so these APIs need to be universal.
