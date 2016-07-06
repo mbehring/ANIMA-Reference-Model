@@ -107,7 +107,7 @@
 		      </address>
    		</author>
 			
-		<date day="21" month="March" year="2016"/>
+		<date day="8" month="July" year="2016"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -223,7 +223,7 @@
 	<!-- naming -->
 
 	<section anchor="addressing" title="Addressing">
-		<t>Autonomic Service Agents (ASAs) need to communicate with each other, using the autonomic addressing of the node they reside on. This section describes the addressing approach of the Autonomic Networking Infrastructure, used by ASAs. It does NOT describe addressing approaches for the data plane of the network, which may be configured and managed in the traditional way, or negotiated as a service of an ASA. One use case for such an autonomic function is described in <xref target="I-D.jiang-auto-addr-management"/>.  The addressing of the Autonomic Networking Infrastructure is in scope for this section, the address space they negotiate for the data plane is not. </t>
+		<t>Autonomic Service Agents (ASAs) need to communicate with each other, using the autonomic addressing of the node they reside on. This section describes the addressing approach of the Autonomic Networking Infrastructure, used by ASAs. It does NOT describe addressing approaches for the data plane of the network, which may be configured and managed in the traditional way, or negotiated as a service of an ASA. One use case for such an autonomic function is described in <xref target="I-D.ietf-anima-prefix-management"/>.  The addressing of the Autonomic Networking Infrastructure is in scope for this section, the address space they negotiate for the data plane is not. </t>
 		<t>Autonomic addressing is a function of the Autonomic Networking Infrastructure (lower part of <xref target="ref_model"/>), specifically the Autonomic Control Plane. ASAs do not have their own addresses. They may use either API calls, or the autonomic addressing scheme of the Autonomic Networking Infrastructure. </t>
 
 		<t>An autonomic addressing scheme has the following requirements: 
@@ -273,7 +273,7 @@
 	<!-- routing -->
 
 	<section anchor="intent-distri" title="Intent Distribution">
-		<t>[Editor's note: Intent is not yet in scope of the ANIMA charter as of March 2016. The following information is provided to help understand the long term ANIMA reference model.]</t>
+		<t>[Editor's note: Intent is not yet in scope of the ANIMA charter as of July 2016. The following information is provided to help understand the long term ANIMA reference model.]</t>
 		<t>Intent is the policy language of an Autonomic Network; see <xref target="intent"/> for general information on Intent. The distribution of Intent is also a function of the Autonomic Control Plane. It is expected that Intent will be expressed as quite complex human-readable data structures, and the distribution mechanism must be able to support that. Some Intent items will need to be flooded to most or all nodes, and other items of Intent may only be needed by a few nodes. Various methods could be used to distribute Intent across an autonomic domain. One approach is to treat it like any other technical objective needing to be synchronized across a set of nodes. In that case the autonomic signaling protocol could be used (previous section).</t>
 	</section>
 	<!-- intent-distri -->
@@ -338,13 +338,13 @@
     </section>
 	<!-- masa -->  
 
-	<section anchor="sub-domains" title="Sub-Domains">
+	<section anchor="sub-domains" title="Sub-Domains (*)">
 		<t>By default, sub-domains are treated as different domains. This implies no trust between a domain and its sub-domains, and no trust between sub-domains of the same domain. Specifically, no ACP is built, and Intent is valid only for the domain it is defined for explicitly. </t>
 		<t>In the future, alternative trust models can be defined, for example to allow full or limited trust between domain and sub-domain.</t>
 	</section>
 	<!-- sub-domains -->
 		
-	<section anchor="cross-domain" title="Cross-Domain Functionality">
+	<section anchor="cross-domain" title="Cross-Domain Functionality (*)">
 		<t>By default, different domains do not interoperate, no ACP is built and no trust is implied between them. </t>
 		<t>In the future, models can be established where other domains can be trusted in full or for limited operations between the domains. </t>
 	</section>
@@ -523,7 +523,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
    runtime to adapt to changing user needs, business goals, and
    changes in the ANI.</t>
 
-   <t>The document [draft-strassner-anima-control-loop] defines the
+   <t>The document <xref target="I-D.strassner-anima-control-loops"/> defines the
    requirements for an autonomic control loop, describes different
    types of control loops, and explains how control loops are used
    in an autonomic system.</t>
@@ -687,7 +687,8 @@ If security properties are managed autonomically, a misbehaving device could att
 			<?rfc include="reference.I-D.behringer-anima-autonomic-addressing.xml"?>
 			<?rfc include="reference.I-D.ietf-anima-grasp.xml"?>
 			<?rfc include="reference.I-D.liu-anima-grasp-api.xml"?>
-			<?rfc include="reference.I-D.jiang-auto-addr-management.xml"?>
+			<?rfc include="reference.I-D.ietf-anima-prefix-management.xml"?>
+			<?rfc include="reference.I-D.strassner-anima-control-loops.xml"?>
 		</references>
 	</back>
 </rfc>
