@@ -1,6 +1,6 @@
-VERSION=03
+VERSION=02
 
-DRAFT=draft-behringer-anima-reference-model
+DRAFT=draft-ietf-anima-reference-model
 
 ${DRAFT}-${VERSION}.txt: ${DRAFT}.txt
 	cp ${DRAFT}.txt ${DRAFT}-${VERSION}.txt
