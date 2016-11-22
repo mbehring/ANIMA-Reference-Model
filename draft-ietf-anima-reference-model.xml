@@ -10,7 +10,7 @@
 <!-- Change to "yes" if someone has disclosed IPR for the draft -->
 <?rfc compact="yes"?>
 
-<rfc ipr="trust200902" docName="draft-ietf-anima-reference-model-02" category="info">
+<rfc ipr="trust200902" docName="draft-ietf-anima-reference-model-03" category="info">
 	<front>
 		<title abbrev="AN Reference Model">A Reference Model for Autonomic Networking</title>
 
@@ -46,9 +46,9 @@
 		</author>
 
 		<author fullname="Toerless Eckert" initials="T." surname="Eckert">
-			<organization>Cisco</organization>
+			<organization>X</organization>
 			<address>
-				<email>eckert@cisco.com</email>
+				<email>tte@cs.fau.de</email>
 			</address>
 		</author>
 
@@ -461,21 +461,35 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 	</section>
 	<!-- asa-life-cycle -->
 	
-	<section anchor="specific-asas" title="Specific ASAs for the Enrolment Process">
-		<t>The following ASAs provide essential, required functionality in an autonomic network, and are therefore mandatory to implement on unconstrained autonomic nodes. </t> 
-
-		<section anchor="enrolment" title="The Enrolment ASA">
-			<t>This section describes the function of an autonomic node to bootstrap into the domain with the help of an enrolment proxy (see previous section). This ASA must be installed by default on all nodes that require an autonomic zero-touch bootstrap. [tbc]</t>
+	<section anchor="specific-asas" title="Specific ASAs for the Autonomic Network Infrastructure">
+		<t>The following functions provide essential, required functionality in an autonomic network, and are therefore mandatory to implement on unconstrained autonomic nodes. They are modeled here as ASAs that interface to the underlying infrastructure components.</t> 
+		
+		<t>The first three together support the trust enrolment process described in <xref target="trust"/>. For details see <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>.</t>
+    <section anchor="enrolment" title="The Enrolment ASAs">
+		<section anchor="enrolment-pledge" title="The Pledge ASA">
+			<t>This ASA interfaces to the function of an autonomic node that bootstraps into the domain with the help of an enrolment proxy . Such a node is known as a Pledge during the enrolment process. This ASA must be installed by default on all nodes that require an autonomic zero-touch bootstrap.</t>
 		</section>
 		<!-- enrolment -->
 
-		<section anchor="enrolment-proxy" title="The Enrolment Proxy ASA">
-			<t>This section describes the function of an autonomic node that helps a non-enrolled, adjacent devices to enrol into the domain. This ASA must be installed on all nodes. [tbc]</t>
+		<section anchor="enrolment-proxy" title="The Proxy ASA">
+			<t>This ASA interfaces to the function of an autonomic node that helps a non-enrolled, adjacent devices to enrol into the domain. This ASA must be installed on all nodes, although only one proxy needs to be active on a given LAN.</t>
 		</section>
 		<!-- enrolment-proxy -->
 
-		<section anchor="registrar" title="The Registrar ASA">
-			<t>This section describes the registrar function in an autonomic network. It explains the tasks of a registrar element, and how registrars are placed in a network, redundancy between several, etc. This ASA does not need to be installed on all nodes, but only on nodes that implement the Registrar function. [tbc]</t>
+		<section anchor="enrolment-registrar" title="The Registrar ASA">
+			<t>This ASA interfaces to the registrar function in an autonomic network. This ASA does not need to be installed on all nodes, but only on nodes that implement the Registrar function.</t>
+		</section>
+		<!-- registrar -->
+		</section>
+		
+		<section anchor="acp-asa" title="The ACP ASA">
+			<t>This ASA interfaces to the ACP function in an autonomic network. In particular it acts to discover other potential ACP nodes, and to support
+			the process of nodes joining and leaving the ACP. This ASA must be installed on all nodes. For details see <xref target="acp"/> and <xref target="I-D.ietf-anima-autonomic-control-plane"/>.</t>
+		</section>
+		<!-- acp -->
+		<section anchor="intent-asa" title="The Intent Distribution ASA">
+			<t>This ASA interfaces to the Intent distribution function in an autonomic network. In particular it acts to announce the availability of
+			Intent to all other autonmic nodes. This ASA does not need to be installed on all nodes, but only on nodes that implement the Intent distribution function. For details see <xref target="intent-distri"/> and <xref target="I-D.du-anima-an-intent"/>.</t>
 		</section>
 		<!-- registrar -->
 
