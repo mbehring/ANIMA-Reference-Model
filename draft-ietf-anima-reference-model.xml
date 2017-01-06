@@ -462,33 +462,33 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 	<!-- asa-life-cycle -->
 	
 	<section anchor="specific-asas" title="Specific ASAs for the Autonomic Network Infrastructure">
-		<t>The following functions provide essential, required functionality in an autonomic network, and are therefore mandatory to implement on unconstrained autonomic nodes. They are modeled here as ASAs that interface to the underlying infrastructure components.</t> 
+		<t>The following functions provide essential, required functionality in an autonomic network, and are therefore mandatory to implement on unconstrained autonomic nodes. They are described here as ASAs that include the underlying infrastructure components, but implementation details might vary.</t> 
 		
 		<t>The first three together support the trust enrolment process described in <xref target="trust"/>. For details see <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>.</t>
     <section anchor="enrolment" title="The Enrolment ASAs">
 		<section anchor="enrolment-pledge" title="The Pledge ASA">
-			<t>This ASA interfaces to the function of an autonomic node that bootstraps into the domain with the help of an enrolment proxy . Such a node is known as a Pledge during the enrolment process. This ASA must be installed by default on all nodes that require an autonomic zero-touch bootstrap.</t>
+			<t>This ASA includes the function of an autonomic node that bootstraps into the domain with the help of an enrolment proxy . Such a node is known as a Pledge during the enrolment process. This ASA must be installed by default on all nodes that require an autonomic zero-touch bootstrap.</t>
 		</section>
 		<!-- enrolment -->
 
 		<section anchor="enrolment-proxy" title="The Proxy ASA">
-			<t>This ASA interfaces to the function of an autonomic node that helps a non-enrolled, adjacent devices to enrol into the domain. This ASA must be installed on all nodes, although only one proxy needs to be active on a given LAN.</t>
+			<t>This ASA includes the function of an autonomic node that helps a non-enrolled, adjacent devices to enrol into the domain. This ASA must be installed on all nodes, although only one proxy needs to be active on a given LAN.</t>
 		</section>
 		<!-- enrolment-proxy -->
 
 		<section anchor="enrolment-registrar" title="The Registrar ASA">
-			<t>This ASA interfaces to the registrar function in an autonomic network. This ASA does not need to be installed on all nodes, but only on nodes that implement the Registrar function.</t>
+			<t>This ASA includes the registrar function in an autonomic network. This ASA does not need to be installed on all nodes, but only on nodes that implement the Registrar function.</t>
 		</section>
 		<!-- registrar -->
 		</section>
 		
 		<section anchor="acp-asa" title="The ACP ASA">
-			<t>This ASA interfaces to the ACP function in an autonomic network. In particular it acts to discover other potential ACP nodes, and to support
+			<t>This ASA includes the ACP function in an autonomic network. In particular it acts to discover other potential ACP nodes, and to support
 			the process of nodes joining and leaving the ACP. This ASA must be installed on all nodes. For details see <xref target="acp"/> and <xref target="I-D.ietf-anima-autonomic-control-plane"/>.</t>
 		</section>
 		<!-- acp -->
 		<section anchor="intent-asa" title="The Intent Distribution ASA">
-			<t>This ASA interfaces to the Intent distribution function in an autonomic network. In particular it acts to announce the availability of
+			<t>This ASA includes the Intent distribution function in an autonomic network. In particular it acts to announce the availability of
 			Intent to all other autonmic nodes. This ASA does not need to be installed on all nodes, but only on nodes that implement the Intent distribution function. For details see <xref target="intent-distri"/> and <xref target="I-D.du-anima-an-intent"/>.</t>
 		</section>
 		<!-- registrar -->
