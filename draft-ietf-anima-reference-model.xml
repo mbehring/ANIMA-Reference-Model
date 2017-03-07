@@ -15,17 +15,9 @@
 		<title abbrev="AN Reference Model">A Reference Model for Autonomic Networking</title>
 
 		<author role="editor" fullname="Michael H. Behringer" initials="M." surname="Behringer">
-			<organization>Cisco Systems</organization>
 
 			<address>
-				<postal>
-					<street>Building D, 45 Allee des Ormes</street>
-					<city>Mougins</city>
-					<region/>
-					<code>06250</code>
-					<country>France</country>
-				</postal>
-			<email>mbehring@cisco.com</email>
+				<email>Michael.H.Behringer@gmail.com</email>
 			</address>
 		</author>
 		
@@ -46,8 +38,14 @@
 		</author>
 
 		<author fullname="Toerless Eckert" initials="T." surname="Eckert">
-			<organization>X</organization>
+			<organization>Futurewei Technologies Inc.</organization>
 			<address>
+				<postal>
+					<street>2330 Central Expy</street>
+					<city>Santa Clara</city>
+					<code>95050</code>
+					<country>USA</country>
+				</postal>
 				<email>tte@cs.fau.de</email>
 			</address>
 		</author>
@@ -127,7 +125,7 @@
 		      </address>
    		</author>
 			
-		<date day="8" month="July" year="2016"/>
+		<date day="7" month="March" year="2017"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>

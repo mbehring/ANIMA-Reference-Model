@@ -3,11 +3,11 @@
 
 
 ANIMA                                                  M. Behringer, Ed.
-Internet-Draft                                             Cisco Systems
+Internet-Draft
 Intended status: Informational                              B. Carpenter
-Expires: January 9, 2017                               Univ. of Auckland
+Expires: September 8, 2017                             Univ. of Auckland
                                                                T. Eckert
-                                                                   Cisco
+                                             Futurewei Technologies Inc.
                                                             L. Ciavaglia
                                                                P. Peloso
                                                                    Nokia
@@ -17,11 +17,11 @@ Expires: January 9, 2017                               Univ. of Auckland
                                  Federal University of Rio Grande do Sul
                                                             J. Strassner
                                                      Huawei Technologies
-                                                            July 8, 2016
+                                                           March 7, 2017
 
 
                A Reference Model for Autonomic Networking
-                  draft-ietf-anima-reference-model-02
+                  draft-ietf-anima-reference-model-03
 
 Abstract
 
@@ -46,21 +46,21 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 9, 2017.
+   This Internet-Draft will expire on September 8, 2017.
 
 
 
 
 
 
-Behringer, et al.        Expires January 9, 2017                [Page 1]
+Behringer, et al.       Expires September 8, 2017               [Page 1]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
 Copyright Notice
 
-   Copyright (c) 2016 IETF Trust and the persons identified as the
+   Copyright (c) 2017 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -97,36 +97,36 @@ Table of Contents
    7.  Autonomic Service Agents (ASA)  . . . . . . . . . . . . . . .  13
      7.1.  General Description of an ASA . . . . . . . . . . . . . .  13
      7.2.  ASA Life-Cycle Management . . . . . . . . . . . . . . . .  15
-     7.3.  Specific ASAs for the Enrolment Process . . . . . . . . .  15
-       7.3.1.  The Enrolment ASA . . . . . . . . . . . . . . . . . .  15
-       7.3.2.  The Enrolment Proxy ASA . . . . . . . . . . . . . . .  16
-       7.3.3.  The Registrar ASA . . . . . . . . . . . . . . . . . .  16
+     7.3.  Specific ASAs for the Autonomic Network Infrastructure  .  15
+       7.3.1.  The Enrolment ASAs  . . . . . . . . . . . . . . . . .  16
+       7.3.2.  The ACP ASA . . . . . . . . . . . . . . . . . . . . .  16
+       7.3.3.  The Intent Distribution ASA . . . . . . . . . . . . .  16
    8.  Management and Programmability  . . . . . . . . . . . . . . .  16
-     8.1.  How an AN Network Is Managed  . . . . . . . . . . . . . .  16
+     8.1.  How an AN Network Is Managed  . . . . . . . . . . . . . .  17
      8.2.  Intent (*)  . . . . . . . . . . . . . . . . . . . . . . .  17
-     8.3.  Aggregated Reporting (*)  . . . . . . . . . . . . . . . .  17
-     8.4.  Feedback Loops to NOC(*)  . . . . . . . . . . . . . . . .  18
+     8.3.  Aggregated Reporting (*)  . . . . . . . . . . . . . . . .  18
+     8.4.  Feedback Loops to NOC(*)  . . . . . . . . . . . . . . . .  19
 
 
 
-Behringer, et al.        Expires January 9, 2017                [Page 2]
+Behringer, et al.       Expires September 8, 2017               [Page 2]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
-     8.5.  Control Loops (*) . . . . . . . . . . . . . . . . . . . .  18
+     8.5.  Control Loops (*) . . . . . . . . . . . . . . . . . . . .  19
      8.6.  APIs (*)  . . . . . . . . . . . . . . . . . . . . . . . .  19
-     8.7.  Data Model (*)  . . . . . . . . . . . . . . . . . . . . .  19
-   9.  Coordination Between Autonomic Functions (*)  . . . . . . . .  20
-     9.1.  The Coordination Problem (*)  . . . . . . . . . . . . . .  20
-     9.2.  A Coordination Functional Block (*) . . . . . . . . . . .  21
+     8.7.  Data Model (*)  . . . . . . . . . . . . . . . . . . . . .  20
+   9.  Coordination Between Autonomic Functions (*)  . . . . . . . .  21
+     9.1.  The Coordination Problem (*)  . . . . . . . . . . . . . .  21
+     9.2.  A Coordination Functional Block (*) . . . . . . . . . . .  22
    10. Security Considerations . . . . . . . . . . . . . . . . . . .  22
      10.1.  Threat Analysis  . . . . . . . . . . . . . . . . . . . .  22
      10.2.  Security Mechanisms  . . . . . . . . . . . . . . . . . .  23
    11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  23
    12. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  23
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  23
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  24
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  25
 
 1.  Introduction
 
@@ -165,9 +165,9 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-Behringer, et al.        Expires January 9, 2017                [Page 3]
+Behringer, et al.       Expires September 8, 2017               [Page 3]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
    each other.  Those autonomic nodes provide a common set of
@@ -221,9 +221,9 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-Behringer, et al.        Expires January 9, 2017                [Page 4]
+Behringer, et al.       Expires September 8, 2017               [Page 4]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
    inside an autonomic node: the level of Autonomic Service Agents, and
@@ -277,9 +277,9 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-Behringer, et al.        Expires January 9, 2017                [Page 5]
+Behringer, et al.       Expires September 8, 2017               [Page 5]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
    Full AN nodes have the full Autonomic Networking Infrastructure, with
@@ -333,9 +333,9 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-Behringer, et al.        Expires January 9, 2017                [Page 6]
+Behringer, et al.       Expires September 8, 2017               [Page 6]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
    Autonomic addressing is a function of the Autonomic Networking
@@ -389,9 +389,9 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-Behringer, et al.        Expires January 9, 2017                [Page 7]
+Behringer, et al.       Expires September 8, 2017               [Page 7]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
    at all, and therefore it needs to discover peers and other resources
@@ -445,9 +445,9 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-Behringer, et al.        Expires January 9, 2017                [Page 8]
+Behringer, et al.       Expires September 8, 2017               [Page 8]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
    in an autonomic network.  It also defines a protocol, GRASP, for this
@@ -501,9 +501,9 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-Behringer, et al.        Expires January 9, 2017                [Page 9]
+Behringer, et al.       Expires September 8, 2017               [Page 9]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
 5.  Behaviour of an Autonomic Node
@@ -557,9 +557,9 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-Behringer, et al.        Expires January 9, 2017               [Page 10]
+Behringer, et al.       Expires September 8, 2017              [Page 10]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
       As this pertains to new devices, it is covered in Section 5.3 of
@@ -613,9 +613,9 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-Behringer, et al.        Expires January 9, 2017               [Page 11]
+Behringer, et al.       Expires September 8, 2017              [Page 11]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
 6.  Security and Trust Infrastructure
@@ -669,9 +669,9 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-Behringer, et al.        Expires January 9, 2017               [Page 12]
+Behringer, et al.       Expires September 8, 2017              [Page 12]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
 6.4.  Sub-Domains (*)
@@ -725,9 +725,9 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-Behringer, et al.        Expires January 9, 2017               [Page 13]
+Behringer, et al.       Expires September 8, 2017              [Page 13]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
    o  A few 'infrastructure ASAs' that use basic ANI features in support
@@ -781,9 +781,9 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-Behringer, et al.        Expires January 9, 2017               [Page 14]
+Behringer, et al.       Expires September 8, 2017              [Page 14]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
    ASAs will automatically benefit from the security provided by the
@@ -823,46 +823,80 @@ Internet-Draft             AN Reference Model                  July 2016
       to carry formatted messages to control ASA execution (at least
       starting and stopping control loop)
 
-7.3.  Specific ASAs for the Enrolment Process
+7.3.  Specific ASAs for the Autonomic Network Infrastructure
 
-   The following ASAs provide essential, required functionality in an
-   autonomic network, and are therefore mandatory to implement on
-   unconstrained autonomic nodes.
+   The following functions provide essential, required functionality in
+   an autonomic network, and are therefore mandatory to implement on
+   unconstrained autonomic nodes.  They are described here as ASAs that
+   include the underlying infrastructure components, but implementation
+   details might vary.
 
-7.3.1.  The Enrolment ASA
-
-   This section describes the function of an autonomic node to bootstrap
-   into the domain with the help of an enrolment proxy (see previous
-
+   The first three together support the trust enrolment process
+   described in Section 6.  For details see
+   [I-D.ietf-anima-bootstrapping-keyinfra].
 
 
 
-Behringer, et al.        Expires January 9, 2017               [Page 15]
+Behringer, et al.       Expires September 8, 2017              [Page 15]
 
-Internet-Draft             AN Reference Model                  July 2016
+Internet-Draft             AN Reference Model                 March 2017
 
 
-   section).  This ASA must be installed by default on all nodes that
-   require an autonomic zero-touch bootstrap. [tbc]
+7.3.1.  The Enrolment ASAs
 
-7.3.2.  The Enrolment Proxy ASA
+7.3.1.1.  The Pledge ASA
 
-   This section describes the function of an autonomic node that helps a
-   non-enrolled, adjacent devices to enrol into the domain.  This ASA
-   must be installed on all nodes. [tbc]
+   This ASA includes the function of an autonomic node that bootstraps
+   into the domain with the help of an enrolment proxy . Such a node is
+   known as a Pledge during the enrolment process.  This ASA must be
+   installed by default on all nodes that require an autonomic zero-
+   touch bootstrap.
 
-7.3.3.  The Registrar ASA
+7.3.1.2.  The Proxy ASA
 
-   This section describes the registrar function in an autonomic
-   network.  It explains the tasks of a registrar element, and how
-   registrars are placed in a network, redundancy between several, etc.
+   This ASA includes the function of an autonomic node that helps a non-
+   enrolled, adjacent devices to enrol into the domain.  This ASA must
+   be installed on all nodes, although only one proxy needs to be active
+   on a given LAN.
+
+7.3.1.3.  The Registrar ASA
+
+   This ASA includes the registrar function in an autonomic network.
    This ASA does not need to be installed on all nodes, but only on
-   nodes that implement the Registrar function. [tbc]
+   nodes that implement the Registrar function.
+
+7.3.2.  The ACP ASA
+
+   This ASA includes the ACP function in an autonomic network.  In
+   particular it acts to discover other potential ACP nodes, and to
+   support the process of nodes joining and leaving the ACP.  This ASA
+   must be installed on all nodes.  For details see Section 4.7 and
+   [I-D.ietf-anima-autonomic-control-plane].
+
+7.3.3.  The Intent Distribution ASA
+
+   This ASA includes the Intent distribution function in an autonomic
+   network.  In particular it acts to announce the availability of
+   Intent to all other autonmic nodes.  This ASA does not need to be
+   installed on all nodes, but only on nodes that implement the Intent
+   distribution function.  For details see Section 4.6 and
+   [I-D.du-anima-an-intent].
 
 8.  Management and Programmability
 
    This section describes how an Autonomic Network is managed, and
    programmed.
+
+
+
+
+
+
+
+Behringer, et al.       Expires September 8, 2017              [Page 16]
+
+Internet-Draft             AN Reference Model                 March 2017
+
 
 8.1.  How an AN Network Is Managed
 
@@ -889,15 +923,6 @@ Internet-Draft             AN Reference Model                  July 2016
    priority over autonomic management.  Thus, the autonomic default
    behavior has the lowest priority, then comes the autonomic Intent
    (medium priority), and, finally, the highest priority is taken by
-
-
-
-
-Behringer, et al.        Expires January 9, 2017               [Page 16]
-
-Internet-Draft             AN Reference Model                  July 2016
-
-
    node-specific network management methods, such as the use of command
    line interfaces.
 
@@ -921,6 +946,14 @@ Internet-Draft             AN Reference Model                  July 2016
    Intent can be refined to lower level policies using different
    approaches.  This is expected in order to adapt the Intent to the
    capabilities of managed devices.  Intent may contain role or function
+
+
+
+Behringer, et al.       Expires September 8, 2017              [Page 17]
+
+Internet-Draft             AN Reference Model                 March 2017
+
+
    information, which can be translated to specific nodes [RFC7575].
    One of the possible refinements of the Intent is using Event-
    Condition-Action (ECA) rules.
@@ -947,13 +980,6 @@ Internet-Draft             AN Reference Model                  July 2016
    Intent enforcement.  Therefore, reporting in an autonomic network
    should happen on a network-wide basis [RFC7575].
 
-
-
-Behringer, et al.        Expires January 9, 2017               [Page 17]
-
-Internet-Draft             AN Reference Model                  July 2016
-
-
    Several events can occur in an autonomic network in the same way they
    can happen in a traditional network.  However, when reporting to a
    human administrator, such events should be aggregated to avoid
@@ -971,6 +997,18 @@ Internet-Draft             AN Reference Model                  July 2016
    management should minimize the need for user intervention, possibly
    there are some events that need to be addressed by human
    administrator actions.
+
+
+
+
+
+
+
+
+Behringer, et al.       Expires September 8, 2017              [Page 18]
+
+Internet-Draft             AN Reference Model                 March 2017
+
 
 8.4.  Feedback Loops to NOC(*)
 
@@ -1001,15 +1039,6 @@ Internet-Draft             AN Reference Model                  July 2016
    control loops SHOULD be able to be dynamically changed at runtime to
    adapt to changing user needs, business goals, and changes in the ANI.
 
-
-
-
-
-Behringer, et al.        Expires January 9, 2017               [Page 18]
-
-Internet-Draft             AN Reference Model                  July 2016
-
-
    The document [I-D.strassner-anima-control-loops] defines the
    requirements for an autonomic control loop, describes different types
    of control loops, and explains how control loops are used in an
@@ -1028,6 +1057,14 @@ Internet-Draft             AN Reference Model                  July 2016
    properties of an object at runtime, while reflection enables a
    program to manipulate the attributes, methods, and/or metadata of an
    object.
+
+
+
+
+Behringer, et al.       Expires September 8, 2017              [Page 19]
+
+Internet-Draft             AN Reference Model                 March 2017
+
 
    APIs MUST be able to express and preserve semantics across different
    domains.  For example, software contracts [Meyer97] are based on the
@@ -1058,14 +1095,6 @@ Internet-Draft             AN Reference Model                  July 2016
    repository, data definition language, query language, implementation
    language, and protocol (typically, but not necessarily, all three).
 
-
-
-
-Behringer, et al.        Expires January 9, 2017               [Page 19]
-
-Internet-Draft             AN Reference Model                  July 2016
-
-
    The utility of an information model is to define objects and their
    relationships in a technology-neutral manner.  This forms a
    consensual vocabulary that the ANI and ASAs can use.  A data model is
@@ -1085,6 +1114,13 @@ Internet-Draft             AN Reference Model                  July 2016
    (e.g., the ANI, an autonomic node, or an ASA).  A data model can be
    used to help design an API, as well as any language used to interface
    to the Autonomic Network.
+
+
+
+Behringer, et al.       Expires September 8, 2017              [Page 20]
+
+Internet-Draft             AN Reference Model                 March 2017
+
 
 9.  Coordination Between Autonomic Functions (*)
 
@@ -1114,14 +1150,6 @@ Internet-Draft             AN Reference Model                  July 2016
 
    Solving the coordination problem beyond one-by-one cases can rapidly
    become intractable for large networks.  Specifying a common
-
-
-
-Behringer, et al.        Expires January 9, 2017               [Page 20]
-
-Internet-Draft             AN Reference Model                  July 2016
-
-
    functional block on coordination is a first step to address the
    problem in a systemic way.  The coordination life-cycle consists in
    three states:
@@ -1141,6 +1169,15 @@ Internet-Draft             AN Reference Model                  July 2016
 
    o  At run-time, when conflicts happen, arbitration is driven by the
       coordination strategies.  Also new dependencies can be observed
+
+
+
+
+Behringer, et al.       Expires September 8, 2017              [Page 21]
+
+Internet-Draft             AN Reference Model                 March 2017
+
+
       and inferred, resulting in an update of the dynamic interaction
       map and adaptation of the coordination strategies and mechanisms.
 
@@ -1170,14 +1207,6 @@ Internet-Draft             AN Reference Model                  July 2016
    o  A common "control/command" interface between the coordination
       "agent" and the autonomic functions.
 
-
-
-
-Behringer, et al.        Expires January 9, 2017               [Page 21]
-
-Internet-Draft             AN Reference Model                  July 2016
-
-
    Guidelines, recommendations or BCPs can also be provided for aspects
    pertaining to the coordination strategies and mechanisms.
 
@@ -1197,6 +1226,14 @@ Internet-Draft             AN Reference Model                  July 2016
    hand, it means that potentially a single misbehaving autonomic device
    could launch a widespread attack, by misusing the distributed AN
    mechanisms.  For example, a resource exhaustion attack could be
+
+
+
+Behringer, et al.       Expires September 8, 2017              [Page 22]
+
+Internet-Draft             AN Reference Model                 March 2017
+
+
    launched by a single device requesting large amounts of that resource
    from all its peers, on behalf of a non-existent traffic load.
    Alternatively it could simply send false information to its peers,
@@ -1222,18 +1259,6 @@ Internet-Draft             AN Reference Model                  July 2016
    on any unprotected Layer 2 link, and to insider attacks even on
    protected Layer 2 links.
 
-
-
-
-
-
-
-
-Behringer, et al.        Expires January 9, 2017               [Page 22]
-
-Internet-Draft             AN Reference Model                  July 2016
-
-
 10.2.  Security Mechanisms
 
    The components of the ANI must each include appropriate security
@@ -1254,6 +1279,16 @@ Internet-Draft             AN Reference Model                  July 2016
 
    Many people have provided feedback and input to this document: Sheng
    Jiang, Roberta Maglione, Jonathan Hansford.
+
+
+
+
+
+
+Behringer, et al.       Expires September 8, 2017              [Page 23]
+
+Internet-Draft             AN Reference Model                 March 2017
+
 
 13.  References
 
@@ -1278,18 +1313,6 @@ Internet-Draft             AN Reference Model                  July 2016
               Autonomic Signaling Protocol (GRASP)", draft-ietf-anima-
               grasp-06 (work in progress), June 2016.
 
-
-
-
-
-
-
-
-Behringer, et al.        Expires January 9, 2017               [Page 23]
-
-Internet-Draft             AN Reference Model                  July 2016
-
-
    [I-D.ietf-anima-prefix-management]
               Jiang, S., Du, Z., Carpenter, B., and Q. Sun, "Autonomic
               IPv6 Edge Prefix Management in Large-scale Networks",
@@ -1312,6 +1335,17 @@ Internet-Draft             AN Reference Model                  July 2016
               Control Loops in Autonomic Networking", draft-strassner-
               anima-control-loops-01 (work in progress), April 2016.
 
+
+
+
+
+
+
+Behringer, et al.       Expires September 8, 2017              [Page 24]
+
+Internet-Draft             AN Reference Model                 March 2017
+
+
    [RFC7575]  Behringer, M., Pritikin, M., Bjarnason, S., Clemm, A.,
               Carpenter, B., Jiang, S., and L. Ciavaglia, "Autonomic
               Networking: Definitions and Design Goals", RFC 7575, DOI
@@ -1326,24 +1360,8 @@ Internet-Draft             AN Reference Model                  July 2016
 Authors' Addresses
 
    Michael H. Behringer (editor)
-   Cisco Systems
-   Building D, 45 Allee des Ormes
-   Mougins  06250
-   France
 
-   Email: mbehring@cisco.com
-
-
-
-
-
-
-
-
-
-Behringer, et al.        Expires January 9, 2017               [Page 24]
-
-Internet-Draft             AN Reference Model                  July 2016
+   Email: Michael.H.Behringer@gmail.com
 
 
    Brian Carpenter
@@ -1357,9 +1375,12 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
    Toerless Eckert
-   Cisco
+   Futurewei Technologies Inc.
+   2330 Central Expy
+   Santa Clara  95050
+   USA
 
-   Email: eckert@cisco.com
+   Email: tte@cs.fau.de
 
 
    Laurent Ciavaglia
@@ -1369,6 +1390,16 @@ Internet-Draft             AN Reference Model                  July 2016
    FR
 
    Email: laurent.ciavaglia@nokia.com
+
+
+
+
+
+
+
+Behringer, et al.       Expires September 8, 2017              [Page 25]
+
+Internet-Draft             AN Reference Model                 March 2017
 
 
    Peloso Pierre
@@ -1388,18 +1419,6 @@ Internet-Draft             AN Reference Model                  July 2016
    P.R. China
 
    Email: leo.liubing@huawei.com
-
-
-
-
-
-
-
-
-
-Behringer, et al.        Expires January 9, 2017               [Page 25]
-
-Internet-Draft             AN Reference Model                  July 2016
 
 
    Jeferson Campos Nobre
@@ -1434,23 +1453,4 @@ Internet-Draft             AN Reference Model                  July 2016
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Behringer, et al.        Expires January 9, 2017               [Page 26]
+Behringer, et al.       Expires September 8, 2017              [Page 26]
