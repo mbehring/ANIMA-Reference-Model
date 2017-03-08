@@ -200,7 +200,7 @@
 |    - Autonomic Control Plane                               |
 |    - Autonomic Node Addressing                             |
 |      Discovery, negotiation and synchronisation functions  |
-|    - Intent distribution                                   |
+|    - Distribution of Intent and other information          |
 |    - Aggregated reporting and feedback loops               |
 |    - Routing                                               |
 |------------------------------------------------------------|
@@ -266,7 +266,7 @@
 			
 			<t>Discovering services: Network services such as AAA should also be discovered and not configured. Service discovery is required for such tasks. An autonomic network can either leverage existing service discovery functions, or use a new approach, or a mixture.</t>
 
-			<t>Thus the discovery mechanism could either be fully integrated with autonomic signaling (next section) or could use an independent discovery mechanism such as DNS Service Discovery or Service Location Protocol. This choice could be made independently for each Autonomic Service Agent, although the infrastructure might require some minimal lowest common denominator (e.g., for discovering the security bootstrap mechanism, or the source of Intent distribution, <xref target="intent-distri"/>).</t>
+			<t>Thus the discovery mechanism could either be fully integrated with autonomic signaling (next section) or could use an independent discovery mechanism such as DNS Service Discovery or Service Location Protocol. This choice could be made independently for each Autonomic Service Agent, although the infrastructure might require some minimal lowest common denominator (e.g., for discovering the security bootstrap mechanism, or the source of information distribution, <xref target="info-distri"/>).</t>
 			
 			<t>The currently proposed protocol for node discovery is GRASP, described in <xref target="I-D.ietf-anima-grasp"/>.</t>
 	</section>
@@ -287,15 +287,15 @@
 	</section>
 	<!-- routing -->
 
-	<section anchor="intent-distri" title="Intent Distribution (*)">
-		<t>Intent is the policy language of an Autonomic Network; see <xref target="intent"/> for general information on Intent. The distribution of Intent is also a function of the Autonomic Control Plane. Since Intent is a high level policy, it should change only infrequently (order of days). Therefore, Intent should be simply flooded to all nodes in an autonomic domain, and there is currently no perceived need to have more targeted distribution methods. Intent is also expected to be monolithic, and flooded as a whole. One possible method for distributing Intent is discussed in <xref target="I-D.liu-anima-grasp-distribution"/>.</t>
-	</section>
-	<!-- intent-distri -->
-
 	<section anchor="acp" title="The Autonomic Control Plane">
 		<t>The totality of autonomic interactions forms the "Autonomic Control Plane". This control plane can be either implemented in the global routing table of a node, such as IGPs in today's networks; or it can be provided as an overlay network. The document "An Autonomic Control Plane" (<xref target="I-D.ietf-anima-autonomic-control-plane"/>) describes the details. </t> 
 	</section>
 	<!-- acp -->
+
+	<section anchor="info-distri" title="Information Distribution (*)">
+		<t>Certain forms of information, such as Intent, must be distributed across an autonomic domain. The distribution of information is also a function of the Autonomic Control Plane. One form of such information is Intent. Intent is the policy language of an Autonomic Network; see <xref target="intent"/> for general information on Intent. It is a high level policy, and should change only infrequently (order of days). Therefore, information such as Intent should be simply flooded to all nodes in an autonomic domain, and there is currently no perceived need to have more targeted distribution methods. Intent is also expected to be monolithic, and flooded as a whole. One possible method for distributing Intent, as well as other forms of data, is discussed in <xref target="I-D.liu-anima-grasp-distribution"/>. Intent and information distribution are currently out of scope for ANIMA. </t>
+	</section>
+	<!-- info-distri -->
 
 </section>
 <!-- ani --> 
@@ -485,9 +485,9 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 			the process of nodes joining and leaving the ACP. This ASA must be installed on all nodes. For details see <xref target="acp"/> and <xref target="I-D.ietf-anima-autonomic-control-plane"/>.</t>
 		</section>
 		<!-- acp -->
-		<section anchor="intent-asa" title="The Intent Distribution ASA">
-			<t>This ASA includes the Intent distribution function in an autonomic network. In particular it acts to announce the availability of
-			Intent to all other autonmic nodes. This ASA does not need to be installed on all nodes, but only on nodes that implement the Intent distribution function. For details see <xref target="intent-distri"/> and <xref target="I-D.du-anima-an-intent"/>.</t>
+		<section anchor="intent-asa" title="The Information Distribution ASA (*)">
+			<t>This ASA is currently out of scope in ANIMA, and provided here only as background information.</t>
+			<t>This ASA includes the information distribution function in an autonomic network. In particular it acts to announce the availability of Intent and other information to all other autonomic nodes. This ASA does not need to be installed on all nodes, but only on nodes that implement the information distribution function. For details see <xref target="info-distri"/>.</t>
 		</section>
 		<!-- registrar -->
 
@@ -508,15 +508,14 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 	<!-- management-general -->		
 
 	<section anchor="intent" title="Intent (*)">
-	<!-- Explaining ingest of intent, distribution, the nature (on top of what’s in <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/>). That intent is signed, time stamps, etc. Probably pointing back to <xref target="I-D.irtf-nmrg-autonomic-network-definitions"/>. (Note intent distribution is handled in <xref target="intent-distri"/>) [tbc] -->
 	<!-- In an ideal autonomic domain, only one intent provided by human administrators is necessary to operate such domain <xref target="RFC7576"/>-->
-		<t>Intent is not covered by the ANIMA charter as of July 2016. This section is for informational purposes only.</t>
+		<t>Intent is not covered by the ANIMA charter as of March 2017. This section is for informational purposes only.</t>
 		<t>This section gives an overview of Intent, and how it is managed. Intent and Policy-Based Network Management (PBNM) is already described inside the IETF (e.g., PCIM and SUPA) and in other SDOs (e.g., DMTF and TMF ZOOM). </t>
 		<t>Intent can be described as an abstract, declarative, high-level policy used to operate an autonomic domain, such as an enterprise network <xref target="RFC7575"/>. Intent should be limited to high level guidance only, thus it does not directly define a policy for every network element separately. It is expected Intent definitions from autonomic function(s) and even from traditional network management elements. </t> 
 	<!-- Such rules, which are more suitable to individual entities, can be defined using different syntax and semantics. --> 	
 		<t>Intent can be refined to lower level policies using different approaches. This is expected in order to adapt the Intent to the capabilities of managed devices. Intent may contain role or function information, which can be translated to specific nodes <xref target="RFC7575"/>. One of the possible refinements of the Intent is using Event-Condition-Action (ECA) rules.</t>
 		<t>Different parameters may be configured for Intent. These parameters are usually provided by the human operator. Some of these parameters can influence the behavior of specific autonomic functions as well as the way the Intent is used to manage the autonomic domain. </t>
-		<t>Intent is discussed in more detail in <xref target="I-D.du-anima-an-intent"/>, Intent distribution in <xref target="I-D.liu-anima-grasp-distribution"/>.</t>
+		<t>Intent is discussed in more detail in <xref target="I-D.du-anima-an-intent"/>. Intent as well as other types of information are distributed via GRASP, see <xref target="I-D.liu-anima-grasp-distribution"/>.</t>
 <!--		<t>Intent distribution is considered as one of the common control and management functions of an autonomic network <xref target="RFC7575"/>. Since distribution is fundamental for autonomic networking, it is necessary a mechanism to provision intent by all devices in a domain <xref target="I-D.ietf-anima-grasp"/>. The distribution of Intent is function of the Autonomic Control Plane and several methods can be used to distribute Intent across an autonomic domain. Intent distribution might not use the ANIMA signaling protocol itself <xref target="I-D.ietf-anima-grasp"/>, but there is a proposal to extend such protocol for intent delivery [draft-liu-anima-intent-distribution]. </t> -->
 	</section>
 	<!-- intent -->
@@ -524,7 +523,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 	<section anchor="reporting" title="Aggregated Reporting (*)">
 	<!-- <t>An autonomic network offers through the autonomic control plane the possibility to aggregate information inside the network, before sending it to the admin of the network. While this can be seen or implemented as a specific form of negotiation, the use case is different and therefore mentioned here explicitly. </t>  -->
 	<!-- The information gathering and the reporting delivery should be done through the autonomic control plane.-->
-		<t>As of July 2016, aggregated reporting is not in the ANIMA charter. This section is provided for information only.</t>
+		<t>As of March 2017, aggregated reporting is not in the ANIMA charter. This section is provided for information only.</t>
 		<t>Autonomic Network should minimize the need for human intervention. In terms of how the network should behave, this is done through an autonomic Intent provided by the human administrator. In an analogous manner, the reports which describe the operational status of the network should aggregate the information produced in different network elements in order to present the effectiveness of autonomic Intent enforcement. Therefore, reporting in an autonomic network should happen on a network-wide basis <xref target="RFC7575"/>. </t>
 	<!--These events can be produced considering traditional network management protocols, such as SNMP and syslog. -->
 		<t>Several events can occur in an autonomic network in the same way they can happen in a traditional network. However, when reporting to a human administrator, such events should be aggregated to avoid advertisement about individual managed elements. In this context, algorithms may be used to determine what should be reported (e.g., filtering) and in which way and how different events are related to each other. Besides that, an event in an individual element can be compensated by changes in other elements to maintain a network-wide level which is described in the autonomic Intent. </t>

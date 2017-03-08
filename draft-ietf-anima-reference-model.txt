@@ -85,8 +85,8 @@ Table of Contents
      4.3.  Discovery . . . . . . . . . . . . . . . . . . . . . . . .   7
      4.4.  Signaling Between Autonomic Nodes . . . . . . . . . . . .   8
      4.5.  Routing . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     4.6.  Intent Distribution (*) . . . . . . . . . . . . . . . . .   9
-     4.7.  The Autonomic Control Plane . . . . . . . . . . . . . . .   9
+     4.6.  The Autonomic Control Plane . . . . . . . . . . . . . . .   9
+     4.7.  Information Distribution (*)  . . . . . . . . . . . . . .   9
    5.  Behaviour of an Autonomic Node  . . . . . . . . . . . . . . .  10
    6.  Security and Trust Infrastructure . . . . . . . . . . . . . .  12
      6.1.  Public Key Infrastructure . . . . . . . . . . . . . . . .  12
@@ -100,7 +100,7 @@ Table of Contents
      7.3.  Specific ASAs for the Autonomic Network Infrastructure  .  15
        7.3.1.  The Enrolment ASAs  . . . . . . . . . . . . . . . . .  16
        7.3.2.  The ACP ASA . . . . . . . . . . . . . . . . . . . . .  16
-       7.3.3.  The Intent Distribution ASA . . . . . . . . . . . . .  16
+       7.3.3.  The Information Distribution ASA (*)  . . . . . . . .  16
    8.  Management and Programmability  . . . . . . . . . . . . . . .  16
      8.1.  How an AN Network Is Managed  . . . . . . . . . . . . . .  17
      8.2.  Intent (*)  . . . . . . . . . . . . . . . . . . . . . . .  17
@@ -246,7 +246,7 @@ Internet-Draft             AN Reference Model                 March 2017
    |    - Autonomic Control Plane                               |
    |    - Autonomic Node Addressing                             |
    |      Discovery, negotiation and synchronisation functions  |
-   |    - Intent distribution                                   |
+   |    - Distribution of Intent and other information          |
    |    - Aggregated reporting and feedback loops               |
    |    - Routing                                               |
    |------------------------------------------------------------|
@@ -419,8 +419,8 @@ Internet-Draft             AN Reference Model                 March 2017
    Protocol.  This choice could be made independently for each Autonomic
    Service Agent, although the infrastructure might require some minimal
    lowest common denominator (e.g., for discovering the security
-   bootstrap mechanism, or the source of Intent distribution,
-   Section 4.6).
+   bootstrap mechanism, or the source of information distribution,
+   Section 4.7).
 
    The currently proposed protocol for node discovery is GRASP,
    described in [I-D.ietf-anima-grasp].
@@ -454,7 +454,7 @@ Internet-Draft             AN Reference Model                 March 2017
    purpose, including an integrated but optional discovery protocol.
 
    GRASP is normally expected to run inside the Autonomic Control Plane
-   (see Section 4.7) and to depend on the ACP for security.  It is also
+   (see Section 4.6) and to depend on the ACP for security.  It is also
    capable of using TLS security in the absence of an ACP, and it may
    run insecurely for a short time during bootstrapping.
 
@@ -474,20 +474,7 @@ Internet-Draft             AN Reference Model                 March 2017
    The routing protocol is defined in the ACP document
    [I-D.ietf-anima-autonomic-control-plane].
 
-4.6.  Intent Distribution (*)
-
-   Intent is the policy language of an Autonomic Network; see
-   Section 8.2 for general information on Intent.  The distribution of
-   Intent is also a function of the Autonomic Control Plane.  Since
-   Intent is a high level policy, it should change only infrequently
-   (order of days).  Therefore, Intent should be simply flooded to all
-   nodes in an autonomic domain, and there is currently no perceived
-   need to have more targeted distribution methods.  Intent is also
-   expected to be monolithic, and flooded as a whole.  One possible
-   method for distributing Intent is discussed in
-   [I-D.liu-anima-grasp-distribution].
-
-4.7.  The Autonomic Control Plane
+4.6.  The Autonomic Control Plane
 
    The totality of autonomic interactions forms the "Autonomic Control
    Plane".  This control plane can be either implemented in the global
@@ -496,8 +483,21 @@ Internet-Draft             AN Reference Model                 March 2017
    Control Plane" ([I-D.ietf-anima-autonomic-control-plane]) describes
    the details.
 
+4.7.  Information Distribution (*)
 
-
+   Certain forms of information, such as Intent, must be distributed
+   across an autonomic domain.  The distribution of information is also
+   a function of the Autonomic Control Plane.  One form of such
+   information is Intent.  Intent is the policy language of an Autonomic
+   Network; see Section 8.2 for general information on Intent.  It is a
+   high level policy, and should change only infrequently (order of
+   days).  Therefore, information such as Intent should be simply
+   flooded to all nodes in an autonomic domain, and there is currently
+   no perceived need to have more targeted distribution methods.  Intent
+   is also expected to be monolithic, and flooded as a whole.  One
+   possible method for distributing Intent, as well as other forms of
+   data, is discussed in [I-D.liu-anima-grasp-distribution].  Intent and
+   information distribution are currently out of scope for ANIMA.
 
 
 
@@ -870,25 +870,25 @@ Internet-Draft             AN Reference Model                 March 2017
    This ASA includes the ACP function in an autonomic network.  In
    particular it acts to discover other potential ACP nodes, and to
    support the process of nodes joining and leaving the ACP.  This ASA
-   must be installed on all nodes.  For details see Section 4.7 and
+   must be installed on all nodes.  For details see Section 4.6 and
    [I-D.ietf-anima-autonomic-control-plane].
 
-7.3.3.  The Intent Distribution ASA
+7.3.3.  The Information Distribution ASA (*)
 
-   This ASA includes the Intent distribution function in an autonomic
-   network.  In particular it acts to announce the availability of
-   Intent to all other autonmic nodes.  This ASA does not need to be
-   installed on all nodes, but only on nodes that implement the Intent
-   distribution function.  For details see Section 4.6 and
-   [I-D.du-anima-an-intent].
+   This ASA is currently out of scope in ANIMA, and provided here only
+   as background information.
+
+   This ASA includes the information distribution function in an
+   autonomic network.  In particular it acts to announce the
+   availability of Intent and other information to all other autonomic
+   nodes.  This ASA does not need to be installed on all nodes, but only
+   on nodes that implement the information distribution function.  For
+   details see Section 4.7.
 
 8.  Management and Programmability
 
    This section describes how an Autonomic Network is managed, and
    programmed.
-
-
-
 
 
 
@@ -928,7 +928,7 @@ Internet-Draft             AN Reference Model                 March 2017
 
 8.2.  Intent (*)
 
-   Intent is not covered by the ANIMA charter as of July 2016.  This
+   Intent is not covered by the ANIMA charter as of March 2017.  This
    section is for informational purposes only.
 
    This section gives an overview of Intent, and how it is managed.
@@ -963,12 +963,13 @@ Internet-Draft             AN Reference Model                 March 2017
    can influence the behavior of specific autonomic functions as well as
    the way the Intent is used to manage the autonomic domain.
 
-   Intent is discussed in more detail in [I-D.du-anima-an-intent],
-   Intent distribution in [I-D.liu-anima-grasp-distribution].
+   Intent is discussed in more detail in [I-D.du-anima-an-intent].
+   Intent as well as other types of information are distributed via
+   GRASP, see [I-D.liu-anima-grasp-distribution].
 
 8.3.  Aggregated Reporting (*)
 
-   As of July 2016, aggregated reporting is not in the ANIMA charter.
+   As of March 2017, aggregated reporting is not in the ANIMA charter.
    This section is provided for information only.
 
    Autonomic Network should minimize the need for human intervention.
@@ -997,7 +998,6 @@ Internet-Draft             AN Reference Model                 March 2017
    management should minimize the need for user intervention, possibly
    there are some events that need to be addressed by human
    administrator actions.
-
 
 
 
