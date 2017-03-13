@@ -1,4 +1,4 @@
-VERSION=02
+VERSION=03
 
 DRAFT=draft-ietf-anima-reference-model
 
