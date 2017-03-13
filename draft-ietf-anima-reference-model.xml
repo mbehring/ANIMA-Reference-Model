@@ -125,7 +125,7 @@
 		      </address>
    		</author>
 			
-		<date day="7" month="March" year="2017"/>
+		<date day="13" month="March" year="2017"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -137,7 +137,8 @@
 	
 	<middle>
 <section anchor="intro" title="Introduction">
-	<t>The document "Autonomic Networking - Definitions and Design Goals" <xref target="RFC7575"/> explains the fundamental concepts behind Autonomic Networking, and defines the relevant terms in this space, as well as a high level reference model. This document defines this reference model with more detail, to allow for functional and protocol specifications to be developed in an architecturally consistent, non-overlapping manner. While the document is written as generally as possible, the initial solutions are limited to the chartered scope of the WG.</t>
+	<t>The document "Autonomic Networking - Definitions and Design Goals" <xref target="RFC7575"/> explains the fundamental concepts behind Autonomic Networking, and defines the relevant terms in this space, as well as a high level reference model. <xref target="RFC7576"/> provides a gap analysis between traditional and autonomic approaches. </t>
+<t>This document defines this reference model with more detail, to allow for functional and protocol specifications to be developed in an architecturally consistent, non-overlapping manner. While the document is written as generally as possible, the initial solutions are limited to the chartered scope of the WG.</t>
 	<t>As discussed in <xref target="RFC7575"/>, the goal of this work is not to focus exclusively on fully autonomic nodes or networks. In reality, most networks will run with some autonomic functions, while the rest of the network is traditionally managed. This reference model allows for this hybrid approach. </t>
 	<t>This is a living document and will evolve with the technical solutions developed in the ANIMA WG. Sections marked with (*) do not represent current charter items. While this document must give a long term architectural view, not all functions will be standardized at the same time. </t> 
 </section>
@@ -179,7 +180,7 @@
 <section anchor="element" title="The Autonomic Network Element">
    <section anchor="element-arch" title="Architecture">
 		   
-			<t>This section describes an autonomic network element and its internal architecture. The reference model explained in the document <xref target="RFC7575">"Autonomic Networking - Definitions and Design Goals"</xref> shows the sources of information that an autonomic service agent can leverage: Self-knowledge, network knowledge (through discovery), Intent, and feedback loops. Fundamentally, there are two levels inside an autonomic node: the level of Autonomic Service Agents, and the level of the Autonomic Networking Infrastructure, with the former using the services of the latter. <xref target="ref_model"/> illustrates this concept.
+			<t>This section describes an autonomic network element and its internal architecture. The reference model explained in the document <xref target="RFC7575">"Autonomic Networking - Definitions and Design Goals"</xref> shows the sources of information that an autonomic service agent can leverage: Self-knowledge, network knowledge (through discovery), Intent, and feedback loops. There are two levels inside an autonomic node: the level of Autonomic Service Agents, and the level of the Autonomic Networking Infrastructure, with the former using the services of the latter. <xref target="ref_model"/> illustrates this concept.
 			</t>
 			  <t>
    <figure anchor='ref_model' title="Model of an autonomic node">
@@ -197,7 +198,7 @@
 |------------------------------------------------------------|
 | Autonomic Networking Infrastructure                        |
 |    - Data structures (ex: certificates, peer information)  |
-|    - Autonomic Control Plane                               |
+|    - Autonomic Control Plane (ACP)                         |
 |    - Autonomic Node Addressing                             |
 |      Discovery, negotiation and synchronisation functions  |
 |    - Distribution of Intent and other information          |
@@ -210,15 +211,85 @@
    </figure>
   </t>
 
-			<t>The Autonomic Networking Infrastructure (lower part of <xref target="ref_model"/>) contains node specific data structures, for example trust information about itself and its peers, as well as a generic set of functions, independent of a particular usage. This infrastructure should be generic, and support a variety of Autonomic Service Agents (upper part of <xref target="ref_model"/>). The Autonomic Control Plane is the summary of all interactions of the Autonomic Networking Infrastructure with other nodes and services.</t>
+			<t>The Autonomic Networking Infrastructure (lower part of <xref target="ref_model"/>) contains node specific data structures, for example trust information about itself and its peers, as well as a generic set of functions, independent of a particular usage. This infrastructure should be generic, and support a variety of Autonomic Service Agents (upper part of <xref target="ref_model"/>). The Autonomic Control Plane (ACP) is the summary of all interactions of the Autonomic Networking Infrastructure with other nodes and services.</t>
 			
-			<t>The use cases of "Autonomics" such as self-management, self-optimisation, etc, are implemented as Autonomic Service Agents. They use the services and data structures of the underlying autonomic networking infrastructure. The underlying Autonomic Networking Infrastructure should itself be self-managing. </t>
+			<t>The use cases of "Autonomics" such as self-management, self-optimisation, etc, are implemented as Autonomic Service Agents. They use the services and data structures of the underlying Autonomic Networking Infrastructure, which should be self-managing. </t>
 			
 			<t>The "Basic Operating System Functions" include the "normal OS", including the network stack, security functions, etc. </t>
 
 		   <t>Full AN nodes have the full Autonomic Networking Infrastructure, with the full functionality described in this document. At a later stage ANIMA may define a scope for constrained nodes with a reduced ANI and well-defined minimal functionality. They are currently out of scope. </t>
 	</section>
 	<!-- element-architecture --> 
+
+	<section anchor="adjacency-table" title="The Adjacency Table">
+
+<!-- old section 5 start -->
+	<t>Autonomic Networking is based on direct interactions between devices of a domain. The Autonomic Networking Infrastructure (ANI) is normally built on a hop-by-hop basis. Therefore, many interactions in the ANI are based on the ANI adjacency table. There are interactions that provide input into the adjacency table, and other interactions that leverage the information contained in it.</t>
+	
+	<t>The ANI adjacency table contains information about adjacent autonomic nodes, at a minimum: node-ID, IP address in data plane, IP address in ACP, domain, certificate. An autonomic node maintains this adjacency table up to date. The adjacency table only contains information about other nodes that are capable of Autonomic Networking; non-autonomic nodes are normally not tracked here. However, the information is tracked independently of the status of the peer nodes; specifically, it contains information about non-enrolled nodes, nodes of the same and other domains. The adjacency table may contain information about the validity and trust of the adjacent autonomic node's certificate, although all autonomic interactions must verify validity and trust independently.</t> 
+	
+	<t>The adjacency table is fed by the following inputs: 
+	<list style="symbols">
+		<t>Link local discovery: This interaction happens in the data plane, using IPv6 link local addressing only, because this addressing type is itself autonomic. This way the nodes learns about all autonomic nodes around itself. This is described in <xref target="I-D.ietf-anima-grasp"/>.</t>
+		<t>Vendor re-direct: A new device may receive information on where its home network is through a vendor based MASA re-direct; this is typically a routable address. See <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. </t>
+		<t>Non-autonomic input: A node may be configured manually with an autonomic peer; it could learn about autonomic nodes through DHCP options, DNS, and other non-autonomic mechanisms. Generally such non-autonomic mechansims require some administrator intervention. The key purpose is to by-pass a non-autonomic device or network. As this pertains to new devices, it is covered in Section 5.3 of <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>.</t>
+	</list></t>
+				
+	<t>The adjacency table is defining the behaviour of an autonomic node: 
+	<list style="symbols">
+		<t>If the node has not bootstrapped into a domain (i.e., doesn't have a domain certificate), it rotates through all nodes in the adjacency table that claim to have a domain, and will attempt bootstrapping through them, one by one. One possible response is a vendor MASA re-direct, which will be entered into the adjacency table (see second bullet above). See <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. </t>
+		<t>If the adjacent node has the same domain, it will authenticate that adjacent node and, if successful, establish the Autonomic Control Plane (ACP). See <xref target="I-D.ietf-anima-autonomic-control-plane"/>.</t>
+		<t>Once the node is part of the ACP of a domain, it will use GRASP discovery <xref target="I-D.ietf-anima-grasp"/> to find Registrar(s) of its domain and potentiall other services.</t>
+		<t>If the node is part of an ACP and has discovered via GRASP at least one Registrar in its domain, it will start the "join assistant" ASA, and act as a join assistant for neighboring nodes that need to be bootstrapped. See <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. </t>		
+		<t>Other behaviours are possible, for example establishing the ACP also with devices of a sub-domain, to other domains, etc. Those will likely be controlled by Intent. They are outside scope for the moment. Note that Intent is distributed through the ACP; therefore, a node can only adapt Intent driven behaviour once it has joined the ACP. At the moment, ANIMA does not consider providing Intent outside the ACP; this can be considered later. </t> 
+	</list></t>
+	
+	<t>Once a node has joined the ACP, it will also learn the ACP addresses of its adjacent nodes, and add them to the adjacency table, to allow for communication inside the ACP. Further autonomic domain interactions will now happen inside the ACP. At this moment, only negotiation / synchronization via GRASP <xref target="I-D.ietf-anima-grasp"/> is being defined. (Note that GRASP runs in the data plane, as an input in building the adjacency table, as well as inside the ACP.) </t>
+	
+	<t>Autonomic Functions consist of Autonomic Service Agents (ASAs). They run logically above the AN Infrastructure, and may use the adjacency table, the ACP, negotiation and synchronization through GRASP in the ACP, Intent and other functions of the ANI. Since the ANI only provides autonomic interactions within a domain, autonomic functions can also use any other context on a node, specifically the global data plane. </t>
+	</section>
+	<!-- end section adjacency table -->
+	<!-- old section 5 end --> 
+
+	<section anchor="state-machine" title="State Machine">
+
+	<t>Autonomic Networking applies during the full life-cycle of a node. This section describes a state machine of an autonomic node, throughout its life.</t>
+
+		<section anchor="state-1" title="State 1: Factory Default">
+			<t>An autonomic node is leaving the factory in this state. In this state, the node has no domain specific configuration, specifically no LDevID, and could be used in any particular target network. It does however have a vendor/manufacturer specific ID, the IDevID <xref target="IDevID"></xref>. Nodes without IDevID cannot be autonomically and securely enrolled into a domain; they require manual pre-staging, in which case the pre-staging takes them directly to state 2.</t>
+
+			<t>Transitions:
+			<list style="symbols">
+			<t>Bootstrap event: The device enrols into a domain; as part of this process it receives a domain identity (LDevID). If enrollment is successful, the next state is state 2. See <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/> Section 3 for details on enrollment.</t>
+			</list> </t>
+		</section>
+		<!-- state-1 -->
+
+		<section anchor="state-2" title="State 2: Enrolled">
+			<t>An autonomic node is in the state "enrolled" if it has a domain identity (LDevID). It may have further configuration or state, for example if it had been in state 3 before, but lost all its ACP channels. The LDevID can only be removed from a device through a factory reset, which also removes all other state from the device. This ensures that a device has no stale domain specific state when entering the "enrolled" state from state 1.</t>
+
+			<t>Transitions:
+			<list style="symbols">
+			<t>Joining ACP: The device establishes an ACP channel to an adjacent device. See <xref target="I-D.ietf-anima-autonomic-control-plane"/> for details. Next state: 3.</t>
+			<t>Factory reset: A factory reset removes all configuration and the domain identity (LDevID) from the device. Next state: 1.</t>
+			</list> </t>
+		</section>
+		<!-- state-2 -->
+
+		<section anchor="state-3" title="State 3: In ACP">
+			<t>In this state, the autonomic node has at least one ACP channel to another device. It can participate in further autonomic transactions, such as starting autonomic service agents. For example it must now enable the join assistant ASA, to help other devices to join the domain. Other conditions may apply to such interactions, for example to serve as a join assistant, the device must first discover a bootstrap Registrar. </t>
+
+			<t>Transitions:
+			<list style="symbols">
+			<t>Leaving ACP: The device drops the last (or only) ACP channel to an adjacent device. Next state: 2.</t>
+			<t>Factory reset: A factory reset removes all configuration and the domain identity (LDevID) from the device. Next state: 1.</t>
+			</list> </t>
+		</section>
+		<!-- state-3 -->
+	
+	</section>
+	<!-- state-machine -->	
+
 		
 </section>
 <!-- element -->
@@ -274,7 +345,7 @@
 
 	<section anchor="negotiation" title="Signaling Between Autonomic Nodes">
 			<t>Autonomic nodes must communicate with each other, for example to negotiate and/or synchronize technical objectives (i.e., network parameters) of any kind and complexity. This requires some form of signaling between autonomic nodes. Autonomic nodes implementing a specific use case might choose their own signaling protocol, as long as it fits the overall security model. However, in the general case, any pair of autonomic nodes might need to communicate, so there needs to be a generic protocol for this. A prerequisite for this is that autonomic nodes can discover each other without any preconfiguration, as mentioned above. To be generic, discovery and signaling must be able to handle any sort of technical objective, including ones that require complex data structures. The document "A Generic Autonomic Signaling Protocol (GRASP)" <xref target="I-D.ietf-anima-grasp"/> describes more detailed requirements for discovery, negotiation and synchronization in an autonomic network. It also defines a protocol, GRASP, for this purpose, including an integrated but optional discovery protocol.</t>
-			<t>GRASP is normally expected to run inside the Autonomic Control Plane (see <xref target="acp"/>) and to depend on the ACP for security.
+			<t>GRASP is normally expected to run inside the Autonomic Control Plane (ACP; see <xref target="acp"/>) and to depend on the ACP for security.
 			It is also capable of using TLS security in the absence of an ACP, and it may run insecurely for a short time during bootstrapping.</t>
 			<t>An autonomic node will normally run a single instance of GRASP, used by multiple ASAs. However, scenarios where multiple instances of GRASP
 			run in a single node, perhaps with different security properties, are not excluded. </t>
@@ -300,41 +371,10 @@
 </section>
 <!-- ani --> 
 
-<section anchor="overview" title="Behaviour of an Autonomic Node">
-
-	<t>This section provides an overview on how the functions in the Autonomic Networking Infrastructure work together, and how the various documents about AN relate to each other. </t>
-
-	<t>The foundations of Autonomic Networking, definitions and gap analysis in the context of the IETF are described in <xref target="RFC7575"/> and <xref target="RFC7576"/>. </t>
-	
-	<t>Autonomic Networking is based on direct interactions between devices of a domain. The Autonomic Networking Infrastructure (ANI) is normally built on a hop-by-hop basis. Therefore, many interactions in the ANI are based on the ANI adjacency table. There are interactions that provide input into the adjacency table, and other interactions that leverage the information contained in it.</t>
-	
-	<t>The ANI adjacency table contains information about adjacent autonomic nodes, at a minimum: node-ID, IP address in data plane, IP address in ACP, domain, certificate. An autonomic node maintains this adjacency table up to date. The adjacency table only contains information about other nodes that are capable of Autonomic Networking; non-autonomic nodes are normally not tracked here. However, the information is tracked independently of the status of the peer nodes; specifically, it contains information about non-enrolled nodes, nodes of the same and other domains. The adjacency table MAY contain information about the validity and trust of the adjacent autonomic node's certificate, although all autonomic interactions must verify validity and trust independently.</t> 
-	
-	<t>The adjacency table is fed by the following inputs: 
-	<list style="symbols">
-		<t>Link local discovery: This interaction happens in the data plane, using IPv6 link local addressing only, because this addressing type is itself autonomic. This way the nodes learns about all autonomic nodes around itself. This is described in <xref target="I-D.ietf-anima-grasp"/>.</t>
-		<t>Vendor re-direct: A new device may receive information on where its home network is through a vendor based MASA re-direct; this is typically a routable address. See <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. </t>
-		<t>Non-autonomic input: A node may be configured manually with an autonomic peer; it could learn about autonomic nodes through DHCP options, DNS, and other non-autonomic mechanisms. Generally such non-autonomic mechansims require some administrator intervention. The key purpose is to by-pass a non-autonomic device or network. As this pertains to new devices, it is covered in Section 5.3 of <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>.</t>
-	</list></t>
-				
-	<t>The adjacency table is defining the behaviour of an autonomic node: 
-	<list style="symbols">
-		<t>If the node has not bootstrapped into a domain (i.e., doesn't have a domain certificate), it rotates through all nodes in the adjacency table that claim to have a domain, and will attempt bootstrapping through them, one by one. One possible response is a vendor MASA re-direct, which will be entered into the adjacency table (see second bullet above). See <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. </t>		
-		<t>If the node has bootstrapped into a domain (i.e., has a domain certificate), it will act as a proxy for neighboring nodes that need to be bootstrapped. See <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. </t>		
-		<t>If the adjacent node has the same domain, it will authenticate that adjacent node and establish the Autonomic Control Plane (ACP). See <xref target="I-D.ietf-anima-autonomic-control-plane"/>.</t>
-		<t>Other behaviours are possible, for example establishing the ACP also with devices of a sub-domain, to other domains, etc. Those will likely be controlled by Intent. They are outside scope for the moment. Note that Intent is distributed through the ACP; therefore, a node can only adapt Intent driven behaviour once it has joined the ACP. At the moment, ANIMA does not consider providing Intent outside the ACP; this can be considered later. </t> 
-	</list></t>
-	
-	<t>Once a node has joined the ACP, it will also learn the ACP addresses of its adjacent nodes, and add them to the adjacency table, to allow for communication inside the ACP. Further interactions will now happen inside the ACP. At this moment, only negotiation / synchronization via GRASP <xref target="I-D.ietf-anima-grasp"/> is being defined. (Note that GRASP runs in the data plane, as an input in building the adjacency table, as well as inside the ACP.) </t>
-	
-	<t>Autonomic Functions consist of Autonomic Service Agents (ASAs). They run logically above the AN Infrastructure, and may use the adjacency table, the ACP, negotiation and synchronization through GRASP in the ACP, Intent and other functions of the ANI. Since the ANI only provides autonomic interactions within a domain, autonomic functions can also use any other context on a node, specifically the global data plane. </t>
-</section>
-<!-- functional overview --> 
-
 <section anchor="trust" title="Security and Trust Infrastructure">
 	<t>An Autonomic Network is self-protecting. All protocols are secure by default, without the requirement for the administrator to explicitly configure security. </t>
 	<t>Autonomic nodes have direct interactions between themselves, which must be secured. Since an autonomic network does not rely on configuration, it is not an option to configure for example pre-shared keys. A trust infrastructure such as a PKI infrastructure must be in place. This section describes the principles of this trust infrastructure. </t>
-	<t>The default method to automatically bring up a trust infrastructure is defined in the document "Bootstrapping Key Infrastructures" <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. The ASAs required for this enrolment process are described in <xref target="specific-asas"/>. An autonomic node must implement the enrolment and enrolment proxy ASAs. The registrar ASA may be implemented only on a sub-set of nodes. </t>
+	<t>The default method to automatically bring up a trust infrastructure is defined in the document "Bootstrapping Key Infrastructures" <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. The ASAs required for this enrollment process are described in <xref target="specific-asas"/>. An autonomic node must implement the enrollment and join assistant ASAs. The registrar ASA may be implemented only on a sub-set of nodes. </t>
 
 	<section anchor="pki" title="Public Key Infrastructure">
 		<t>An autonomic domain uses a PKI model. The root of trust is a certification authority (CA). A registrar acts as a registration authority (RA). </t>
@@ -462,29 +502,29 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 	<section anchor="specific-asas" title="Specific ASAs for the Autonomic Network Infrastructure">
 		<t>The following functions provide essential, required functionality in an autonomic network, and are therefore mandatory to implement on unconstrained autonomic nodes. They are described here as ASAs that include the underlying infrastructure components, but implementation details might vary.</t> 
 		
-		<t>The first three together support the trust enrolment process described in <xref target="trust"/>. For details see <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>.</t>
-    <section anchor="enrolment" title="The Enrolment ASAs">
-		<section anchor="enrolment-pledge" title="The Pledge ASA">
-			<t>This ASA includes the function of an autonomic node that bootstraps into the domain with the help of an enrolment proxy . Such a node is known as a Pledge during the enrolment process. This ASA must be installed by default on all nodes that require an autonomic zero-touch bootstrap.</t>
+		<t>The first three together support the trust enrollment process described in <xref target="trust"/>. For details see <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>.</t>
+    <section anchor="enrollment" title="The enrollment ASAs">
+		<section anchor="enrollment-pledge" title="The Pledge ASA">
+			<t>This ASA includes the function of an autonomic node that bootstraps into the domain with the help of an join assitant ASA (see below). Such a node is known as a Pledge during the enrollment process. This ASA must be installed by default on all nodes that require an autonomic zero-touch bootstrap.</t>
 		</section>
-		<!-- enrolment -->
+		<!-- enrollment -->
 
-		<section anchor="enrolment-proxy" title="The Proxy ASA">
-			<t>This ASA includes the function of an autonomic node that helps a non-enrolled, adjacent devices to enrol into the domain. This ASA must be installed on all nodes, although only one proxy needs to be active on a given LAN.</t>
+		<section anchor="join-assitant" title="The Join Assistant ASA">
+			<t>This ASA includes the function of an autonomic node that helps a non-enrolled, adjacent devices to enroll into the domain. This ASA must be installed on all nodes, although only one join assistant needs to be active on a given LAN.</t>
 		</section>
-		<!-- enrolment-proxy -->
+		<!-- join-assistant -->
 
-		<section anchor="enrolment-registrar" title="The Registrar ASA">
-			<t>This ASA includes the registrar function in an autonomic network. This ASA does not need to be installed on all nodes, but only on nodes that implement the Registrar function.</t>
+		<section anchor="enrollment-registrar" title="The Join Registrar ASA">
+			<t>This ASA includes the join registrar function in an autonomic network. This ASA does not need to be installed on all nodes, but only on nodes that implement the Join Registrar function.</t>
 		</section>
 		<!-- registrar -->
 		</section>
 		
 		<section anchor="acp-asa" title="The ACP ASA">
-			<t>This ASA includes the ACP function in an autonomic network. In particular it acts to discover other potential ACP nodes, and to support
-			the process of nodes joining and leaving the ACP. This ASA must be installed on all nodes. For details see <xref target="acp"/> and <xref target="I-D.ietf-anima-autonomic-control-plane"/>.</t>
+			<t>This ASA includes the ACP function in an autonomic network. In particular it acts to discover other potential ACP nodes, and to support the establishment and teardown of ACP channels. This ASA must be installed on all nodes. For details see <xref target="acp"/> and <xref target="I-D.ietf-anima-autonomic-control-plane"/>.</t>
 		</section>
 		<!-- acp -->
+		
 		<section anchor="intent-asa" title="The Information Distribution ASA (*)">
 			<t>This ASA is currently out of scope in ANIMA, and provided here only as background information.</t>
 			<t>This ASA includes the information distribution function in an autonomic network. In particular it acts to announce the availability of Intent and other information to all other autonomic nodes. This ASA does not need to be installed on all nodes, but only on nodes that implement the information distribution function. For details see <xref target="info-distri"/>.</t>
@@ -724,6 +764,17 @@ If security properties are managed autonomically, a misbehaving device could att
 			<?rfc include="reference.I-D.liu-anima-grasp-distribution.xml"?>
 			<?rfc include="reference.I-D.ietf-anima-prefix-management.xml"?>
 			<?rfc include="reference.I-D.strassner-anima-control-loops.xml"?>
+      <reference anchor="IDevID"
+                 target="http://standards.ieee.org/findstds/standard/802.1AR-2009.html">
+        <front>
+          <title>IEEE 802.1AR Secure Device Identifier</title>
+
+          <author surname="IEEE Standard"></author>
+
+          <date month="December" year="2009" />
+        </front>
+      </reference>
+
 		</references>
 	</back>
 </rfc>
