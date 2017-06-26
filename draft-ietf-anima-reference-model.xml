@@ -10,7 +10,7 @@
 <!-- Change to "yes" if someone has disclosed IPR for the draft -->
 <?rfc compact="yes"?>
 
-<rfc ipr="trust200902" docName="draft-ietf-anima-reference-model-03" category="info">
+<rfc ipr="trust200902" docName="draft-ietf-anima-reference-model-04" category="info">
 	<front>
 		<title abbrev="AN Reference Model">A Reference Model for Autonomic Networking</title>
 
@@ -125,7 +125,7 @@
 		      </address>
    		</author>
 			
-		<date day="13" month="March" year="2017"/>
+		<date day="26" month="June" year="2017"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -346,7 +346,7 @@
 	<section anchor="negotiation" title="Signaling Between Autonomic Nodes">
 			<t>Autonomic nodes must communicate with each other, for example to negotiate and/or synchronize technical objectives (i.e., network parameters) of any kind and complexity. This requires some form of signaling between autonomic nodes. Autonomic nodes implementing a specific use case might choose their own signaling protocol, as long as it fits the overall security model. However, in the general case, any pair of autonomic nodes might need to communicate, so there needs to be a generic protocol for this. A prerequisite for this is that autonomic nodes can discover each other without any preconfiguration, as mentioned above. To be generic, discovery and signaling must be able to handle any sort of technical objective, including ones that require complex data structures. The document "A Generic Autonomic Signaling Protocol (GRASP)" <xref target="I-D.ietf-anima-grasp"/> describes more detailed requirements for discovery, negotiation and synchronization in an autonomic network. It also defines a protocol, GRASP, for this purpose, including an integrated but optional discovery protocol.</t>
 			<t>GRASP is normally expected to run inside the Autonomic Control Plane (ACP; see <xref target="acp"/>) and to depend on the ACP for security.
-			It is also capable of using TLS security in the absence of an ACP, and it may run insecurely for a short time during bootstrapping.</t>
+			It <!-- is also capable of using TLS security in the absence of an ACP, and it -->may run insecurely for a short time during bootstrapping.</t>
 			<t>An autonomic node will normally run a single instance of GRASP, used by multiple ASAs. However, scenarios where multiple instances of GRASP
 			run in a single node, perhaps with different security properties, are not excluded. </t>
 	</section>
@@ -549,7 +549,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 
 	<section anchor="intent" title="Intent (*)">
 	<!-- In an ideal autonomic domain, only one intent provided by human administrators is necessary to operate such domain <xref target="RFC7576"/>-->
-		<t>Intent is not covered by the ANIMA charter as of March 2017. This section is for informational purposes only.</t>
+		<t>Intent is not covered by the ANIMA charter at the time of this writing. This section is for informational purposes only.</t>
 		<t>This section gives an overview of Intent, and how it is managed. Intent and Policy-Based Network Management (PBNM) is already described inside the IETF (e.g., PCIM and SUPA) and in other SDOs (e.g., DMTF and TMF ZOOM). </t>
 		<t>Intent can be described as an abstract, declarative, high-level policy used to operate an autonomic domain, such as an enterprise network <xref target="RFC7575"/>. Intent should be limited to high level guidance only, thus it does not directly define a policy for every network element separately. It is expected Intent definitions from autonomic function(s) and even from traditional network management elements. </t> 
 	<!-- Such rules, which are more suitable to individual entities, can be defined using different syntax and semantics. --> 	
@@ -563,7 +563,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 	<section anchor="reporting" title="Aggregated Reporting (*)">
 	<!-- <t>An autonomic network offers through the autonomic control plane the possibility to aggregate information inside the network, before sending it to the admin of the network. While this can be seen or implemented as a specific form of negotiation, the use case is different and therefore mentioned here explicitly. </t>  -->
 	<!-- The information gathering and the reporting delivery should be done through the autonomic control plane.-->
-		<t>As of March 2017, aggregated reporting is not in the ANIMA charter. This section is provided for information only.</t>
+		<t>At the time of this writing, aggregated reporting is not in the ANIMA charter. This section is provided for information only.</t>
 		<t>Autonomic Network should minimize the need for human intervention. In terms of how the network should behave, this is done through an autonomic Intent provided by the human administrator. In an analogous manner, the reports which describe the operational status of the network should aggregate the information produced in different network elements in order to present the effectiveness of autonomic Intent enforcement. Therefore, reporting in an autonomic network should happen on a network-wide basis <xref target="RFC7575"/>. </t>
 	<!--These events can be produced considering traditional network management protocols, such as SNMP and syslog. -->
 		<t>Several events can occur in an autonomic network in the same way they can happen in a traditional network. However, when reporting to a human administrator, such events should be aggregated to avoid advertisement about individual managed elements. In this context, algorithms may be used to determine what should be reported (e.g., filtering) and in which way and how different events are related to each other. Besides that, an event in an individual element can be compensated by changes in other elements to maintain a network-wide level which is described in the autonomic Intent. </t>
