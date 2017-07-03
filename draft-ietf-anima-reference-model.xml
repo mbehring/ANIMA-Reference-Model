@@ -125,7 +125,7 @@
 		      </address>
    		</author>
 			
-		<date day="26" month="June" year="2017"/>
+		<date day="3" month="July" year="2017"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -140,7 +140,7 @@
 	<t>The document "Autonomic Networking - Definitions and Design Goals" <xref target="RFC7575"/> explains the fundamental concepts behind Autonomic Networking, and defines the relevant terms in this space, as well as a high level reference model. <xref target="RFC7576"/> provides a gap analysis between traditional and autonomic approaches. </t>
 <t>This document defines this reference model with more detail, to allow for functional and protocol specifications to be developed in an architecturally consistent, non-overlapping manner. While the document is written as generally as possible, the initial solutions are limited to the chartered scope of the WG.</t>
 	<t>As discussed in <xref target="RFC7575"/>, the goal of this work is not to focus exclusively on fully autonomic nodes or networks. In reality, most networks will run with some autonomic functions, while the rest of the network is traditionally managed. This reference model allows for this hybrid approach. </t>
-	<t>This is a living document and will evolve with the technical solutions developed in the ANIMA WG. Sections marked with (*) do not represent current charter items. While this document must give a long term architectural view, not all functions will be standardized at the same time. </t> 
+	<t>This document describes phase 1 of an Autonomic Networking solution, and covers primarily the WG items of the ANIMA WG as of July 2017. Sections marked with (*) do not represent chartered items at this time. New WG items will require an update to this document, or potentially a new document. </t> 
 </section>
 <!-- intro -->
 
@@ -232,7 +232,7 @@
 	<list style="symbols">
 		<t>Link local discovery: This interaction happens in the data plane, using IPv6 link local addressing only, because this addressing type is itself autonomic. This way the nodes learns about all autonomic nodes around itself. This is described in <xref target="I-D.ietf-anima-grasp"/>.</t>
 		<t>Vendor re-direct: A new device may receive information on where its home network is through a vendor based MASA re-direct; this is typically a routable address. See <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. </t>
-		<t>Non-autonomic input: A node may be configured manually with an autonomic peer; it could learn about autonomic nodes through DHCP options, DNS, and other non-autonomic mechanisms. Generally such non-autonomic mechansims require some administrator intervention. The key purpose is to by-pass a non-autonomic device or network. As this pertains to new devices, it is covered in Section 5.3 of <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>.</t>
+		<t>Non-autonomic input: A node may be configured manually with an autonomic peer; it could learn about autonomic nodes through DHCP options, DNS, and other non-autonomic mechanisms. Generally such non-autonomic mechansims require some administrator intervention. The key purpose is to by-pass a non-autonomic device or network. As this pertains to new devices, it is covered in Appendix A and B of <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>.</t>
 	</list></t>
 				
 	<t>The adjacency table is defining the behaviour of an autonomic node: 
@@ -339,7 +339,7 @@
 
 			<t>Thus the discovery mechanism could either be fully integrated with autonomic signaling (next section) or could use an independent discovery mechanism such as DNS Service Discovery or Service Location Protocol. This choice could be made independently for each Autonomic Service Agent, although the infrastructure might require some minimal lowest common denominator (e.g., for discovering the security bootstrap mechanism, or the source of information distribution, <xref target="info-distri"/>).</t>
 			
-			<t>The currently proposed protocol for node discovery is GRASP, described in <xref target="I-D.ietf-anima-grasp"/>.</t>
+			<t>Phase 1 of Autonomic Networking uses GRASP for discovery, described in <xref target="I-D.ietf-anima-grasp"/>.</t>
 	</section>
 	<!-- discovery -->
 
@@ -364,7 +364,7 @@
 	<!-- acp -->
 
 	<section anchor="info-distri" title="Information Distribution (*)">
-		<t>Certain forms of information, such as Intent, must be distributed across an autonomic domain. The distribution of information is also a function of the Autonomic Control Plane. One form of such information is Intent. Intent is the policy language of an Autonomic Network; see <xref target="intent"/> for general information on Intent. It is a high level policy, and should change only infrequently (order of days). Therefore, information such as Intent should be simply flooded to all nodes in an autonomic domain, and there is currently no perceived need to have more targeted distribution methods. Intent is also expected to be monolithic, and flooded as a whole. One possible method for distributing Intent, as well as other forms of data, is discussed in <xref target="I-D.liu-anima-grasp-distribution"/>. Intent and information distribution are currently out of scope for ANIMA. </t>
+		<t>Certain forms of information, such as Intent, must be distributed across an autonomic domain. The distribution of information is also a function of the Autonomic Control Plane. One form of such information is Intent. Intent is the policy language of an Autonomic Network; see <xref target="intent"/> for general information on Intent. It is a high level policy, and should change only infrequently (order of days). Therefore, information such as Intent should be simply flooded to all nodes in an autonomic domain, and there is currently no perceived need to have more targeted distribution methods. Intent is also expected to be monolithic, and flooded as a whole. One possible method for distributing Intent, as well as other forms of data, is discussed in <xref target="I-D.liu-anima-grasp-distribution"/>. Intent and information distribution are not part of phase 1 of ANIMA. </t>
 	</section>
 	<!-- info-distri -->
 
@@ -394,7 +394,7 @@
 
 	<section anchor="sub-domains" title="Sub-Domains (*)">
 		<t>By default, sub-domains are treated as different domains. This implies no trust between a domain and its sub-domains, and no trust between sub-domains of the same domain. Specifically, no ACP is built, and Intent is valid only for the domain it is defined for explicitly. </t>
-		<t>In the future, alternative trust models can be defined, for example to allow full or limited trust between domain and sub-domain.</t>
+		<t>In phase 2 of ANIMA, alternative trust models should be defined, for example to allow full or limited trust between domain and sub-domain.</t>
 	</section>
 	<!-- sub-domains -->
 		
@@ -552,7 +552,6 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 		<t>Intent is not covered by the ANIMA charter at the time of this writing. This section is for informational purposes only.</t>
 		<t>This section gives an overview of Intent, and how it is managed. Intent and Policy-Based Network Management (PBNM) is already described inside the IETF (e.g., PCIM and SUPA) and in other SDOs (e.g., DMTF and TMF ZOOM). </t>
 		<t>Intent can be described as an abstract, declarative, high-level policy used to operate an autonomic domain, such as an enterprise network <xref target="RFC7575"/>. Intent should be limited to high level guidance only, thus it does not directly define a policy for every network element separately. It is expected Intent definitions from autonomic function(s) and even from traditional network management elements. </t> 
-	<!-- Such rules, which are more suitable to individual entities, can be defined using different syntax and semantics. --> 	
 		<t>Intent can be refined to lower level policies using different approaches. This is expected in order to adapt the Intent to the capabilities of managed devices. Intent may contain role or function information, which can be translated to specific nodes <xref target="RFC7575"/>. One of the possible refinements of the Intent is using Event-Condition-Action (ECA) rules.</t>
 		<t>Different parameters may be configured for Intent. These parameters are usually provided by the human operator. Some of these parameters can influence the behavior of specific autonomic functions as well as the way the Intent is used to manage the autonomic domain. </t>
 		<t>Intent is discussed in more detail in <xref target="I-D.du-anima-an-intent"/>. Intent as well as other types of information are distributed via GRASP, see <xref target="I-D.liu-anima-grasp-distribution"/>.</t>
@@ -721,17 +720,21 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 
 		<section anchor="security" title="Security Considerations">
 
-		<section title="Threat Analysis">
+		<section title="Consequences of a Distributed System">
 
-<t>This is a preliminary outline of a threat analysis, to be expanded and made more specific as the various Autonomic Networking specifications evolve.</t>
+<t>An autonomic network consists of autonomic devices that form a distributed self-managing system. Devices within a domain share a common trust anchor and thus implicitly trust each other. This means that any device inside a trust domain can by default use all distributed functions in the entire autonomic domain in a malicious way.</t>
 
-<t>Since AN will hand over responsibility for network configuration from humans or centrally established management systems to fully distributed devices, the threat environment is also fully distributed. On the one hand, that means there is no single point of failure to act as an attractive target for bad actors. On the other hand, it means that potentially a single misbehaving autonomic device could launch a widespread attack, by misusing the distributed AN mechanisms. For example, a resource exhaustion attack could be launched by a single device requesting large amounts of that resource from all its peers, on behalf of a non-existent traffic load.
-Alternatively it could simply send false information to its peers, for example by announcing resource exhaustion when this was not the case.
-If security properties are managed autonomically, a misbehaving device could attempt a distributed attack by requesting all its peers to reduce security protections in some way. In general, since autonomic devices run without supervision, almost any kind of undesirable management action could in theory be attempted by a misbehaving device. </t>
+<t>An outside attacker has the following generic ways to take control of an autonomic network: <list style='symbols'>
+  <t>Introducing a fake device into the trust domain, by subverting the authentication methods. This is covered in detail in <xref target='I-D.ietf-anima-bootstrapping-keyinfra'/>.</t>
+  <t>Subverting a device which is already part of a trust domain, and modifying its behavior. This threat is not specific to the solution discussed in this document, and applies to all network solutions.  </t>
+  <t>Exploiting potentially yet unknown protocol vulnerabilities in the AN or other protocols. Also this is a generic threat that applies to all network solutions.</t>
+</list></t>
 
-<t>If it is possible for an unauthorised device to act as an autonomic device, or for a malicious third party to inject messages appearing to come from an autonomic device, all these same risks would apply. </t>
+<t>The above threats are in principle comparable to other solutions. However, the distributed nature of AN, specifically the Autonomic Control Plane, increases the threat surface. For example, a compromised device may have full IP reachability to all other devices inside the ACP, and can use all AN methods and protocols. </t>
 
-<t>If AN messages can be observed by a third party, they might reveal valuable information about network configuration, security precautions in use, individual users, and their traffic patterns. If encrypted, AN messages might still reveal some information via traffic analysis, but this would be quite limited (for example, this would be highly unlikely to reveal any specific information about user traffic). AN messages are liable to be exposed to third parties on any unprotected Layer 2 link, and to insider attacks even on protected Layer 2 links. </t>
+<t>For the next phase of the ANIMA work it is therefore recommended to introduce a sub-domain security model, to reduce the attack surface and not expose a full domain to a potential intruder. Furthermore, additional security mechanisms on the ASA level should be considered for high-risk autonomic functions. </t>
+
+<t>Most AN messages run inside the encrypted ACP. The not protected AN messages outside the ACP are limited to simple discovery methods. See Section 2.5.2 of <xref target='I-D.ietf-anima-grasp'/> for a list of such messages. If AN messages can be observed by a third party, they might reveal valuable information about network configuration, security precautions in use, individual users, and their traffic patterns. If encrypted, AN messages might still reveal some information via traffic analysis, but this would be quite limited (for example, this would be highly unlikely to reveal any specific information about user traffic).  </t>
 
 </section>
 
@@ -747,7 +750,7 @@ If security properties are managed autonomically, a misbehaving device could att
 		<!-- iana -->
 		
 		<section anchor="ack" title="Acknowledgements">
-			<t>Many people have provided feedback and input to this document: Sheng Jiang, Roberta Maglione, Jonathan Hansford.</t>
+			<t>Many people have provided feedback and input to this document: Sheng Jiang, Roberta Maglione, Jonathan Hansford, Jason Coleman.</t>
 		</section>
 		<!-- ack -->
 				
