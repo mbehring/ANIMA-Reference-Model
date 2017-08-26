@@ -10,7 +10,7 @@
 <!-- Change to "yes" if someone has disclosed IPR for the draft -->
 <?rfc compact="yes"?>
 
-<rfc ipr="trust200902" docName="draft-ietf-anima-reference-model-04" category="info">
+<rfc ipr="trust200902" docName="draft-ietf-anima-reference-model-05" category="info">
 	<front>
 		<title abbrev="AN Reference Model">A Reference Model for Autonomic Networking</title>
 
@@ -125,7 +125,7 @@
 		      </address>
    		</author>
 			
-		<date day="3" month="July" year="2017"/>
+		<date day="27" month="August" year="2017"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -595,7 +595,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
    runtime.</t>
 
    <t>Most autonomic systems use a closed control loop with feedback.
-   Such control loops SHOULD be able to be dynamically changed at
+   Such control loops should be able to be dynamically changed at
    runtime to adapt to changing user needs, business goals, and
    changes in the ANI.</t>
 
@@ -611,7 +611,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 	
    <t>Most APIs are static, meaning that they are pre-defined and
    represent an invariant mechanism for operating with data. An
-   Autonomic Network SHOULD be able to use dynamic APIs in addition
+   Autonomic Network should be able to use dynamic APIs in addition
    to static APIs.  </t>
    
    <t>A dynamic API is one that retrieves data using a generic
@@ -622,8 +622,8 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
    enables a program to manipulate the attributes, methods, and/or
    metadata of an object.</t>
 
-   <t>APIs MUST be able to express and preserve semantics across
-   different domains. For example, software contracts [Meyer97] are
+   <t>APIs must be able to express and preserve semantics across
+   different domains. For example, software contracts <!--[Meyer97]--> are
    based on the principle that a software-intensive system, such as
    an Autonomic Network, is a set of communicating components whose
    interaction is based on precisely-defined specifications of the
@@ -631,13 +631,13 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
    This typically includes specifying:
 
    <list style="symbols">
-	 <t>pre-conditions that MUST be satisfied before the method can
+	 <t>pre-conditions that must be satisfied before the method can
         start execution</t>
 
-	 <t>post-conditions that MUST be satisfied when the method has
+	 <t>post-conditions that must be satisfied when the method has
         finished execution</t>
 
-     <t>invariant attributes that MUST NOT change during the execution
+     <t>invariant attributes that must not change during the execution
         of the method</t>
    </list>
    </t>
@@ -667,7 +667,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
    for example, typically have multiple types of repositories, such as
    SQL and NoSQL, to take advantage of the different properties of
    each. If multiple data models are required by an Autonomic System,
-   then an information model SHOULD be used to ensure that the
+   then an information model should be used to ensure that the
    concepts of each data model can be related to each other without
    technological bias.</t>
 
@@ -756,12 +756,15 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 				
 	</middle>
 	<back>
-		<references title="References">
-			<?rfc include='reference.RFC.7575'?>
-			<?rfc include='reference.RFC.7576'?>
+		<references title="Normative References">
 			<?rfc include="reference.I-D.ietf-anima-bootstrapping-keyinfra.xml"?>
 			<?rfc include="reference.I-D.ietf-anima-autonomic-control-plane.xml"?>
 			<?rfc include="reference.I-D.ietf-anima-grasp.xml"?>
+		</references>
+		
+		<references title="Informative References">
+			<?rfc include='reference.RFC.7575'?>
+			<?rfc include='reference.RFC.7576'?>
 			<?rfc include="reference.I-D.liu-anima-grasp-api.xml"?>
 			<?rfc include="reference.I-D.du-anima-an-intent.xml"?>
 			<?rfc include="reference.I-D.liu-anima-grasp-distribution.xml"?>
