@@ -125,7 +125,7 @@
 		      </address>
    		</author>
 			
-		<date day="27" month="August" year="2017"/>
+		<date day="29" month="August" year="2017"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -599,10 +599,10 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
    runtime to adapt to changing user needs, business goals, and
    changes in the ANI.</t>
 
-   <t>The document <xref target="I-D.strassner-anima-control-loops"/> defines the
+   <!-- <t>The document <xref target="I-D.strassner-anima-control-loops"/> defines the
    requirements for an autonomic control loop, describes different
    types of control loops, and explains how control loops are used
-   in an autonomic system.</t>
+   in an autonomic system.</t> -->
    
 	</section>
 	<!-- control-loops -->
@@ -623,7 +623,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
    metadata of an object.</t>
 
    <t>APIs must be able to express and preserve semantics across
-   different domains. For example, software contracts <!--[Meyer97]--> are
+   different domains. For example, software contracts <xref target="Meyer97"/> are
    based on the principle that a software-intensive system, such as
    an Autonomic Network, is a set of communicating components whose
    interaction is based on precisely-defined specifications of the
@@ -646,7 +646,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
    
 	<section anchor="data-model" title="Data Model (*)">
 
-   <t>The following definitions are taken from [supa-model]:</t>
+   <t>The following definitions are adapted from <xref target="I-D.ietf-supa-generic-policy-data-model"/>:</t>
 
    <t>An information model is a representation of concepts of interest 
    to an environment in a form that is independent of data repository, 
@@ -769,7 +769,19 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 			<?rfc include="reference.I-D.du-anima-an-intent.xml"?>
 			<?rfc include="reference.I-D.liu-anima-grasp-distribution.xml"?>
 			<?rfc include="reference.I-D.ietf-anima-prefix-management.xml"?>
-			<?rfc include="reference.I-D.strassner-anima-control-loops.xml"?>
+			<?rfc include="reference.I-D.ietf-supa-generic-policy-data-model"?>
+			<!-- <?rfc include="reference.I-D.strassner-anima-control-loops.xml"?> -->
+      <reference anchor="Meyer97">
+        <front>
+          <title>Object-Oriented Software Construction (2nd edition)</title>
+
+          <author initials="B." surname="Meyer"></author>
+
+          <date year="1997" />
+        </front>
+        <seriesInfo name="Prentice-Hall," value='ISBN 978-0136291558' />
+      </reference>
+      
       <reference anchor="IDevID"
                  target="http://standards.ieee.org/findstds/standard/802.1AR-2009.html">
         <front>
