@@ -125,7 +125,7 @@
 		      </address>
    		</author>
 			
-		<date day="29" month="August" year="2017"/>
+		<date day="11" month="October" year="2017"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -151,8 +151,8 @@
 	
 	<t>Autonomic functions typically span several, possibly all nodes in the network. The atomic entities of an autonomic function are called the "Autonomic Service Agents" (ASA), which are instantiated on nodes. </t>
 
-   <figure anchor='network-view' title="High level view of an Autonomic Network">
-   	<artwork>
+<figure anchor='network-view' title="High level view of an Autonomic Network">
+   <artwork>
 +- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
 :            :       Autonomic Function 1        :                 :
 : ASA 1      :      ASA 1      :      ASA 1      :          ASA 1  :
@@ -169,8 +169,8 @@
 +--------+   :    +--------+   :    +--------+   :        +--------+
 | Node 1 |--------| Node 2 |--------| Node 3 |----...-----| Node n | 
 +--------+   :    +--------+   :    +--------+   :        +--------+
-	</artwork>
-   </figure>
+   </artwork>
+</figure>
 	<t>In a horizontal view, autonomic functions span across the network, as well as the Autonomic Networking Infrastructure. In a vertical view, a node always implements the ANI, plus it may have one or several Autonomic Service Agents. </t>
 	<t>The Autonomic Networking Infrastructure (ANI) therefore is the foundation for autonomic functions. The current charter of the ANIMA WG is to specify the ANI, using a few autonomic functions as use cases. </t>
 	
@@ -184,7 +184,7 @@
 			</t>
 			  <t>
    <figure anchor='ref_model' title="Model of an autonomic node">
-   	<artwork>
+     <artwork>
 +------------------------------------------------------------+
 |                                                            |
 | +-----------+        +------------+        +------------+  |
@@ -207,7 +207,7 @@
 |------------------------------------------------------------|
 |             Basic Operating System Functions               |
 +------------------------------------------------------------+
-	</artwork>
+     </artwork>
    </figure>
   </t>
 
@@ -239,7 +239,7 @@
 	<list style="symbols">
 		<t>If the node has not bootstrapped into a domain (i.e., doesn't have a domain certificate), it rotates through all nodes in the adjacency table that claim to have a domain, and will attempt bootstrapping through them, one by one. One possible response is a vendor MASA re-direct, which will be entered into the adjacency table (see second bullet above). See <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. </t>
 		<t>If the adjacent node has the same domain, it will authenticate that adjacent node and, if successful, establish the Autonomic Control Plane (ACP). See <xref target="I-D.ietf-anima-autonomic-control-plane"/>.</t>
-		<t>Once the node is part of the ACP of a domain, it will use GRASP discovery <xref target="I-D.ietf-anima-grasp"/> to find Registrar(s) of its domain and potentiall other services.</t>
+		<t>Once the node is part of the ACP of a domain, it will use GRASP discovery <xref target="I-D.ietf-anima-grasp"/> to find Registrar(s) of its domain and potentially other services.</t>
 		<t>If the node is part of an ACP and has discovered via GRASP at least one Registrar in its domain, it will start the "join assistant" ASA, and act as a join assistant for neighboring nodes that need to be bootstrapped. See <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. </t>		
 		<t>Other behaviours are possible, for example establishing the ACP also with devices of a sub-domain, to other domains, etc. Those will likely be controlled by Intent. They are outside scope for the moment. Note that Intent is distributed through the ACP; therefore, a node can only adapt Intent driven behaviour once it has joined the ACP. At the moment, ANIMA does not consider providing Intent outside the ACP; this can be considered later. </t> 
 	</list></t>
@@ -296,8 +296,7 @@
 
 <section anchor="ani" title="The Autonomic Networking Infrastructure">		
 
-	<t>The Autonomic Networking Infrastructure provides a layer of common functionality across an Autonomic Network. It comprises "must implement" functions and services, as well as extensions. </t>
-	<t>An Autonomic Function, comprising of Autonomic Service Agents on nodes, can rely on the fact that all nodes in the network implement at least the "must implement" functions. </t> 
+	<t>The Autonomic Networking Infrastructure provides a layer of common functionality across an Autonomic Network. It provides the elementary functions and services, as well as extensions. An Autonomic Function, comprising of Autonomic Service Agents on nodes, uses the functions described in this section. </t> 
 
     <section anchor="naming" title="Naming">
 	    <t>Inside a domain, each autonomic device should be assigned a unique name. The naming scheme should be consistent within a domain. Names are typically assigned by a Registrar at bootstrap time and persistent over the lifetime of the device. All Registrars in a domain must follow the same naming scheme.</t>
@@ -364,7 +363,8 @@
 	<!-- acp -->
 
 	<section anchor="info-distri" title="Information Distribution (*)">
-		<t>Certain forms of information, such as Intent, must be distributed across an autonomic domain. The distribution of information is also a function of the Autonomic Control Plane. One form of such information is Intent. Intent is the policy language of an Autonomic Network; see <xref target="intent"/> for general information on Intent. It is a high level policy, and should change only infrequently (order of days). Therefore, information such as Intent should be simply flooded to all nodes in an autonomic domain, and there is currently no perceived need to have more targeted distribution methods. Intent is also expected to be monolithic, and flooded as a whole. One possible method for distributing Intent, as well as other forms of data, is discussed in <xref target="I-D.liu-anima-grasp-distribution"/>. Intent and information distribution are not part of phase 1 of ANIMA. </t>
+		<t>Certain forms of information require distribution across an autonomic domain. The distribution of information runs inside the Autonomic Control Plane. For example, Intent is distributed across an autonomic domain, as explained in <xref target="RFC7575"/>.</t>
+		<t>Intent is the policy language of an Autonomic Network, see also <xref target="intent"/>. It is a high level policy, and should change only infrequently (order of days). Therefore, information such as Intent should be simply flooded to all nodes in an autonomic domain, and there is currently no perceived need to have more targeted distribution methods. Intent is also expected to be monolithic, and flooded as a whole. One possible method for distributing Intent, as well as other forms of data, is discussed in <xref target="I-D.liu-anima-grasp-distribution"/>. Intent and information distribution are not part of phase 1 of ANIMA. </t>
 	</section>
 	<!-- info-distri -->
 
@@ -528,6 +528,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 		<section anchor="intent-asa" title="The Information Distribution ASA (*)">
 			<t>This ASA is currently out of scope in ANIMA, and provided here only as background information.</t>
 			<t>This ASA includes the information distribution function in an autonomic network. In particular it acts to announce the availability of Intent and other information to all other autonomic nodes. This ASA does not need to be installed on all nodes, but only on nodes that implement the information distribution function. For details see <xref target="info-distri"/>.</t>
+			<t>See <xref target="I-D.liu-anima-grasp-distribution"/> for more details on how information is suggested to be distributed.</t>
 		</section>
 		<!-- registrar -->
 
@@ -540,8 +541,13 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 <section anchor="management" title="Management and Programmability">
 	<t>This section describes how an Autonomic Network is managed, and programmed.</t>
 		
-	<section anchor="management-general" title="How an AN Network Is Managed">
-		<t>Autonomic management usually co-exists with traditional management methods in most networks. Thus, autonomic behavior will be defined for individual functions in most environments. In fact, the co-existence is twofold: autonomic functions can use traditional methods and protocols (e.g., SNMP and NETCONF) to perform management tasks; and autonomic functions can conflict with behavior enforced by the same traditional methods and protocols. </t>
+	<section anchor="management-general" title="Managing a (Partially) Autonomic Network">
+		<t>Autonomic management usually co-exists with traditional management methods in most networks. Thus, autonomic behavior will be defined for individual functions in most environments. Examples for overlap are:
+<list style="symbols">
+<t>Autonomic functions can use traditional methods and protocols (e.g., SNMP and NETCONF) to perform management tasks, inside and outside the ACP;</t>
+<t>Autonomic functions can conflict with behavior enforced by the same traditional methods and protocols;</t>
+<t>Traditional functions can use the ACP, for example if reachability on the data plane is not (yet) established. </t>
+</list></t>
 		<t>The autonomic Intent is defined at a high level of abstraction. However, since it is necessary to address individual managed elements, autonomic management needs to communicate in lower-level interactions (e.g., commands and requests). For example, it is expected that the configuration of such elements be performed using NETCONF and YANG modules as well as the monitoring be executed through SNMP and MIBs.</t>
 		<t>Conflict can occur between autonomic default behavior, autonomic Intent, traditional management methods. Conflict resolution is achieved in autonomic management through prioritization <xref target="RFC7575"/>. The rationale is that manual and node-based management have a higher priority over autonomic management. Thus, the autonomic default behavior has the lowest priority, then comes the autonomic Intent (medium priority), and, finally, the highest priority is taken by  node-specific network management methods, such as the use of command line interfaces. </t>
 	</section>
@@ -551,7 +557,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 	<!-- In an ideal autonomic domain, only one intent provided by human administrators is necessary to operate such domain <xref target="RFC7576"/>-->
 		<t>Intent is not covered by the ANIMA charter at the time of this writing. This section is for informational purposes only.</t>
 		<t>This section gives an overview of Intent, and how it is managed. Intent and Policy-Based Network Management (PBNM) is already described inside the IETF (e.g., PCIM and SUPA) and in other SDOs (e.g., DMTF and TMF ZOOM). </t>
-		<t>Intent can be described as an abstract, declarative, high-level policy used to operate an autonomic domain, such as an enterprise network <xref target="RFC7575"/>. Intent should be limited to high level guidance only, thus it does not directly define a policy for every network element separately. It is expected Intent definitions from autonomic function(s) and even from traditional network management elements. </t> 
+		<t>Intent can be described as an abstract, declarative, high-level policy used to operate an autonomic domain, such as an enterprise network <xref target="RFC7575"/>. Intent should be limited to high level guidance only, thus it does not directly define a policy for every network element separately. </t> 
 		<t>Intent can be refined to lower level policies using different approaches. This is expected in order to adapt the Intent to the capabilities of managed devices. Intent may contain role or function information, which can be translated to specific nodes <xref target="RFC7575"/>. One of the possible refinements of the Intent is using Event-Condition-Action (ECA) rules.</t>
 		<t>Different parameters may be configured for Intent. These parameters are usually provided by the human operator. Some of these parameters can influence the behavior of specific autonomic functions as well as the way the Intent is used to manage the autonomic domain. </t>
 		<t>Intent is discussed in more detail in <xref target="I-D.du-anima-an-intent"/>. Intent as well as other types of information are distributed via GRASP, see <xref target="I-D.liu-anima-grasp-distribution"/>.</t>
@@ -580,7 +586,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 	
     <t>   Control loops are used in autonomic networking to provide a generic
    mechanism to enable the Autonomic System to adapt (on its own) to
-   various factors that can change the goals that the Autonomic System
+   various factors that can change the goals that the autonomic network
    is trying to achieve, or how those goals are achieved. For example,
    as user needs, business goals, and the ANI itself changes, self-
    adaptation enables the ANI to change the services and resources it
@@ -622,8 +628,8 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
    enables a program to manipulate the attributes, methods, and/or
    metadata of an object.</t>
 
-   <t>APIs must be able to express and preserve semantics across
-   different domains. For example, software contracts <xref target="Meyer97"/> are
+   <t>APIs must be able to express and preserve the semantics of 
+   data models. For example, software contracts <xref target="Meyer97"/> are
    based on the principle that a software-intensive system, such as
    an Autonomic Network, is a set of communicating components whose
    interaction is based on precisely-defined specifications of the
@@ -702,7 +708,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 			<t>At run-time, when conflicts happen, arbitration is driven by the coordination strategies. Also new dependencies can be observed and inferred, resulting in an update of the dynamic interaction map and adaptation of the coordination strategies and mechanisms.</t>
 			</list></t>
 
-			<t>Multiple coordination strategies and mechanisms exists and can be devised. The set ranges from basic approaches such as random process or token-based process, to approaches based on time separation and hierarchical optimization, to more complex approaches such as multi-objective optimization, and other control theory approaches and algorithms family.</t>
+			<t>Multiple coordination strategies and mechanisms exist and can be devised. The set ranges from basic approaches such as random process or token-based process, to approaches based on time separation and hierarchical optimization, to more complex approaches such as multi-objective optimization, and other control theory approaches and algorithms family.</t>
 		  </section>
 		  
 		  <section title="A Coordination Functional Block (*)">
@@ -750,7 +756,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 		<!-- iana -->
 		
 		<section anchor="ack" title="Acknowledgements">
-			<t>Many people have provided feedback and input to this document: Sheng Jiang, Roberta Maglione, Jonathan Hansford, Jason Coleman.</t>
+			<t>Many people have provided feedback and input to this document: Sheng Jiang, Roberta Maglione, Jonathan Hansford, Jason Coleman, Artur Hecker.</t>
 		</section>
 		<!-- ack -->
 				
