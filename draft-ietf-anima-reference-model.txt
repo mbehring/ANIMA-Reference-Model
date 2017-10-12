@@ -5,7 +5,7 @@
 ANIMA                                                  M. Behringer, Ed.
 Internet-Draft
 Intended status: Informational                              B. Carpenter
-Expires: April 14, 2018                                Univ. of Auckland
+Expires: April 15, 2018                                Univ. of Auckland
                                                                T. Eckert
                                              Futurewei Technologies Inc.
                                                             L. Ciavaglia
@@ -17,7 +17,7 @@ Expires: April 14, 2018                                Univ. of Auckland
                                  Federal University of Rio Grande do Sul
                                                             J. Strassner
                                                      Huawei Technologies
-                                                        October 11, 2017
+                                                        October 12, 2017
 
 
                A Reference Model for Autonomic Networking
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 14, 2018.
+   This Internet-Draft will expire on April 15, 2018.
 
 
 
 
 
 
-Behringer, et al.        Expires April 14, 2018                 [Page 1]
+Behringer, et al.        Expires April 15, 2018                 [Page 1]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Behringer, et al.        Expires April 14, 2018                 [Page 2]
+Behringer, et al.        Expires April 15, 2018                 [Page 2]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -125,12 +125,12 @@ Internet-Draft             AN Reference Model               October 2017
      8.1.  The Coordination Problem (*)  . . . . . . . . . . . . . .  22
      8.2.  A Coordination Functional Block (*) . . . . . . . . . . .  23
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .  24
-     9.1.  Consequences of a Distributed System  . . . . . . . . . .  24
-     9.2.  Security Mechanisms . . . . . . . . . . . . . . . . . . .  25
-   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  25
-   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  25
-   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  25
-     12.1.  Normative References . . . . . . . . . . . . . . . . . .  25
+     9.1.  Protection Against Outsider Attacks . . . . . . . . . . .  24
+     9.2.  Risk of Insider Attacks . . . . . . . . . . . . . . . . .  25
+   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  26
+   11. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  26
+   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  26
+     12.1.  Normative References . . . . . . . . . . . . . . . . . .  26
      12.2.  Informative References . . . . . . . . . . . . . . . . .  26
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  27
 
@@ -165,7 +165,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                 [Page 3]
+Behringer, et al.        Expires April 15, 2018                 [Page 3]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -221,7 +221,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                 [Page 4]
+Behringer, et al.        Expires April 15, 2018                 [Page 4]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -277,7 +277,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                 [Page 5]
+Behringer, et al.        Expires April 15, 2018                 [Page 5]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -333,7 +333,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                 [Page 6]
+Behringer, et al.        Expires April 15, 2018                 [Page 6]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -389,7 +389,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                 [Page 7]
+Behringer, et al.        Expires April 15, 2018                 [Page 7]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -445,7 +445,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                 [Page 8]
+Behringer, et al.        Expires April 15, 2018                 [Page 8]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -501,7 +501,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                 [Page 9]
+Behringer, et al.        Expires April 15, 2018                 [Page 9]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -557,7 +557,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 10]
+Behringer, et al.        Expires April 15, 2018                [Page 10]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -613,7 +613,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 11]
+Behringer, et al.        Expires April 15, 2018                [Page 11]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -669,7 +669,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 12]
+Behringer, et al.        Expires April 15, 2018                [Page 12]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -725,7 +725,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 13]
+Behringer, et al.        Expires April 15, 2018                [Page 13]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -781,7 +781,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 14]
+Behringer, et al.        Expires April 15, 2018                [Page 14]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -837,7 +837,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 15]
+Behringer, et al.        Expires April 15, 2018                [Page 15]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -893,7 +893,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 16]
+Behringer, et al.        Expires April 15, 2018                [Page 16]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -949,7 +949,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 17]
+Behringer, et al.        Expires April 15, 2018                [Page 17]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -969,8 +969,9 @@ Internet-Draft             AN Reference Model               October 2017
    on nodes that implement the information distribution function.  For
    details see Section 4.7.
 
-   See [I-D.liu-anima-grasp-distribution] for more details on how
-   information is suggested to be distributed.
+   Note that information distribution can be implemented as a function
+   in any ASA.  See [I-D.liu-anima-grasp-distribution] for more details
+   on how information is suggested to be distributed.
 
 7.  Management and Programmability
 
@@ -1004,8 +1005,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-
-Behringer, et al.        Expires April 14, 2018                [Page 18]
+Behringer, et al.        Expires April 15, 2018                [Page 18]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -1061,7 +1061,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 19]
+Behringer, et al.        Expires April 15, 2018                [Page 19]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -1117,7 +1117,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 20]
+Behringer, et al.        Expires April 15, 2018                [Page 20]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -1173,7 +1173,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 21]
+Behringer, et al.        Expires April 15, 2018                [Page 21]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -1229,7 +1229,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 22]
+Behringer, et al.        Expires April 15, 2018                [Page 22]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -1285,7 +1285,7 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 23]
+Behringer, et al.        Expires April 15, 2018                [Page 23]
 
 Internet-Draft             AN Reference Model               October 2017
 
@@ -1301,7 +1301,69 @@ Internet-Draft             AN Reference Model               October 2017
 
 9.  Security Considerations
 
-9.1.  Consequences of a Distributed System
+   In this section we distinguish outsider and insider attacks.  In an
+   outsider attack all network elements and protocols are securely
+   managed and operating, and an outside attacker can sniff packets in
+   transit, inject and replay packets "on the wire".  In an insider
+   attack, the attacker has access to an autonomic node, or can insert
+   packets directly into the ACP.
+
+   If a system has vulnerabilities in the implementation or operation
+   (configuration), an outside attacker can exploit such vulnerabilies
+   to become an insider attacker.
+
+9.1.  Protection Against Outsider Attacks
+
+   Here, we assume that all systems involved in an autonomic network are
+   secured and operated according to best current practices.  These
+   protection methods comprise traditional security implementation and
+   operation methods (such as code security, strong randomization
+   algorithms, strong passwords, etc.) as well as mechanisms specific to
+   an autonomic network (such as a secured MASA server).
+
+   Traditional security methods for both implementation and operation
+   are outside scope for this document.
+
+   AN specific protocols and methods must also follow traditional
+   security methods, in that all packets that can be sniffed or injected
+   by an outside attacker are:
+
+   o  protected against modification.
+
+   o  authenticated.
+
+   o  protected against replay attacks.
+
+   o  encrypted.
+
+   How these requirements are met is covered in the AN standards track
+   documents that define the methods used, specifically
+
+
+
+Behringer, et al.        Expires April 15, 2018                [Page 24]
+
+Internet-Draft             AN Reference Model               October 2017
+
+
+   [I-D.ietf-anima-bootstrapping-keyinfra], [I-D.ietf-anima-grasp], and
+   [I-D.ietf-anima-autonomic-control-plane].
+
+   Most AN messages run inside the cryptographically protected ACP.  The
+   not protected AN messages outside the ACP are limited to a simple
+   discovery method, defined in Section 2.5.2 of [I-D.ietf-anima-grasp]:
+   The "Discovery Unsolicited Link-Local (DULL)" message, with detailed
+   rules on its usage.
+
+   If AN messages can be observed by a third party, they might reveal
+   valuable information about network configuration, security
+   precautions in use, individual users, and their traffic patterns.  If
+   encrypted, AN messages might still reveal some information via
+   traffic analysis, but this would be quite limited (for example, this
+   would be highly unlikely to reveal any specific information about
+   user traffic).
+
+9.2.  Risk of Insider Attacks
 
    An autonomic network consists of autonomic devices that form a
    distributed self-managing system.  Devices within a domain share a
@@ -1310,12 +1372,13 @@ Internet-Draft             AN Reference Model               October 2017
    distributed functions in the entire autonomic domain in a malicious
    way.
 
-   An outside attacker has the following generic ways to take control of
-   an autonomic network:
+   If an autonomic node or protocol has vulnerabilities or is not
+   securely operated, an outside attacker has the following generic ways
+   to take control of an autonomic network:
 
    o  Introducing a fake device into the trust domain, by subverting the
-      authentication methods.  This is covered in detail in
-      [I-D.ietf-anima-bootstrapping-keyinfra].
+      authentication methods.  This depends on the correct
+      specification, implementation and operation of the AN protocols.
 
    o  Subverting a device which is already part of a trust domain, and
       modifying its behavior.  This threat is not specific to the
@@ -1326,48 +1389,27 @@ Internet-Draft             AN Reference Model               October 2017
       AN or other protocols.  Also this is a generic threat that applies
       to all network solutions.
 
-   The above threats are in principle comparable to other solutions.
-   However, the distributed nature of AN, specifically the Autonomic
-   Control Plane, increases the threat surface.  For example, a
-   compromised device may have full IP reachability to all other devices
-   inside the ACP, and can use all AN methods and protocols.
+   The above threats are in principle comparable to other solutions: In
+   the presence of design, implementation or operational errors,
+   security is no longer guaranteed.  However, the distributed nature of
+   AN, specifically the Autonomic Control Plane, increases the threat
+   surface significantly.  For example, a compromised device may have
+
+
+
+Behringer, et al.        Expires April 15, 2018                [Page 25]
+
+Internet-Draft             AN Reference Model               October 2017
+
+
+   full IP reachability to all other devices inside the ACP, and can use
+   all AN methods and protocols.
 
    For the next phase of the ANIMA work it is therefore recommended to
    introduce a sub-domain security model, to reduce the attack surface
    and not expose a full domain to a potential intruder.  Furthermore,
    additional security mechanisms on the ASA level should be considered
    for high-risk autonomic functions.
-
-
-
-
-Behringer, et al.        Expires April 14, 2018                [Page 24]
-
-Internet-Draft             AN Reference Model               October 2017
-
-
-   Most AN messages run inside the encrypted ACP.  The not protected AN
-   messages outside the ACP are limited to simple discovery methods.
-   See Section 2.5.2 of [I-D.ietf-anima-grasp] for a list of such
-   messages.  If AN messages can be observed by a third party, they
-   might reveal valuable information about network configuration,
-   security precautions in use, individual users, and their traffic
-   patterns.  If encrypted, AN messages might still reveal some
-   information via traffic analysis, but this would be quite limited
-   (for example, this would be highly unlikely to reveal any specific
-   information about user traffic).
-
-9.2.  Security Mechanisms
-
-   The components of the ANI must each include appropriate security
-   mechanisms.  In particular, the ACP must provide security against
-   interception, forgery, and replay of any messages sent over the ACP.
-   The signaling protocol may rely on this protection, but must also
-   provide for security when running without an ACP.  All components of
-   the security bootstrap process must of course themselves be secured.
-   All ASAs must make use of the ANI's security, and must be carefully
-   designed so that they do not create security "holes" in the boundary
-   of the whole AN system.
 
 10.  IANA Considerations
 
@@ -1394,14 +1436,6 @@ Internet-Draft             AN Reference Model               October 2017
               Infrastructures (BRSKI)", draft-ietf-anima-bootstrapping-
               keyinfra-07 (work in progress), July 2017.
 
-
-
-
-Behringer, et al.        Expires April 14, 2018                [Page 25]
-
-Internet-Draft             AN Reference Model               October 2017
-
-
    [I-D.ietf-anima-grasp]
               Bormann, C., Carpenter, B., and B. Liu, "A Generic
               Autonomic Signaling Protocol (GRASP)", draft-ietf-anima-
@@ -1413,6 +1447,16 @@ Internet-Draft             AN Reference Model               October 2017
               Du, Z., Jiang, S., Nobre, J., Ciavaglia, L., and M.
               Behringer, "ANIMA Intent Policy and Format", draft-du-
               anima-an-intent-05 (work in progress), February 2017.
+
+
+
+
+
+
+Behringer, et al.        Expires April 15, 2018                [Page 26]
+
+Internet-Draft             AN Reference Model               October 2017
+
 
    [I-D.ietf-anima-prefix-management]
               Jiang, S., Du, Z., Carpenter, B., and Q. Sun, "Autonomic
@@ -1450,14 +1494,6 @@ Internet-Draft             AN Reference Model               October 2017
               DOI 10.17487/RFC7575, June 2015, <https://www.rfc-
               editor.org/info/rfc7575>.
 
-
-
-
-Behringer, et al.        Expires April 14, 2018                [Page 26]
-
-Internet-Draft             AN Reference Model               October 2017
-
-
    [RFC7576]  Jiang, S., Carpenter, B., and M. Behringer, "General Gap
               Analysis for Autonomic Networking", RFC 7576,
               DOI 10.17487/RFC7576, June 2015, <https://www.rfc-
@@ -1468,6 +1504,14 @@ Authors' Addresses
    Michael H. Behringer (editor)
 
    Email: Michael.H.Behringer@gmail.com
+
+
+
+
+
+Behringer, et al.        Expires April 15, 2018                [Page 27]
+
+Internet-Draft             AN Reference Model               October 2017
 
 
    Brian Carpenter
@@ -1507,13 +1551,6 @@ Authors' Addresses
    Email: pierre.peloso@nokia.com
 
 
-
-
-Behringer, et al.        Expires April 14, 2018                [Page 27]
-
-Internet-Draft             AN Reference Model               October 2017
-
-
    Bing Liu
    Huawei Technologies
    Q14, Huawei Campus
@@ -1522,6 +1559,15 @@ Internet-Draft             AN Reference Model               October 2017
    P.R. China
 
    Email: leo.liubing@huawei.com
+
+
+
+
+
+
+Behringer, et al.        Expires April 15, 2018                [Page 28]
+
+Internet-Draft             AN Reference Model               October 2017
 
 
    Jeferson Campos Nobre
@@ -1565,4 +1611,14 @@ Internet-Draft             AN Reference Model               October 2017
 
 
 
-Behringer, et al.        Expires April 14, 2018                [Page 28]
+
+
+
+
+
+
+
+
+
+
+Behringer, et al.        Expires April 15, 2018                [Page 29]

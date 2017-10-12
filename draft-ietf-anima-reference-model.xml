@@ -125,7 +125,7 @@
 		      </address>
    		</author>
 			
-		<date day="11" month="October" year="2017"/>
+		<date day="12" month="October" year="2017"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -528,7 +528,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 		<section anchor="intent-asa" title="The Information Distribution ASA (*)">
 			<t>This ASA is currently out of scope in ANIMA, and provided here only as background information.</t>
 			<t>This ASA includes the information distribution function in an autonomic network. In particular it acts to announce the availability of Intent and other information to all other autonomic nodes. This ASA does not need to be installed on all nodes, but only on nodes that implement the information distribution function. For details see <xref target="info-distri"/>.</t>
-			<t>See <xref target="I-D.liu-anima-grasp-distribution"/> for more details on how information is suggested to be distributed.</t>
+			<t>Note that information distribution can be implemented as a function in any ASA. See <xref target="I-D.liu-anima-grasp-distribution"/> for more details on how information is suggested to be distributed.</t>
 		</section>
 		<!-- registrar -->
 
@@ -726,27 +726,46 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 
 		<section anchor="security" title="Security Considerations">
 
-		<section title="Consequences of a Distributed System">
+<t>In this section we distinguish outsider and insider attacks. In an outsider attack all network elements and protocols are securely managed and operating, and an outside attacker can sniff packets in transit, inject and replay packets "on the wire". In an insider attack, the attacker has access to an autonomic node, or can insert packets directly into the ACP.</t>
+<t>If a system has vulnerabilities in the implementation or operation (configuration), an outside attacker can exploit such vulnerabilies to become an insider attacker.</t>
 
+		<section title="Protection Against Outsider Attacks">
+
+<t>Here, we assume that all systems involved in an autonomic network are secured and operated according to best current practices. These protection methods comprise traditional security implementation and operation methods (such as code security, strong randomization algorithms, strong passwords, etc.) as well as mechanisms specific to an autonomic network (such as a secured MASA server).</t>
+
+<t>Traditional security methods for both implementation and operation are outside scope for this document.</t>
+
+<t>AN specific protocols and methods must also follow traditional security methods, in that all packets that can be sniffed or injected by an outside attacker are:
+<list style="symbols">
+  <t>protected against modification.</t>
+  <t>authenticated.</t>
+  <t>protected against replay attacks.</t>
+  <t>encrypted.</t>
+</list> 
+</t>
+
+<t>How these requirements are met is covered in the AN standards track documents that define the methods used, specifically <xref target='I-D.ietf-anima-bootstrapping-keyinfra'/>, <xref target='I-D.ietf-anima-grasp'/>, and <xref target='I-D.ietf-anima-autonomic-control-plane'/>. </t>
+
+<t>Most AN messages run inside the cryptographically protected ACP. The not protected AN messages outside the ACP are limited to a simple discovery method, defined in Section 2.5.2 of <xref target='I-D.ietf-anima-grasp'/>: The "Discovery Unsolicited Link-Local (DULL)" message, with detailed rules on its usage. </t>
+<t>If AN messages can be observed by a third party, they might reveal valuable information about network configuration, security precautions in use, individual users, and their traffic patterns. If encrypted, AN messages might still reveal some information via traffic analysis, but this would be quite limited (for example, this would be highly unlikely to reveal any specific information about user traffic).  </t>
+
+		</section>
+
+		<section title="Risk of Insider Attacks">
 <t>An autonomic network consists of autonomic devices that form a distributed self-managing system. Devices within a domain share a common trust anchor and thus implicitly trust each other. This means that any device inside a trust domain can by default use all distributed functions in the entire autonomic domain in a malicious way.</t>
 
-<t>An outside attacker has the following generic ways to take control of an autonomic network: <list style='symbols'>
-  <t>Introducing a fake device into the trust domain, by subverting the authentication methods. This is covered in detail in <xref target='I-D.ietf-anima-bootstrapping-keyinfra'/>.</t>
+<t>If an autonomic node or protocol has vulnerabilities or is not securely operated, an outside attacker has the following generic ways to take control of an autonomic network: <list style='symbols'>
+  <t>Introducing a fake device into the trust domain, by subverting the authentication methods. This depends on the correct specification, implementation and operation of the AN protocols.</t>
   <t>Subverting a device which is already part of a trust domain, and modifying its behavior. This threat is not specific to the solution discussed in this document, and applies to all network solutions.  </t>
   <t>Exploiting potentially yet unknown protocol vulnerabilities in the AN or other protocols. Also this is a generic threat that applies to all network solutions.</t>
 </list></t>
 
-<t>The above threats are in principle comparable to other solutions. However, the distributed nature of AN, specifically the Autonomic Control Plane, increases the threat surface. For example, a compromised device may have full IP reachability to all other devices inside the ACP, and can use all AN methods and protocols. </t>
+<t>The above threats are in principle comparable to other solutions: In the presence of design, implementation or operational errors, security is no longer guaranteed. However, the distributed nature of AN, specifically the Autonomic Control Plane, increases the threat surface significantly. For example, a compromised device may have full IP reachability to all other devices inside the ACP, and can use all AN methods and protocols. </t>
 
 <t>For the next phase of the ANIMA work it is therefore recommended to introduce a sub-domain security model, to reduce the attack surface and not expose a full domain to a potential intruder. Furthermore, additional security mechanisms on the ASA level should be considered for high-risk autonomic functions. </t>
 
-<t>Most AN messages run inside the encrypted ACP. The not protected AN messages outside the ACP are limited to simple discovery methods. See Section 2.5.2 of <xref target='I-D.ietf-anima-grasp'/> for a list of such messages. If AN messages can be observed by a third party, they might reveal valuable information about network configuration, security precautions in use, individual users, and their traffic patterns. If encrypted, AN messages might still reveal some information via traffic analysis, but this would be quite limited (for example, this would be highly unlikely to reveal any specific information about user traffic).  </t>
-
 </section>
 
-    <section title="Security Mechanisms">
-    <t>The components of the ANI must each include appropriate security mechanisms. In particular, the ACP must provide security against interception, forgery, and replay of any messages sent over the ACP. The signaling protocol may rely on this protection, but must also provide for security when running without an ACP. All components of the security bootstrap process must of course themselves be secured. All ASAs must make use of the ANI's security, and must be carefully designed so that they do not create security "holes" in the boundary of the whole AN system. </t>
-    </section>
 		</section>
 		<!-- security -->
 		
