@@ -125,7 +125,7 @@
 		      </address>
    		</author>
 			
-		<date day="12" month="October" year="2017"/>
+		<date day="19" month="October" year="2017"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -726,12 +726,12 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 
 		<section anchor="security" title="Security Considerations">
 
-<t>In this section we distinguish outsider and insider attacks. In an outsider attack all network elements and protocols are securely managed and operating, and an outside attacker can sniff packets in transit, inject and replay packets "on the wire". In an insider attack, the attacker has access to an autonomic node, or can insert packets directly into the ACP.</t>
+<t>In this section we distinguish outsider and insider attacks. In an outsider attack all network elements and protocols are securely managed and operating, and an outside attacker can sniff packets in transit, inject and replay packets. In an insider attack, the attacker has access to an autonomic node, or can insert packets directly into the protected ACP.</t>
 <t>If a system has vulnerabilities in the implementation or operation (configuration), an outside attacker can exploit such vulnerabilies to become an insider attacker.</t>
 
 		<section title="Protection Against Outsider Attacks">
 
-<t>Here, we assume that all systems involved in an autonomic network are secured and operated according to best current practices. These protection methods comprise traditional security implementation and operation methods (such as code security, strong randomization algorithms, strong passwords, etc.) as well as mechanisms specific to an autonomic network (such as a secured MASA server).</t>
+<t>Here, we assume that all systems involved in an autonomic network are secured and operated according to best current practices. These protection methods comprise traditional security implementation and operation methods (such as code security, strong randomization algorithms, strong passwords, etc.) as well as mechanisms specific to an autonomic network (such as a secured MASA service).</t>
 
 <t>Traditional security methods for both implementation and operation are outside scope for this document.</t>
 
