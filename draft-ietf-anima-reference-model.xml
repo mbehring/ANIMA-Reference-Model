@@ -726,7 +726,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 
 		<section anchor="security" title="Security Considerations">
 
-<t>In this section we distinguish outsider and insider attacks. In an outsider attack all network elements and protocols are securely managed and operating, and an outside attacker can sniff packets in transit, inject and replay packets. In an insider attack, the attacker has access to an autonomic node, or can insert packets directly into the protected ACP.</t>
+<t>In this section we distinguish outsider and insider attacks. In an outsider attack all network elements and protocols are securely managed and operating, and an outside attacker can sniff packets in transit, inject and replay packets. In an insider attack, the attacker has access to an autonomic node or other means (e.g. remote code execution in the node by exploiting ACP-independent vulnerabilities in the node platform) to produce arbitrary payloads on the protected ACP channels.</t>
 <t>If a system has vulnerabilities in the implementation or operation (configuration), an outside attacker can exploit such vulnerabilies to become an insider attacker.</t>
 
 		<section title="Protection Against Outsider Attacks">
@@ -741,6 +741,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
   <t>authenticated.</t>
   <t>protected against replay attacks.</t>
   <t>encrypted.</t>
+  <t>and that the AN protocols are robust against packet drops and man-in-the-middle attacks.</t>
 </list> 
 </t>
 
