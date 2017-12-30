@@ -10,7 +10,7 @@
 <!-- Change to "yes" if someone has disclosed IPR for the draft -->
 <?rfc compact="yes"?>
 
-<rfc ipr="trust200902" docName="draft-ietf-anima-reference-model-05" category="info">
+<rfc ipr="trust200902" docName="draft-ietf-anima-reference-model-06" category="info">
 	<front>
 		<title abbrev="AN Reference Model">A Reference Model for Autonomic Networking</title>
 
@@ -125,7 +125,7 @@
 		      </address>
    		</author>
 			
-		<date day="19" month="October" year="2017"/>
+		<date day="1" month="January" year="2018"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -420,15 +420,14 @@ of the features provided by the ANI to achieve its own goals, usually including
 interaction with other ASAs via the GRASP protocol <xref target="I-D.ietf-anima-grasp"/> or otherwise.
 Of course it also interacts with the specific targets of its function, using
 any suitable mechanism.
-Unless its function is very simple, the ASA will need to be multi-threaded so that
-it can handle overlapping asynchronous operations. It may therefore be a quite
+Unless its function is very simple, the ASA will need to handle overlapping asynchronous operations. It may therefore be a quite
 complex piece of software in its own right, forming part of the application layer
 above the ANI. </t>
 
 <t>Thus we can distinguish at least three classes of ASAs:
 <list style="symbols">
  <t>Simple ASAs with a small footprint that could run anywhere.</t>
- <t>Complex, multi-threaded ASAs that have a significant resource requirement and will only
+ <t>Complex, possibly multi-threaded ASAs that have a significant resource requirement and will only
     run on selected nodes.</t>
  <t>A few 'infrastructure ASAs' that use basic ANI features in support of the ANI itself,
     which must run in all autonomic nodes.
