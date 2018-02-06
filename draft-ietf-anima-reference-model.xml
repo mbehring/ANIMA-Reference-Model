@@ -66,39 +66,6 @@
 			</address>
 		</author>
 		
-		<author fullname="Peloso Pierre" 
-				initials="P."
-				surname="Peloso">
-			<organization>Nokia</organization>
-			<address>
-				<postal>
-					<street>Villarceaux</street>
-					<code>91460</code>
-					<city>Nozay</city>
-					<region/>
-					<country>FR</country>
-				</postal>
-				<email>pierre.peloso@nokia.com</email>
-				<uri/>
-			</address>
-		</author>
-
-
-		<author fullname="Bing Liu" initials="B." surname="Liu">
-		  <organization>Huawei Technologies </organization>
-
-		  <address>
-			<postal>
-			  <street>Q14, Huawei Campus</street>
-			  <street>No.156 Beiqing Road</street>
-			  <city>Hai-Dian District, Beijing</city>
-			  <code>100095</code>
-			  <country>P.R. China</country>
-			</postal>
-			<email>leo.liubing@huawei.com</email>
-		  </address>
-		</author>
-		
 		<author fullname="Jeferson Campos Nobre" initials="J.C." surname="Nobre">
       			<organization>University of Vale do Rio dos Sinos</organization>
       			<address>
@@ -112,20 +79,7 @@
 		      </address>
    		</author>
 
-		<author fullname="John Strassner" initials="J." surname="Strassner">
-      			<organization>Huawei Technologies</organization>
-      			<address>
-        			<postal>
-          				<street>2330 Central Expressway</street>
-        				<city>Santa Clara, CA</city>
-			        	<code>95050</code>
-        				<country>USA</country>
-        			</postal>
-        			<email>john.sc.strassner@huawei.com</email>
-		      </address>
-   		</author>
-			
-		<date day="1" month="January" year="2018"/>
+		<date day="7" month="February" year="2018"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -345,7 +299,7 @@
 	<section anchor="negotiation" title="Signaling Between Autonomic Nodes">
 			<t>Autonomic nodes must communicate with each other, for example to negotiate and/or synchronize technical objectives (i.e., network parameters) of any kind and complexity. This requires some form of signaling between autonomic nodes. Autonomic nodes implementing a specific use case might choose their own signaling protocol, as long as it fits the overall security model. However, in the general case, any pair of autonomic nodes might need to communicate, so there needs to be a generic protocol for this. A prerequisite for this is that autonomic nodes can discover each other without any preconfiguration, as mentioned above. To be generic, discovery and signaling must be able to handle any sort of technical objective, including ones that require complex data structures. The document "A Generic Autonomic Signaling Protocol (GRASP)" <xref target="I-D.ietf-anima-grasp"/> describes more detailed requirements for discovery, negotiation and synchronization in an autonomic network. It also defines a protocol, GRASP, for this purpose, including an integrated but optional discovery protocol.</t>
 			<t>GRASP is normally expected to run inside the Autonomic Control Plane (ACP; see <xref target="acp"/>) and to depend on the ACP for security.
-			It <!-- is also capable of using TLS security in the absence of an ACP, and it -->may run insecurely for a short time during bootstrapping.</t>
+			It may run insecurely for a short time during bootstrapping.</t>
 			<t>An autonomic node will normally run a single instance of GRASP, used by multiple ASAs. However, scenarios where multiple instances of GRASP
 			run in a single node, perhaps with different security properties, are not excluded. </t>
 	</section>
@@ -434,7 +388,6 @@ above the ANI. </t>
     These are outlined in the following sections.</t>
 </list></t>
 
-<!-- Paragraph moved from GRASP spec -->
 <t>Autonomic nodes, and therefore their ASAs, will be self-aware.
 Every autonomic node will be loaded with various functions and ASAs and will be
 aware of its own capabilities, typically decided by the hardware,
@@ -553,25 +506,19 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 	<!-- management-general -->		
 
 	<section anchor="intent" title="Intent (*)">
-	<!-- In an ideal autonomic domain, only one intent provided by human administrators is necessary to operate such domain <xref target="RFC7576"/>-->
 		<t>Intent is not covered by the ANIMA charter at the time of this writing. This section is for informational purposes only.</t>
 		<t>This section gives an overview of Intent, and how it is managed. Intent and Policy-Based Network Management (PBNM) is already described inside the IETF (e.g., PCIM and SUPA) and in other SDOs (e.g., DMTF and TMF ZOOM). </t>
 		<t>Intent can be described as an abstract, declarative, high-level policy used to operate an autonomic domain, such as an enterprise network <xref target="RFC7575"/>. Intent should be limited to high level guidance only, thus it does not directly define a policy for every network element separately. </t> 
 		<t>Intent can be refined to lower level policies using different approaches. This is expected in order to adapt the Intent to the capabilities of managed devices. Intent may contain role or function information, which can be translated to specific nodes <xref target="RFC7575"/>. One of the possible refinements of the Intent is using Event-Condition-Action (ECA) rules.</t>
 		<t>Different parameters may be configured for Intent. These parameters are usually provided by the human operator. Some of these parameters can influence the behavior of specific autonomic functions as well as the way the Intent is used to manage the autonomic domain. </t>
 		<t>Intent is discussed in more detail in <xref target="I-D.du-anima-an-intent"/>. Intent as well as other types of information are distributed via GRASP, see <xref target="I-D.liu-anima-grasp-distribution"/>.</t>
-<!--		<t>Intent distribution is considered as one of the common control and management functions of an autonomic network <xref target="RFC7575"/>. Since distribution is fundamental for autonomic networking, it is necessary a mechanism to provision intent by all devices in a domain <xref target="I-D.ietf-anima-grasp"/>. The distribution of Intent is function of the Autonomic Control Plane and several methods can be used to distribute Intent across an autonomic domain. Intent distribution might not use the ANIMA signaling protocol itself <xref target="I-D.ietf-anima-grasp"/>, but there is a proposal to extend such protocol for intent delivery [draft-liu-anima-intent-distribution]. </t> -->
 	</section>
 	<!-- intent -->
 		
 	<section anchor="reporting" title="Aggregated Reporting (*)">
-	<!-- <t>An autonomic network offers through the autonomic control plane the possibility to aggregate information inside the network, before sending it to the admin of the network. While this can be seen or implemented as a specific form of negotiation, the use case is different and therefore mentioned here explicitly. </t>  -->
-	<!-- The information gathering and the reporting delivery should be done through the autonomic control plane.-->
 		<t>At the time of this writing, aggregated reporting is not in the ANIMA charter. This section is provided for information only.</t>
 		<t>Autonomic Network should minimize the need for human intervention. In terms of how the network should behave, this is done through an autonomic Intent provided by the human administrator. In an analogous manner, the reports which describe the operational status of the network should aggregate the information produced in different network elements in order to present the effectiveness of autonomic Intent enforcement. Therefore, reporting in an autonomic network should happen on a network-wide basis <xref target="RFC7575"/>. </t>
-	<!--These events can be produced considering traditional network management protocols, such as SNMP and syslog. -->
 		<t>Several events can occur in an autonomic network in the same way they can happen in a traditional network. However, when reporting to a human administrator, such events should be aggregated to avoid advertisement about individual managed elements. In this context, algorithms may be used to determine what should be reported (e.g., filtering) and in which way and how different events are related to each other. Besides that, an event in an individual element can be compensated by changes in other elements to maintain a network-wide level which is described in the autonomic Intent. </t>
-	<!-- An alternative to model this is the use of exception-based management <xref target="RFC7575"/>. -->	
 		<t>Reporting in an autonomic network may be in the same abstraction level of the Intent. In this context, the visibility on current operational status of an autonomic network can be used to switch to different management modes. Despite the fact that autonomic management should minimize the need for user intervention, possibly there are some events that need to be addressed by human administrator actions.</t>
 	</section>
 	<!-- reporting -->
@@ -604,11 +551,6 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
    runtime to adapt to changing user needs, business goals, and
    changes in the ANI.</t>
 
-   <!-- <t>The document <xref target="I-D.strassner-anima-control-loops"/> defines the
-   requirements for an autonomic control loop, describes different
-   types of control loops, and explains how control loops are used
-   in an autonomic system.</t> -->
-   
 	</section>
 	<!-- control-loops -->
 	
@@ -779,6 +721,11 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 		</section>
 		<!-- ack -->
 				
+		<section anchor="contributors" title="Contributors">
+			<t>Significant contributions to this document have been made by John Strassner and Leo Liubing from Huawei, and Pierre Peloso from Nokia.</t>
+		</section>
+		<!-- contributors -->
+
 	</middle>
 	<back>
 		<references title="Normative References">
@@ -795,7 +742,6 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 			<?rfc include="reference.I-D.liu-anima-grasp-distribution.xml"?>
 			<?rfc include="reference.I-D.ietf-anima-prefix-management.xml"?>
 			<?rfc include="reference.I-D.ietf-supa-generic-policy-data-model"?>
-			<!-- <?rfc include="reference.I-D.strassner-anima-control-loops.xml"?> -->
       <reference anchor="Meyer97">
         <front>
           <title>Object-Oriented Software Construction (2nd edition)</title>
