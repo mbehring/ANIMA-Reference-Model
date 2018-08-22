@@ -79,12 +79,12 @@
 		      </address>
    		</author>
 
-		<date day="15" month="August" year="2018"/>
+		<date day="22" month="August" year="2018"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
 			<t>
-			This document describes a reference model for Autonomic Networking. It defines the behaviour of an autonomic node, how the various elements in an autonomic context work together, and how autonomic services can use the infrastructure.</t>
+			This document describes a reference model for Autonomic Networking for managed networks. It defines the behaviour of an autonomic node, how the various elements in an autonomic context work together, and how autonomic services can use the infrastructure.</t>
 		</abstract>
 	</front>
 	
@@ -94,6 +94,7 @@
 <t>This document defines this reference model with more detail, to allow for functional and protocol specifications to be developed in an architecturally consistent, non-overlapping manner. </t>
 	<t>As discussed in <xref target="RFC7575"/>, the goal of this work is not to focus exclusively on fully autonomic nodes or networks. In reality, most networks will run with some autonomic functions, while the rest of the network is traditionally managed. This reference model allows for this hybrid approach. </t>
 	<t>For example, it is possible in an existing, non-autonomic network to enrol devices in a traditional way, to bring up a trust infrastructure with certificates. This trust infrastructure could then be used to automatically bring up an Autonomic Control Plane (ACP), and run traditional network operations over the secure and self-healing ACP. See <xref target="I-D.ietf-anima-stable-connectivity"/> for a description of this use case.</t>
+	<t>The scope of this model is therefore limited to networks that are to some extent managed by skilled human operators, loosely referred to as "professionally managed" networks. Unmanaged networks raise additional security and trust issues that this model does not cover.</t>
 	<t>This document describes a first, simple, implementable phase of an Autonomic Networking solution. It is expected that the experience from this phase will be used in defining updated and extended specifications over time. Some topics are considered architecturally in this document, but are not yet reflected in the implementation specifications. They are marked with an (*).</t> 
 </section>
 <!-- intro -->
@@ -137,7 +138,7 @@ based on that adjacency table.</t>
 
    <section anchor="element-arch" title="Architecture">
 		   
-			<t>This section describes an autonomic network element and its internal architecture. The reference model explained in the document <xref target="RFC7575">"Autonomic Networking - Definitions and Design Goals"</xref> shows the sources of information that an autonomic service agent can leverage: Self-knowledge, network knowledge (through discovery), Intent, and feedback loops. There are two levels inside an autonomic node: the level of Autonomic Service Agents, and the level of the Autonomic Networking Infrastructure, with the former using the services of the latter. <xref target="ref_model"/> illustrates this concept.
+			<t>This section describes an autonomic network element and its internal architecture. The reference model explained in the document <xref target="RFC7575">"Autonomic Networking - Definitions and Design Goals"</xref> shows the sources of information that an autonomic service agent can leverage: Self-knowledge, network knowledge (through discovery), Intent (see <xref target="intent"/>), and feedback loops. There are two levels inside an autonomic node: the level of Autonomic Service Agents, and the level of the Autonomic Networking Infrastructure, with the former using the services of the latter. <xref target="ref_model"/> illustrates this concept.
 			</t>
 			  <t>
    <figure anchor='ref_model' title="Model of an autonomic node">
@@ -190,16 +191,16 @@ based on that adjacency table.</t>
 	<t>The adjacency table is fed by the following inputs: 
 	<list style="symbols">
 		<t>Link local discovery: This interaction happens in the data plane, using IPv6 link local addressing only, because this addressing type is itself autonomic. This way the nodes learns about all autonomic nodes around itself. The related standards track documents (<xref target="I-D.ietf-anima-grasp"/>, <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>, <xref target="I-D.ietf-anima-autonomic-control-plane"/>) describe in detail how link local discovery is used.</t>
-		<t>Vendor re-direct: A new device may receive information on where its home network is through a vendor based MASA re-direct; this is typically a routable address.  </t>
+		<t>Vendor re-direct: A new device may receive information on where its home network is through a vendor based Manufacturer Authorized Signing Authority (MASA, see <xref target="masa"/>) re-direct; this is typically a routable address.  </t>
 		<t>Non-autonomic input: A node may be configured manually with an autonomic peer; it could learn about autonomic nodes through DHCP options, DNS, and other non-autonomic mechanisms. Generally such non-autonomic mechansims require some administrator intervention. The key purpose is to by-pass a non-autonomic device or network. As this pertains to new devices, it is covered in appendix A and B of <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>.</t>
 	</list></t>
 				
 	<t>The adjacency table is defining the behaviour of an autonomic node: 
 	<list style="symbols">
-		<t>If the node has not bootstrapped into a domain (i.e., doesn't have a domain certificate), it rotates through all nodes in the adjacency table that claim to have a domain, and will attempt bootstrapping through them, one by one. One possible response is a vendor MASA re-direct, which will be entered into the adjacency table (see second bullet above). See <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. </t>
+		<t>If the node has not bootstrapped into a domain (i.e., doesn't have a domain certificate), it rotates through all nodes in the adjacency table that claim to have a domain, and will attempt bootstrapping through them, one by one. One possible response is a re-direct via a vendor MASA, which will be entered into the adjacency table (see second bullet above). See <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/> for details. </t>
 		<t>If the adjacent node has the same domain, it will authenticate that adjacent node and, if successful, establish the Autonomic Control Plane (ACP). See <xref target="I-D.ietf-anima-autonomic-control-plane"/>.</t>
 		<t>Once the node is part of the ACP of a domain, it will use GRASP <xref target="I-D.ietf-anima-grasp"/> to find Registrar(s) of its domain and potentially other services.</t>
-		<t>If the node is part of an ACP and has discovered via GRASP at least one Registrar in its domain, it will start the "join assistant" ASA, and act as a join assistant for neighboring nodes that need to be bootstrapped. See <xref target="join-assitant"/> for details. </t>		
+		<t>If the node is part of an ACP and has discovered at least one Registrar in its domain via GRASP, it will start the "join assistant" ASA, and act as a join assistant for neighboring nodes that need to be bootstrapped. See <xref target="join-assitant"/> for details. </t>		
 		<t>Other behaviours are possible, for example establishing the ACP also with devices of a sub-domain, to other domains, etc. Those will likely be controlled by Intent. They are outside scope for the moment. Note that Intent is distributed through the ACP; therefore, a node can only adapt Intent driven behaviour once it has joined the ACP. At the moment, ANIMA does not consider providing Intent outside the ACP; this can be considered later. </t> 
 	</list></t>
 	
@@ -217,7 +218,7 @@ based on that adjacency table.</t>
 
 
 		<section anchor="state-1" title="State 1: Factory Default">
-			<t>An autonomic node is leaving the factory in this state. In this state, the node has no domain specific configuration, specifically no LDevID, and could be used in any particular target network. It does however have a vendor/manufacturer specific ID, the IDevID <xref target="IDevID"></xref>. Nodes without IDevID cannot be autonomically and securely enrolled into a domain; they require manual pre-staging, in which case the pre-staging takes them directly to state 2.</t>
+			<t>An autonomic node leaves the factory in this state. In this state, the node has no domain specific configuration, specifically no LDevID, and could be used in any particular target network. It does however have a vendor/manufacturer specific ID, the IDevID <xref target="IDevID"></xref>. Nodes without IDevID cannot be autonomically and securely enrolled into a domain; they require manual pre-staging, in which case the pre-staging takes them directly to state 2.</t>
 
 			<t>Transitions:
 			<list style="symbols">
@@ -337,7 +338,7 @@ based on that adjacency table.</t>
 
 <section anchor="trust" title="Security and Trust Infrastructure">
 	<t>An Autonomic Network is self-protecting. All protocols are secure by default, without the requirement for the administrator to explicitly configure security, with the exception of setting up a PKI infrastructure. </t>
-	<t>Autonomic nodes have direct interactions between themselves, which must be secured. Since an autonomic network does not rely on configuration, it is not an option to configure for example pre-shared keys. A trust infrastructure such as a PKI infrastructure must be in place. This section describes the principles of this trust infrastructure. </t>
+	<t>Autonomic nodes have direct interactions between themselves, which must be secured. Since an autonomic network does not rely on configuration, it is not an option to configure, for example, pre-shared keys. A trust infrastructure such as a PKI infrastructure must be in place. This section describes the principles of this trust infrastructure. </t>
 	<t>The default method to automatically bring up a trust infrastructure is defined in the document "Bootstrapping Key Infrastructures" <xref target="I-D.ietf-anima-bootstrapping-keyinfra"/>. The ASAs required for this enrollment process are described in <xref target="specific-asas"/>. An autonomic node must implement the enrollment and join assistant ASAs. The registrar ASA may be implemented only on a sub-set of nodes. </t>
 
 	<section anchor="pki" title="Public Key Infrastructure">
@@ -448,7 +449,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 		<t>The life-cyle will cover the sequential states below: Installation, Deployment, Operation and the transitional states in-between. This Life-Cycle will also define which interactions ASAs have with the ANI in between the different states. The noticeable interactions are:
 		<list style="symbols">
 		<t>Self-description of ASA instances at the end of deployment: its format needs to define the information required for the management of ASAs by ANI entities</t>
-		<t>Control of ASA control-loop during the operation: a signaling has to carry formatted messages to control ASA execution (at least starting and stopping control loop)</t>
+		<t>Control of ASA control-loop during the operation: a signaling has to carry formatted messages to control ASA execution (at least starting and stopping the control loop)</t>
 		</list></t>
 	</section>
 	<!-- asa-life-cycle -->
@@ -519,13 +520,13 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 		
 	<section anchor="reporting" title="Aggregated Reporting (*)">
 		<t>Aggregated reporting is not covered in the current implementation specifications. This section is for informational purposes, for following phases of standardization.</t>
-		<t>Autonomic Network should minimize the need for human intervention. In terms of how the network should behave, this is done through an autonomic Intent provided by the human administrator. In an analogous manner, the reports which describe the operational status of the network should aggregate the information produced in different network elements in order to present the effectiveness of autonomic Intent enforcement. Therefore, reporting in an autonomic network should happen on a network-wide basis <xref target="RFC7575"/>. </t>
-		<t>Several events can occur in an autonomic network in the same way they can happen in a traditional network. However, when reporting to a human administrator, such events should be aggregated to avoid advertisement about individual managed elements. In this context, algorithms may be used to determine what should be reported (e.g., filtering) and in which way and how different events are related to each other. Besides that, an event in an individual element can be compensated by changes in other elements to maintain a network-wide level which is described in the autonomic Intent. </t>
-		<t>Reporting in an autonomic network may be in the same abstraction level of the Intent. In this context, the visibility on current operational status of an autonomic network can be used to switch to different management modes. Despite the fact that autonomic management should minimize the need for user intervention, possibly there are some events that need to be addressed by human administrator actions.</t>
+		<t>An Autonomic Network should minimize the need for human intervention. In terms of how the network should behave, this is done through an autonomic Intent provided by the human administrator. In an analogous manner, the reports which describe the operational status of the network should aggregate the information produced in different network elements in order to present the effectiveness of autonomic Intent enforcement. Therefore, reporting in an autonomic network should happen on a network-wide basis <xref target="RFC7575"/>. </t>
+		<t>Multiple simultaneous events can occur in an autonomic network in the same way they can happen in a traditional network. However, when reporting to a human administrator, such events should be aggregated to avoid notifications about individual managed elements. In this context, algorithms may be used to determine what should be reported (e.g., filtering) and in which way and how different events are related to each other. Besides that, an event in an individual element can be compensated by changes in other elements to maintain a network-wide target which is described in the autonomic Intent. </t>
+		<t>Reporting in an autonomic network may be at the same abstraction level as Intent. In this context, the aggregated view of current operational status of an autonomic network can be used to switch to different management modes. Despite the fact that autonomic management should minimize the need for user intervention, possibly there are some events that need to be addressed by human administrator actions.</t>
 	</section>
 	<!-- reporting -->
 
-	<section anchor="feedback" title="Feedback Loops to NOC(*)">
+	<section anchor="feedback" title="Feedback Loops to NOC (*)">
 		<t>Feedback loops are required in an autonomic network to allow the intervention of a human administrator or central control systems, while maintaining a default behaviour. Through a feedback loop an administrator can be prompted with a default action, and has the possibility to acknowledge or override the proposed default action.</t>
 	</section>
 	<!-- feedback -->
@@ -626,7 +627,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
    technological bias.</t>
 
    <t>A data model is essential for certain types of functions, such as
-   a MRACL. More generally, a data model can be used to define the
+   a  Model-Reference Adaptive Control Loop (MRACL). More generally, a data model can be used to define the
    objects, attributes, methods, and relationships of a software
    system (e.g., the ANI, an autonomic node, or an ASA). A data
    model can be used to help design an API, as well as any language
@@ -696,7 +697,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 
 <t>How these requirements are met is covered in the AN standards track documents that define the methods used, specifically <xref target='I-D.ietf-anima-bootstrapping-keyinfra'/>, <xref target='I-D.ietf-anima-grasp'/>, and <xref target='I-D.ietf-anima-autonomic-control-plane'/>. </t>
 
-<t>Most AN messages run inside the cryptographically protected ACP. The not protected AN messages outside the ACP are limited to a simple discovery method, defined in Section 2.5.2 of <xref target='I-D.ietf-anima-grasp'/>: The "Discovery Unsolicited Link-Local (DULL)" message, with detailed rules on its usage. </t>
+<t>Most AN messages run inside the cryptographically protected ACP. The unprotected AN messages outside the ACP are limited to a simple discovery method, defined in Section 2.5.2 of <xref target='I-D.ietf-anima-grasp'/>: The "Discovery Unsolicited Link-Local (DULL)" message, with detailed rules on its usage. </t>
 <t>If AN messages can be observed by a third party, they might reveal valuable information about network configuration, security precautions in use, individual users, and their traffic patterns. If encrypted, AN messages might still reveal some information via traffic analysis, but this would be quite limited (for example, this would be highly unlikely to reveal any specific information about user traffic).  </t>
 
 		</section>
@@ -725,7 +726,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 		<!-- iana -->
 		
 		<section anchor="ack" title="Acknowledgements">
-			<t>Many people have provided feedback and input to this document: Sheng Jiang, Roberta Maglione, Jonathan Hansford, Jason Coleman, Artur Hecker.</t>
+			<t>Many people have provided feedback and input to this document: Sheng Jiang, Roberta Maglione, Jonathan Hansford, Jason Coleman, Artur Hecker. Useful reviews were made by Joel Halpern, Radia Perlman and Tianran Zhou.</t>
 		</section>
 		<!-- ack -->
 				

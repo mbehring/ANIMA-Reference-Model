@@ -5,14 +5,14 @@
 ANIMA                                                  M. Behringer, Ed.
 Internet-Draft
 Intended status: Informational                              B. Carpenter
-Expires: February 16, 2019                             Univ. of Auckland
+Expires: February 23, 2019                             Univ. of Auckland
                                                                T. Eckert
                                              Futurewei Technologies Inc.
                                                             L. Ciavaglia
                                                                    Nokia
                                                                 J. Nobre
                                      University of Vale do Rio dos Sinos
-                                                         August 15, 2018
+                                                         August 22, 2018
 
 
                A Reference Model for Autonomic Networking
@@ -20,10 +20,10 @@ Expires: February 16, 2019                             Univ. of Auckland
 
 Abstract
 
-   This document describes a reference model for Autonomic Networking.
-   It defines the behaviour of an autonomic node, how the various
-   elements in an autonomic context work together, and how autonomic
-   services can use the infrastructure.
+   This document describes a reference model for Autonomic Networking
+   for managed networks.  It defines the behaviour of an autonomic node,
+   how the various elements in an autonomic context work together, and
+   how autonomic services can use the infrastructure.
 
 Status of This Memo
 
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on February 16, 2019.
+   This Internet-Draft will expire on February 23, 2019.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Behringer, et al.       Expires February 16, 2019               [Page 1]
+Behringer, et al.       Expires February 23, 2019               [Page 1]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -101,7 +101,7 @@ Table of Contents
      7.1.  Managing a (Partially) Autonomic Network  . . . . . . . .  19
      7.2.  Intent (*)  . . . . . . . . . . . . . . . . . . . . . . .  20
      7.3.  Aggregated Reporting (*)  . . . . . . . . . . . . . . . .  20
-     7.4.  Feedback Loops to NOC(*)  . . . . . . . . . . . . . . . .  21
+     7.4.  Feedback Loops to NOC (*) . . . . . . . . . . . . . . . .  21
      7.5.  Control Loops (*) . . . . . . . . . . . . . . . . . . . .  21
      7.6.  APIs (*)  . . . . . . . . . . . . . . . . . . . . . . . .  22
      7.7.  Data Model (*)  . . . . . . . . . . . . . . . . . . . . .  23
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Behringer, et al.       Expires February 16, 2019               [Page 2]
+Behringer, et al.       Expires February 23, 2019               [Page 2]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -153,22 +153,25 @@ Internet-Draft             AN Reference Model                August 2018
    self-healing ACP.  See [I-D.ietf-anima-stable-connectivity] for a
    description of this use case.
 
+   The scope of this model is therefore limited to networks that are to
+   some extent managed by skilled human operators, loosely referred to
+   as "professionally managed" networks.  Unmanaged networks raise
+   additional security and trust issues that this model does not cover.
+
    This document describes a first, simple, implementable phase of an
    Autonomic Networking solution.  It is expected that the experience
    from this phase will be used in defining updated and extended
    specifications over time.  Some topics are considered architecturally
-   in this document, but are not yet reflected in the implementation
-   specifications.  They are marked with an (*).
 
 
 
-
-
-
-Behringer, et al.       Expires February 16, 2019               [Page 3]
+Behringer, et al.       Expires February 23, 2019               [Page 3]
 
 Internet-Draft             AN Reference Model                August 2018
 
+
+   in this document, but are not yet reflected in the implementation
+   specifications.  They are marked with an (*).
 
 2.  The Network View
 
@@ -214,17 +217,17 @@ Internet-Draft             AN Reference Model                August 2018
    Autonomic Service Agents.  ASAs may be standalone, or use other ASAs
    in a hierarchical way.
 
-   The Autonomic Networking Infrastructure (ANI) therefore is the
-   foundation for autonomic functions.
 
 
 
 
-
-Behringer, et al.       Expires February 16, 2019               [Page 4]
+Behringer, et al.       Expires February 23, 2019               [Page 4]
 
 Internet-Draft             AN Reference Model                August 2018
 
+
+   The Autonomic Networking Infrastructure (ANI) therefore is the
+   foundation for autonomic functions.
 
 3.  The Autonomic Network Element
 
@@ -241,10 +244,10 @@ Internet-Draft             AN Reference Model                August 2018
    "Autonomic Networking - Definitions and Design Goals" [RFC7575] shows
    the sources of information that an autonomic service agent can
    leverage: Self-knowledge, network knowledge (through discovery),
-   Intent, and feedback loops.  There are two levels inside an autonomic
-   node: the level of Autonomic Service Agents, and the level of the
-   Autonomic Networking Infrastructure, with the former using the
-   services of the latter.  Figure 2 illustrates this concept.
+   Intent (see Section 7.2), and feedback loops.  There are two levels
+   inside an autonomic node: the level of Autonomic Service Agents, and
+   the level of the Autonomic Networking Infrastructure, with the former
+   using the services of the latter.  Figure 2 illustrates this concept.
 
    +------------------------------------------------------------+
    |                                                            |
@@ -271,17 +274,17 @@ Internet-Draft             AN Reference Model                August 2018
 
                    Figure 2: Model of an autonomic node
 
-   The Autonomic Networking Infrastructure (lower part of Figure 2)
-   contains node specific data structures, for example trust information
-   about itself and its peers, as well as a generic set of functions,
 
 
 
-Behringer, et al.       Expires February 16, 2019               [Page 5]
+Behringer, et al.       Expires February 23, 2019               [Page 5]
 
 Internet-Draft             AN Reference Model                August 2018
 
 
+   The Autonomic Networking Infrastructure (lower part of Figure 2)
+   contains node specific data structures, for example trust information
+   about itself and its peers, as well as a generic set of functions,
    independent of a particular usage.  This infrastructure should be
    generic, and support a variety of Autonomic Service Agents (upper
    part of Figure 2).  It contains addressing and naming of autonomic
@@ -326,17 +329,19 @@ Internet-Draft             AN Reference Model                August 2018
    information is tracked independently of the status of the peer nodes;
    specifically, it contains information about non-enrolled nodes, nodes
    of the same and other domains.  The adjacency table may contain
+
+
+
+
+Behringer, et al.       Expires February 23, 2019               [Page 6]
+
+Internet-Draft             AN Reference Model                August 2018
+
+
    information about the validity and trust level of the adjacent
    autonomic nodes.
 
    The adjacency table is fed by the following inputs:
-
-
-
-Behringer, et al.       Expires February 16, 2019               [Page 6]
-
-Internet-Draft             AN Reference Model                August 2018
-
 
    o  Link local discovery: This interaction happens in the data plane,
       using IPv6 link local addressing only, because this addressing
@@ -348,7 +353,8 @@ Internet-Draft             AN Reference Model                August 2018
       link local discovery is used.
 
    o  Vendor re-direct: A new device may receive information on where
-      its home network is through a vendor based MASA re-direct; this is
+      its home network is through a vendor based Manufacturer Authorized
+      Signing Authority (MASA, see Section 5.3) re-direct; this is
       typically a routable address.
 
    o  Non-autonomic input: A node may be configured manually with an
@@ -365,9 +371,9 @@ Internet-Draft             AN Reference Model                August 2018
       a domain certificate), it rotates through all nodes in the
       adjacency table that claim to have a domain, and will attempt
       bootstrapping through them, one by one.  One possible response is
-      a vendor MASA re-direct, which will be entered into the adjacency
-      table (see second bullet above).  See
-      [I-D.ietf-anima-bootstrapping-keyinfra].
+      a re-direct via a vendor MASA, which will be entered into the
+      adjacency table (see second bullet above).  See
+      [I-D.ietf-anima-bootstrapping-keyinfra] for details.
 
    o  If the adjacent node has the same domain, it will authenticate
       that adjacent node and, if successful, establish the Autonomic
@@ -378,22 +384,22 @@ Internet-Draft             AN Reference Model                August 2018
       [I-D.ietf-anima-grasp] to find Registrar(s) of its domain and
       potentially other services.
 
-   o  If the node is part of an ACP and has discovered via GRASP at
-      least one Registrar in its domain, it will start the "join
+   o  If the node is part of an ACP and has discovered at least one
+      Registrar in its domain via GRASP, it will start the "join
+
+
+
+Behringer, et al.       Expires February 23, 2019               [Page 7]
+
+Internet-Draft             AN Reference Model                August 2018
+
+
       assistant" ASA, and act as a join assistant for neighboring nodes
       that need to be bootstrapped.  See Section 6.3.1.2 for details.
 
    o  Other behaviours are possible, for example establishing the ACP
       also with devices of a sub-domain, to other domains, etc.  Those
       will likely be controlled by Intent.  They are outside scope for
-
-
-
-Behringer, et al.       Expires February 16, 2019               [Page 7]
-
-Internet-Draft             AN Reference Model                August 2018
-
-
       the moment.  Note that Intent is distributed through the ACP;
       therefore, a node can only adapt Intent driven behaviour once it
       has joined the ACP.  At the moment, ANIMA does not consider
@@ -429,27 +435,26 @@ Internet-Draft             AN Reference Model                August 2018
 
 3.3.1.  State 1: Factory Default
 
-   An autonomic node is leaving the factory in this state.  In this
-   state, the node has no domain specific configuration, specifically no
+   An autonomic node leaves the factory in this state.  In this state,
+   the node has no domain specific configuration, specifically no
    LDevID, and could be used in any particular target network.  It does
    however have a vendor/manufacturer specific ID, the IDevID [IDevID].
    Nodes without IDevID cannot be autonomically and securely enrolled
    into a domain; they require manual pre-staging, in which case the
    pre-staging takes them directly to state 2.
 
+
+
+Behringer, et al.       Expires February 23, 2019               [Page 8]
+
+Internet-Draft             AN Reference Model                August 2018
+
+
    Transitions:
 
    o  Bootstrap event: The device enrols into a domain; as part of this
       process it receives a domain identity (LDevID).  If enrollment is
       successful, the next state is state 2.  See
-
-
-
-Behringer, et al.       Expires February 16, 2019               [Page 8]
-
-Internet-Draft             AN Reference Model                August 2018
-
-
       [I-D.ietf-anima-bootstrapping-keyinfra] Section 3 for details on
       enrollment.
 
@@ -494,17 +499,15 @@ Internet-Draft             AN Reference Model                August 2018
    o  Leaving ACP: The device drops the last (or only) ACP channel to an
       adjacent device.  Next state: 2.
 
-   o  Factory reset: A factory reset removes all configuration and the
-      domain identity (LDevID) from the device.  Next state: 1.
 
 
-
-
-
-Behringer, et al.       Expires February 16, 2019               [Page 9]
+Behringer, et al.       Expires February 23, 2019               [Page 9]
 
 Internet-Draft             AN Reference Model                August 2018
 
+
+   o  Factory reset: A factory reset removes all configuration and the
+      domain identity (LDevID) from the device.  Next state: 1.
 
    o  Powercycle event: The device loses all state tables, but not its
       domain identity (LDevID).  Next state: 2.
@@ -551,17 +554,17 @@ Internet-Draft             AN Reference Model                August 2018
    autonomic function is described in
    [I-D.ietf-anima-prefix-management].
 
-   Autonomic addressing is a function of the Autonomic Networking
-   Infrastructure (lower part of Figure 2), specifically the Autonomic
-   Control Plane.  ASAs do not have their own addresses.  They may use
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 10]
+Behringer, et al.       Expires February 23, 2019              [Page 10]
 
 Internet-Draft             AN Reference Model                August 2018
 
 
+   Autonomic addressing is a function of the Autonomic Networking
+   Infrastructure (lower part of Figure 2), specifically the Autonomic
+   Control Plane.  ASAs do not have their own addresses.  They may use
    either API calls, or the autonomic addressing scheme of the Autonomic
    Networking Infrastructure.
 
@@ -607,16 +610,17 @@ Internet-Draft             AN Reference Model                August 2018
    Traditionally, most of the information a node requires is provided
    through configuration or northbound interfaces.  An autonomic
    function should rely on such northbound interfaces minimally or not
-   at all, and therefore it needs to discover peers and other resources
-   in the network.  This section describes various discovery functions
-   in an autonomic network.
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 11]
+Behringer, et al.       Expires February 23, 2019              [Page 11]
 
 Internet-Draft             AN Reference Model                August 2018
 
+
+   at all, and therefore it needs to discover peers and other resources
+   in the network.  This section describes various discovery functions
+   in an autonomic network.
 
    Discovering nodes and their properties and capabilities: A core
    function to establish an autonomic domain is the mutual discovery of
@@ -661,18 +665,17 @@ Internet-Draft             AN Reference Model                August 2018
    require complex data structures.  The document "A Generic Autonomic
    Signaling Protocol (GRASP)" [I-D.ietf-anima-grasp] describes more
    detailed requirements for discovery, negotiation and synchronization
-   in an autonomic network.  It also defines a protocol, GRASP, for this
-   purpose, including an integrated but optional discovery protocol.
 
 
 
 
-
-
-Behringer, et al.       Expires February 16, 2019              [Page 12]
+Behringer, et al.       Expires February 23, 2019              [Page 12]
 
 Internet-Draft             AN Reference Model                August 2018
 
+
+   in an autonomic network.  It also defines a protocol, GRASP, for this
+   purpose, including an integrated but optional discovery protocol.
 
    GRASP is normally expected to run inside the Autonomic Control Plane
    (ACP; see Section 4.6) and to depend on the ACP for security.  It may
@@ -719,16 +722,16 @@ Internet-Draft             AN Reference Model                August 2018
    distribution methods.  Intent is also expected to be monolithic, and
    flooded as a whole.  One possible method for distributing Intent, as
    well as other forms of data, is discussed in
-   [I-D.liu-anima-grasp-distribution].  Intent and information
-   distribution are not part of phase 1 of ANIMA.
 
 
 
-
-Behringer, et al.       Expires February 16, 2019              [Page 13]
+Behringer, et al.       Expires February 23, 2019              [Page 13]
 
 Internet-Draft             AN Reference Model                August 2018
 
+
+   [I-D.liu-anima-grasp-distribution].  Intent and information
+   distribution are not part of phase 1 of ANIMA.
 
 5.  Security and Trust Infrastructure
 
@@ -739,7 +742,7 @@ Internet-Draft             AN Reference Model                August 2018
 
    Autonomic nodes have direct interactions between themselves, which
    must be secured.  Since an autonomic network does not rely on
-   configuration, it is not an option to configure for example pre-
+   configuration, it is not an option to configure, for example, pre-
    shared keys.  A trust infrastructure such as a PKI infrastructure
    must be in place.  This section describes the principles of this
    trust infrastructure.
@@ -775,17 +778,16 @@ Internet-Draft             AN Reference Model                August 2018
    provide ownership tracking of devices in a domain.  The MASA provides
    audit, authorization, and ownership tokens to the registrar during
    the bootstrap process to assist in the authentication of devices
-   attempting to join an Autonomic Domain, and to allow a joining device
-   to validate whether it is joining the correct domain.  The details
 
 
 
-
-Behringer, et al.       Expires February 16, 2019              [Page 14]
+Behringer, et al.       Expires February 23, 2019              [Page 14]
 
 Internet-Draft             AN Reference Model                August 2018
 
 
+   attempting to join an Autonomic Domain, and to allow a joining device
+   to validate whether it is joining the correct domain.  The details
    for MASA service, security, and usage are defined in
    [I-D.ietf-anima-bootstrapping-keyinfra].
 
@@ -835,9 +837,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-
-
-Behringer, et al.       Expires February 16, 2019              [Page 15]
+Behringer, et al.       Expires February 23, 2019              [Page 15]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -893,7 +893,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 16]
+Behringer, et al.       Expires February 23, 2019              [Page 16]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -940,7 +940,7 @@ Internet-Draft             AN Reference Model                August 2018
 
    o  Control of ASA control-loop during the operation: a signaling has
       to carry formatted messages to control ASA execution (at least
-      starting and stopping control loop)
+      starting and stopping the control loop)
 
 
 
@@ -949,7 +949,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 17]
+Behringer, et al.       Expires February 23, 2019              [Page 17]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -1005,7 +1005,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 18]
+Behringer, et al.       Expires February 23, 2019              [Page 18]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -1061,7 +1061,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 19]
+Behringer, et al.       Expires February 23, 2019              [Page 19]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -1117,12 +1117,12 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 20]
+Behringer, et al.       Expires February 23, 2019              [Page 20]
 
 Internet-Draft             AN Reference Model                August 2018
 
 
-   Autonomic Network should minimize the need for human intervention.
+   An Autonomic Network should minimize the need for human intervention.
    In terms of how the network should behave, this is done through an
    autonomic Intent provided by the human administrator.  In an
    analogous manner, the reports which describe the operational status
@@ -1131,25 +1131,25 @@ Internet-Draft             AN Reference Model                August 2018
    Intent enforcement.  Therefore, reporting in an autonomic network
    should happen on a network-wide basis [RFC7575].
 
-   Several events can occur in an autonomic network in the same way they
-   can happen in a traditional network.  However, when reporting to a
-   human administrator, such events should be aggregated to avoid
-   advertisement about individual managed elements.  In this context,
-   algorithms may be used to determine what should be reported (e.g.,
-   filtering) and in which way and how different events are related to
-   each other.  Besides that, an event in an individual element can be
-   compensated by changes in other elements to maintain a network-wide
-   level which is described in the autonomic Intent.
+   Multiple simultaneous events can occur in an autonomic network in the
+   same way they can happen in a traditional network.  However, when
+   reporting to a human administrator, such events should be aggregated
+   to avoid notifications about individual managed elements.  In this
+   context, algorithms may be used to determine what should be reported
+   (e.g., filtering) and in which way and how different events are
+   related to each other.  Besides that, an event in an individual
+   element can be compensated by changes in other elements to maintain a
+   network-wide target which is described in the autonomic Intent.
 
-   Reporting in an autonomic network may be in the same abstraction
-   level of the Intent.  In this context, the visibility on current
+   Reporting in an autonomic network may be at the same abstraction
+   level as Intent.  In this context, the aggregated view of current
    operational status of an autonomic network can be used to switch to
    different management modes.  Despite the fact that autonomic
    management should minimize the need for user intervention, possibly
    there are some events that need to be addressed by human
    administrator actions.
 
-7.4.  Feedback Loops to NOC(*)
+7.4.  Feedback Loops to NOC (*)
 
    Feedback loops are required in an autonomic network to allow the
    intervention of a human administrator or central control systems,
@@ -1173,7 +1173,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 21]
+Behringer, et al.       Expires February 23, 2019              [Page 21]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -1229,7 +1229,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 22]
+Behringer, et al.       Expires February 23, 2019              [Page 22]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -1265,11 +1265,11 @@ Internet-Draft             AN Reference Model                August 2018
    data model can be related to each other without technological bias.
 
    A data model is essential for certain types of functions, such as a
-   MRACL.  More generally, a data model can be used to define the
-   objects, attributes, methods, and relationships of a software system
-   (e.g., the ANI, an autonomic node, or an ASA).  A data model can be
-   used to help design an API, as well as any language used to interface
-   to the Autonomic Network.
+   Model-Reference Adaptive Control Loop (MRACL).  More generally, a
+   data model can be used to define the objects, attributes, methods,
+   and relationships of a software system (e.g., the ANI, an autonomic
+   node, or an ASA).  A data model can be used to help design an API, as
+   well as any language used to interface to the Autonomic Network.
 
 8.  Coordination Between Autonomic Functions (*)
 
@@ -1285,7 +1285,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 23]
+Behringer, et al.       Expires February 23, 2019              [Page 23]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -1341,7 +1341,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 24]
+Behringer, et al.       Expires February 23, 2019              [Page 24]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -1397,7 +1397,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 25]
+Behringer, et al.       Expires February 23, 2019              [Page 25]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -1426,7 +1426,7 @@ Internet-Draft             AN Reference Model                August 2018
    [I-D.ietf-anima-autonomic-control-plane].
 
    Most AN messages run inside the cryptographically protected ACP.  The
-   not protected AN messages outside the ACP are limited to a simple
+   unprotected AN messages outside the ACP are limited to a simple
    discovery method, defined in Section 2.5.2 of [I-D.ietf-anima-grasp]:
    The "Discovery Unsolicited Link-Local (DULL)" message, with detailed
    rules on its usage.
@@ -1453,7 +1453,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 26]
+Behringer, et al.       Expires February 23, 2019              [Page 26]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -1497,7 +1497,8 @@ Internet-Draft             AN Reference Model                August 2018
 
    Many people have provided feedback and input to this document: Sheng
    Jiang, Roberta Maglione, Jonathan Hansford, Jason Coleman, Artur
-   Hecker.
+   Hecker.  Useful reviews were made by Joel Halpern, Radia Perlman and
+   Tianran Zhou.
 
 12.  Contributors
 
@@ -1508,8 +1509,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-
-Behringer, et al.       Expires February 16, 2019              [Page 27]
+Behringer, et al.       Expires February 23, 2019              [Page 27]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -1565,7 +1565,7 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 28]
+Behringer, et al.       Expires February 23, 2019              [Page 28]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -1621,7 +1621,7 @@ Authors' Addresses
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 29]
+Behringer, et al.       Expires February 23, 2019              [Page 29]
 
 Internet-Draft             AN Reference Model                August 2018
 
@@ -1677,4 +1677,4 @@ Internet-Draft             AN Reference Model                August 2018
 
 
 
-Behringer, et al.       Expires February 16, 2019              [Page 30]
+Behringer, et al.       Expires February 23, 2019              [Page 30]
