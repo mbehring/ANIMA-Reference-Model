@@ -10,7 +10,7 @@
 <!-- Change to "yes" if someone has disclosed IPR for the draft -->
 <?rfc compact="yes"?>
 
-<rfc ipr="trust200902" docName="draft-ietf-anima-reference-model-07" category="info">
+<rfc ipr="trust200902" docName="draft-ietf-anima-reference-model-08" category="info">
 	<front>
 		<title abbrev="AN Reference Model">A Reference Model for Autonomic Networking</title>
 
@@ -79,7 +79,7 @@
 		      </address>
    		</author>
 
-		<date day="24" month="August" year="2018"/>
+		<date day="4" month="October" year="2018"/>
 		<area>Operations and Management</area>
 		<workgroup>ANIMA</workgroup>
 		<abstract>
@@ -241,7 +241,7 @@ based on that adjacency table.</t>
 		<!-- state-2 -->
 
 		<section anchor="state-3" title="State 3: In ACP">
-			<t>In this state, the autonomic node has at least one ACP channel to another device. It can participate in further autonomic transactions, such as starting autonomic service agents. For example it must now enable the join assistant ASA, to help other devices to join the domain. Other conditions may apply to such interactions, for example to serve as a join assistant, the device must first discover a bootstrap Registrar. </t>
+			<t>In this state, the autonomic node has at least one ACP channel to another device. The node can now participate in further autonomic transactions, such as starting autonomic service agents (e.g., it must now enable the join assistant ASA, to help other devices to join the domain. Other conditions may apply to such interactions, for example to serve as a join assistant, the device must first discover a bootstrap Registrar. </t>
 
 			<t>Transitions:
 			<list style="symbols">
@@ -273,7 +273,7 @@ based on that adjacency table.</t>
 
 	<section anchor="addressing" title="Addressing">
 	<t>Autonomic Service Agents (ASAs) need to communicate with each other, using the autonomic addressing of the Autonomic Networking Infrastructure of the node they reside on. This section describes the addressing approach of the Autonomic Networking Infrastructure, used by ASAs. </t>
-	<t>Out of scope are addressing approaches for the data plane of the network, which may be configured and managed in the traditional way, or negotiated as a service of an ASA. One use case for such an autonomic function is described in <xref target="I-D.ietf-anima-prefix-management"/>.</t>
+	<t>Addressing approaches for the data plane of the network are outside the scope of this document. These addressing approaches may be configured and managed in the traditional way, or negotiated as a service of an ASA. One use case for such an autonomic function is described in <xref target="I-D.ietf-anima-prefix-management"/>.</t>
 		<t>Autonomic addressing is a function of the Autonomic Networking Infrastructure (lower part of <xref target="ref_model"/>), specifically the Autonomic Control Plane. ASAs do not have their own addresses. They may use either API calls, or the autonomic addressing scheme of the Autonomic Networking Infrastructure. </t>
 
 		<t>An autonomic addressing scheme has the following requirements: 
@@ -283,7 +283,7 @@ based on that adjacency table.</t>
 			<t>Flexibility: The addressing scheme must be flexible enough for nodes to be able to move around, for the network to grow, split and merge. </t>
 			<t>Robustness: It should be as hard as possible for an administrator to negatively affect addressing (and thus connectivity) in the autonomic context. </t>
       <t>Stability: The addressing scheme should be as stable as possible. However, implementations need to be able to recover from unexpected address changes. </t>
-			<t>Support for virtualization: Autonomic Nodes may support Autonomic Service Agents in different virtual machines or containers. The addressing scheme should support this architecture. </t>
+			<t>Support for virtualization: Autonomic functions can exist either at the level of the physical network and physical devices, or at the level of virtual machines, containers and networks. In particular, Autonomic Nodes may support Autonomic Service Agents in virtual entities. The infrastructure, including the addressing scheme, should be able to support this architecture. </t>
 			<t>Simplicity: To make engineering simpler, and to give the human administrator an easy way to trouble-shoot autonomic functions. </t>
 			<t>Scale: The proposed scheme should work in any network of any size. </t> 
 			<t>Upgradability: The scheme must be able to support different addressing concepts in the future. </t>
@@ -323,7 +323,7 @@ based on that adjacency table.</t>
 	<!-- routing -->
 
 	<section anchor="acp" title="The Autonomic Control Plane">
-		<t>The "Autonomic Control Plane" carries the control protocols in an autonomic network. This control plane can be either implemented in the global routing table of a node, such as IGPs in today's networks; or it can be provided as an overlay network. The document "An Autonomic Control Plane" (<xref target="I-D.ietf-anima-autonomic-control-plane"/>) describes the implementation details suggested here. See <xref target="I-D.ietf-anima-stable-connectivity"/> for uses cases for the ACP. </t> 
+		<t>The "Autonomic Control Plane" carries the control protocols in an autonomic network. In the architecture described here, it is implemented as an overlay network. The document "An Autonomic Control Plane" (<xref target="I-D.ietf-anima-autonomic-control-plane"/>) describes the implementation details suggested here. See <xref target="I-D.ietf-anima-stable-connectivity"/> for uses cases for the ACP. </t> 
 	</section>
 	<!-- acp -->
 
@@ -402,7 +402,7 @@ above the ANI. ASA design guidelines are available in <xref target="I-D.carpente
 <t>Autonomic nodes, and therefore their ASAs, know their own capabilities and restrictions, derived from hardware, firmware or pre-installed software: They are "self-aware". </t>
 <t>The role of an autonomic node depends on Intent and on the surrounding network behaviors, which may include forwarding behaviors, aggregation properties, topology location, bandwidth,
 tunnel or translation properties, etc. For example, a node may decide to act as a backup node for a neighbor, if its capabilities allow it to do so. </t>
-<t>Following an initial discovery phase, the device properties and those of its neighbors are the foundation of the behavior of a specific device. A device and its ASAs have no pre-configuration for the particular network in which they are installed.</t>
+<t>Following an initial discovery phase, the node properties and those of its neighbors are the foundation of the behavior of a specific node. A node and its ASAs have no pre-configuration for the particular network in which they are installed.</t>
 
 <t>Since all ASAs will interact with the ANI, they will depend on appropriate application
 programming interfaces (APIs). It is desirable that ASAs are portable between operating
@@ -421,7 +421,7 @@ highly desirable that ASAs can be dynamically loaded on a running node.</t>
 
 <t>Since autonomic systems must be self-repairing, it is of great importance that ASAs are
 coded using robust programming techniques. All run-time error conditions must be caught,
-leading to suitable recovery actions, with a complete restart of the ASA as a last resort.
+leading to suitable minimally disruptive recovery actions, also considering a complete restart of the ASA.
 Conditions such as discovery failures or negotiation failures must be treated as routine,
 with the ASA retrying the failed operation, preferably with an exponential back-off
 in the case of persistent errors. When multiple threads are started within an ASA,
@@ -442,7 +442,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 		<t>ASAs operating on a given ANI may come from different providers and pursue different objectives. Management of ASAs and its interactions with the ANI should follow the same operating principles, hence comply to a generic life-cycle management model.</t>
 		<t>The ASA life-cycle provides standard processes to:
 		<list style="symbols">
-			<t>install ASA: copy the ASA code onto the host and start it,</t>
+			<t>install ASA: copy the ASA code onto the node and start it,</t>
 			<t>deploy ASA: associate the ASA instance with a (some) managed network device(s) (or network function),</t>
 			<t>control ASA execution: when and how an ASA executes its control loop.</t>
 		</list></t>
@@ -527,7 +527,8 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 	<!-- reporting -->
 
 	<section anchor="feedback" title="Feedback Loops to NOC (*)">
-		<t>Feedback loops are required in an autonomic network to allow the intervention of a human administrator or central control systems, while maintaining a default behaviour. Through a feedback loop an administrator can be prompted with a default action, and has the possibility to acknowledge or override the proposed default action.</t>
+		<t>Feedback loops are required in an autonomic network to allow the intervention of a human administrator or central control systems, while maintaining a default behaviour. Through a feedback loop an administrator must be prompted with a default action, and has the possibility to acknowledge or override the proposed default action. </t>
+		<t>Uni-directional notifications to the NOC, that do not propose any default action, and do not allow an override as part of the transaction are considered like traditional notification services, such as syslog. They are expected to co-exist with autonomic methods, but are not covered in this draft.</t>
 	</section>
 	<!-- feedback -->
 
@@ -726,7 +727,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 		<!-- iana -->
 		
 		<section anchor="ack" title="Acknowledgements">
-			<t>Many people have provided feedback and input to this document: Sheng Jiang, Roberta Maglione, Jonathan Hansford, Jason Coleman, Artur Hecker. Useful reviews were made by Joel Halpern, Radia Perlman and Tianran Zhou.</t>
+			<t>Many people have provided feedback and input to this document: Sheng Jiang, Roberta Maglione, Jonathan Hansford, Jason Coleman, Artur Hecker. Useful reviews were made by Joel Halpern, Radia Perlman, Tianran Zhou and Christian Hopps.</t>
 		</section>
 		<!-- ack -->
 				
