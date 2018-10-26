@@ -1412,7 +1412,7 @@ Internet-Draft             AN Reference Model              November 2018
 
    o  protected against replay attacks.
 
-   o  encrypted.
+   o  confidentiality protected (encrypted).
 
    o  and that the AN protocols are robust against packet drops and man-
       in-the-middle attacks.
@@ -1437,11 +1437,11 @@ Internet-Draft             AN Reference Model              November 2018
 9.2.  Risk of Insider Attacks
 
    An autonomic network consists of autonomic devices that form a
-   distributed self-managing system.  Devices within a domain share a
-   common trust anchor and can use this to create mutual trust.  This
-   means that any device inside a trust domain can by default use all
-   distributed functions in the entire autonomic domain in a malicious
-   way.
+   distributed self-managing system.  Devices within a domain have
+   credentials issued from a common trust anchor and can use them to
+   create mutual trust.  This means that any device inside a trust
+   domain can by default use all distributed functions in the entire
+   autonomic domain in a malicious way.
 
    If an autonomic node or protocol has vulnerabilities or is not
    securely operated, an outside attacker has the following generic ways

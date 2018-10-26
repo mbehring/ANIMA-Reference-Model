@@ -691,7 +691,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
   <t>protected against modification.</t>
   <t>authenticated.</t>
   <t>protected against replay attacks.</t>
-  <t>encrypted.</t>
+  <t>confidentiality protected (encrypted).</t>
   <t>and that the AN protocols are robust against packet drops and man-in-the-middle attacks.</t>
 </list> 
 </t>
@@ -704,7 +704,7 @@ the design of an ASA must include a security analysis beyond 'use ANI security.'
 		</section>
 
 		<section title="Risk of Insider Attacks">
-<t>An autonomic network consists of autonomic devices that form a distributed self-managing system. Devices within a domain share a common trust anchor and can use this to create mutual trust.  This means that any device inside a trust domain can by default use all distributed functions in the entire autonomic domain in a malicious way.</t>
+<t>An autonomic network consists of autonomic devices that form a distributed self-managing system.  Devices within a domain have credentials issued from a common trust anchor and can use them to create mutual trust.  This means that any device inside a trust domain can by default use all distributed functions in the entire autonomic domain in a malicious way.</t>
 
 <t>If an autonomic node or protocol has vulnerabilities or is not securely operated, an outside attacker has the following generic ways to take control of an autonomic network: <list style='symbols'>
   <t>Introducing a fake device into the trust domain, by subverting the authentication methods. This depends on the correct specification, implementation and operation of the AN protocols.</t>
