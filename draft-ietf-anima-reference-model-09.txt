@@ -5,14 +5,14 @@
 ANIMA                                                  M. Behringer, Ed.
 Internet-Draft
 Intended status: Informational                              B. Carpenter
-Expires: May 7, 2019                                   Univ. of Auckland
+Expires: May 10, 2019                                  Univ. of Auckland
                                                                T. Eckert
                                              Futurewei Technologies Inc.
                                                             L. Ciavaglia
                                                                    Nokia
                                                                 J. Nobre
                                      University of Vale do Rio dos Sinos
-                                                        November 3, 2018
+                                                        November 6, 2018
 
 
                A Reference Model for Autonomic Networking
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 7, 2019.
+   This Internet-Draft will expire on May 10, 2019.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Behringer, et al.          Expires May 7, 2019                  [Page 1]
+Behringer, et al.         Expires May 10, 2019                  [Page 1]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Behringer, et al.          Expires May 7, 2019                  [Page 2]
+Behringer, et al.         Expires May 10, 2019                  [Page 2]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -165,7 +165,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                  [Page 3]
+Behringer, et al.         Expires May 10, 2019                  [Page 3]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -221,7 +221,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                  [Page 4]
+Behringer, et al.         Expires May 10, 2019                  [Page 4]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -277,7 +277,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                  [Page 5]
+Behringer, et al.         Expires May 10, 2019                  [Page 5]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -333,7 +333,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                  [Page 6]
+Behringer, et al.         Expires May 10, 2019                  [Page 6]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -389,7 +389,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                  [Page 7]
+Behringer, et al.         Expires May 10, 2019                  [Page 7]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -445,7 +445,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                  [Page 8]
+Behringer, et al.         Expires May 10, 2019                  [Page 8]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -501,7 +501,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                  [Page 9]
+Behringer, et al.         Expires May 10, 2019                  [Page 9]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -557,7 +557,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 10]
+Behringer, et al.         Expires May 10, 2019                 [Page 10]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -613,7 +613,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 11]
+Behringer, et al.         Expires May 10, 2019                 [Page 11]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -669,7 +669,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 12]
+Behringer, et al.         Expires May 10, 2019                 [Page 12]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -725,7 +725,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 13]
+Behringer, et al.         Expires May 10, 2019                 [Page 13]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -781,7 +781,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 14]
+Behringer, et al.         Expires May 10, 2019                 [Page 14]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -837,7 +837,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 15]
+Behringer, et al.         Expires May 10, 2019                 [Page 15]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -893,7 +893,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 16]
+Behringer, et al.         Expires May 10, 2019                 [Page 16]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -949,7 +949,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 17]
+Behringer, et al.         Expires May 10, 2019                 [Page 17]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1005,7 +1005,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 18]
+Behringer, et al.         Expires May 10, 2019                 [Page 18]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1061,7 +1061,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 19]
+Behringer, et al.         Expires May 10, 2019                 [Page 19]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1117,7 +1117,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 20]
+Behringer, et al.         Expires May 10, 2019                 [Page 20]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1173,7 +1173,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 21]
+Behringer, et al.         Expires May 10, 2019                 [Page 21]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1229,7 +1229,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 22]
+Behringer, et al.         Expires May 10, 2019                 [Page 22]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1285,7 +1285,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 23]
+Behringer, et al.         Expires May 10, 2019                 [Page 23]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1341,7 +1341,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 24]
+Behringer, et al.         Expires May 10, 2019                 [Page 24]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1397,7 +1397,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 25]
+Behringer, et al.         Expires May 10, 2019                 [Page 25]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1453,7 +1453,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 26]
+Behringer, et al.         Expires May 10, 2019                 [Page 26]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1509,7 +1509,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 27]
+Behringer, et al.         Expires May 10, 2019                 [Page 27]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1565,7 +1565,7 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 28]
+Behringer, et al.         Expires May 10, 2019                 [Page 28]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1621,7 +1621,7 @@ Authors' Addresses
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 29]
+Behringer, et al.         Expires May 10, 2019                 [Page 29]
 
 Internet-Draft             AN Reference Model              November 2018
 
@@ -1677,4 +1677,4 @@ Internet-Draft             AN Reference Model              November 2018
 
 
 
-Behringer, et al.          Expires May 7, 2019                 [Page 30]
+Behringer, et al.         Expires May 10, 2019                 [Page 30]
